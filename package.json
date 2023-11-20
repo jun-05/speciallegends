@@ -11,9 +11,11 @@
     "lint": "next lint --cache"
   },
   "dependencies": {
+    "aws-sdk": "^2.1499.0",
     "next": "14.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/node": "^20",
