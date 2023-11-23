@@ -1,5 +1,3 @@
-
-
 export const mapTypes = {
   4003: ['버려진 해적선 - 정오', 'Abandoned Pirate Ship - Noon'],
   4005: ['버려진 해적선 - 석양', 'Abandoned Pirate Ship - Proto'],
