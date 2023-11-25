@@ -1,3 +1,4 @@
+import { characterResult } from '@/types/smasherDataTypes';
 import { Characters } from 'aws-sdk/clients/comprehendmedical';
 
 export const getSortedCharacters = (
@@ -6,7 +7,7 @@ export const getSortedCharacters = (
     sortType: string;
     order: string;
   }
-) => {
+): characterResult[] => {
   return Object.entries(dataInOption)
     .map(([characterId, data]) => ({ characterId, ...data }))
     .sort((a, b) => {

@@ -1,32 +1,4 @@
-interface characterResult {
-  gameCount: number;
-  winCount: number;
-  winRate?: number;
-  pickRate?: number;
-}
-
-interface Characters {
-  [charNumber: string]: characterResult;
-}
-
-interface MapData {
-  characters: Characters;
-  totalGamesInMap: number;
-}
-
-interface Maps {
-  [mapNumber: string]: MapData;
-}
-
-interface TierData {
-  maps: Maps;
-  characters: Characters;
-  totalGamesInTier: number;
-  totalGameWin: number;
-}
-export interface SmasherData {
-  [tier: string]: TierData;
-}
+import { SmasherData } from '@/types/smasherDataTypes';
 
 class GameStatisticsService {
   //각 티어를 분류로하는 맵에 따른 캐릭터 정보 / 티어에 따른 캐릭터 정보를 갖는 객체를 만듦
