@@ -34,6 +34,19 @@ const TierAndMapSelect = ({
     { 4009: '비허가 스페이스독 - 석양' },
   ];
 
+  // 맵,티어 이미지 전체 선로딩
+  if (typeof window !== 'undefined') {
+    mapList.forEach((mapNum) => {
+      const img = new Image();
+      img.src =
+        MapIcon[Number(Object.keys(mapNum)[0]) as keyof typeof MapIcon].url;
+    });
+    tierList.forEach((tier) => {
+      const img = new Image();
+      img.src = TierIcon[Object.keys(tier)[0] as keyof typeof TierIcon].url;
+    });
+  }
+
   const selectedTierIcon =
     TierIcon[option.selectedTier as keyof typeof TierIcon];
   const selectedMapIcon = MapIcon[option.selectedMap as keyof typeof MapIcon];
@@ -45,7 +58,7 @@ const TierAndMapSelect = ({
           className="mr-2 h-10 md:h-11  p-2 w-22 md:w-48 lg:w-40 text-xs md:text-sm lg:text-base border border-gray-200 rounded"
           onChange={(e) => onChangeTier(e.target.value)}
         >
-          <option value="master">티어 선택</option>
+          <option value={option.selectedTier}>티어 선택</option>
           {tierList.map((tier, idx) => (
             <option key={`tier_${idx}`} value={Object.keys(tier)}>
               {Object.values(tier)}
@@ -56,7 +69,7 @@ const TierAndMapSelect = ({
           className="p-2  h-10  md:h-11 w-32 lg:w-60 md:w-48 text-xs md:text-sm lg:text-base  border border-gray-200 rounded"
           onChange={(e) => onChangeMap(Number(e.target.value))}
         >
-          <option value="4000">맵 선택</option>
+          <option value={option.selectedMap}>맵 선택</option>
           {mapList.map((map, idx) => (
             <option key={`map_${idx}`} value={Object.keys(map)}>
               {Object.values(map)}
@@ -75,7 +88,7 @@ const TierAndMapSelect = ({
           alt={selectedMapIcon.name}
           className={`h-10 w-10 md:h-14 md:w-14
           ${
-            option.selectedMap !== 4000
+            option.selectedMap !== 4000 && window.innerWidth > 768
               ? 'transition-all duration-500 ease-in-out transform group-hover:scale-x-[2] rounded-md object-fill'
               : ''
           }  `}
