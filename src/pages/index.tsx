@@ -78,24 +78,33 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
     </div>
   );
 };
-
+import fs from 'fs';
 export async function getStaticProps() {
-  const S3Service = require('/src/services/S3Service');
+  // const S3Service = require('/src/services/S3Service');
   const ExcelService = require('/src/services/ExcelService');
   const GameStatisticsService = require('/src/services/GameStatisticsService');
+
+  //로컬 개발환경에서 사용하는 코드
+  const filePath = './public/slgg_sheet_2023_11121119.xlsx';
+  const buffer = fs.readFileSync(filePath);
 
   const params = {
     Bucket: process.env.AWS_BUCKET!,
     Key: process.env.AWS_FILE_KEY!,
   };
 
-  const s3Service = new S3Service();
+  // const s3Service = new S3Service();
+
   const excelService = new ExcelService();
   const gameStatisticsService = new GameStatisticsService();
 
-  const xlsxFile = await s3Service.getObject(params);
-  const fileBuffer = xlsxFile.Body;
-  const data = excelService.readExcelFile(fileBuffer);
+  // const xlsxFile = await s3Service.getObject(params);
+  // const fileBuffer = xlsxFile.Body;
+  // const data = excelService.readExcelFile(fileBuffer);
+
+  //로컬 개발환경에서 사용하는 코드
+  const data = excelService.readExcelFile(buffer);
+
   const smasherData = gameStatisticsService.analyzeData(data);
   gameStatisticsService.calculateRates(smasherData);
 
