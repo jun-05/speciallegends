@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { charactersIcon } from '@/constants/images';
-import { legendTypes } from '@/constants/mapping';
 import { useLanguageContext } from '@/context/LanguageContext';
 import { localeText } from '@/locales/localeText';
 import { characterResult } from '@/types/smasherDataTypes';
