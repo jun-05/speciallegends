@@ -2,6 +2,8 @@
 
 import { charactersIcon } from '@/constants/images';
 import { legendTypes } from '@/constants/mapping';
+import { useLanguageContext } from '@/context/LanguageContext';
+import { localeText } from '@/locales/localeText';
 import { characterResult } from '@/types/smasherDataTypes';
 
 interface CharacterItemProps {
@@ -9,14 +11,23 @@ interface CharacterItemProps {
 }
 
 const CharacterItem = ({ characterData }: CharacterItemProps) => {
-  const characterType =
-    legendTypes[characterData.characterId as keyof typeof legendTypes];
-  const name = characterType[0];
+  const [language] = useLanguageContext();
+  const languageTranslations = localeText[language as keyof typeof localeText];
+
+  const name =
+    languageTranslations.characterName[
+      characterData.characterId as keyof typeof characterData.characterId
+    ];
+
+  if (!name) {
+    throw new Error(`Invalid character ID: ${characterData.characterId}`);
+  }
+
   const characterIcon =
     charactersIcon[characterData.characterId as keyof typeof charactersIcon];
 
   return (
-    <tr className="hover:bg-gray-300 hover:cursor-pointer">
+    <tr className="bg-gray-200  hover:bg-gray-300 dark:hover:bg-gray-700 dark:text-white dark:bg-gray-800">
       <th className="w-[10%] ">-</th>
       <th className="flex w-full items-center text-left pl-4 md:pl-8 space-x-2 md:space-x-5">
         <span className="flex-shrink-0">

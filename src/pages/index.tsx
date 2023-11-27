@@ -18,6 +18,8 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
     order: 'desc', // 'asc' 또는 'desc'
   });
 
+  console.log(option);
+
   const tierData = smasherData[option.selectedTier];
   const { characters, maps } = tierData;
 
@@ -57,7 +59,7 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
   };
 
   return (
-    <div className="p-4 pt-8 md:pt-32 flex justify-center items-center dark:text-white">
+    <div className="p-4 pt-8 md:pt-32 flex justify-center items-center text-gray-800 dark:text-white ">
       <div className="w-[512px] md:w-[720px] lg:w-[1024px] ">
         {/**옵션 */}
         <TierAndMapSelect
@@ -67,7 +69,7 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
         />
         {/**테이블 */}
         <div className="rounded-md overflow-hidden">
-          <table className=" w-full mt-4 border rounded-md text-sm md:text-base text-gray-800 dark:text-white">
+          <table className="w-full mt-4 rounded-md text-sm md:text-base text-gray-800 dark:text-white bg-white dark:bg-gray-800">
             {/**테이블 헤드 컴포넌트 */}
             <TableOption sortOption={sortOption} onClickSort={onClickSort} />
             {/**테이블 리스트 컴포넌트 */}

@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { MapIcon, TierIcon } from '@/constants/images';
+import { useLanguageContext } from '@/context/LanguageContext';
+import { localeText } from '@/locales/localeText';
 import React from 'react';
 
 interface TierAndMapSelectProps {
@@ -16,34 +18,21 @@ const TierAndMapSelect = ({
   onChangeTier,
   onChangeMap,
 }: TierAndMapSelectProps) => {
-  const tierList = [
-    { master: '마스터' },
-    { diamond: '다이아몬드' },
-    { platinum: '플래티넘' },
-    { gold: '골드' },
-    { silver: '실버' },
-    { bronze: '브론즈' },
-  ];
-  const mapList = [
-    { 4000: '전체' },
-    { 4003: '버려진 해적선 - 정오' },
-    { 4005: '버려진 해적선 - 석양' },
-    { 4006: '버려진 해적선 - 심야' },
-    { 4007: '버려진 해적선 - 비' },
-    { 4008: '비허가 스페이스독 - 성층권' },
-    { 4009: '비허가 스페이스독 - 석양' },
-  ];
+  const [language] = useLanguageContext();
+  const languageTranslations = localeText[language as keyof typeof localeText];
 
-  // 맵,티어 이미지 전체 선로딩
+  const tierList = languageTranslations.tierList;
+  const mapList = languageTranslations.mapList;
+
+  // 티어와 맵 이미지 선로딩
   if (typeof window !== 'undefined') {
-    mapList.forEach((mapNum) => {
+    Object.keys(mapList).forEach((mapNum) => {
       const img = new Image();
-      img.src =
-        MapIcon[Number(Object.keys(mapNum)[0]) as keyof typeof MapIcon].url;
+      img.src = MapIcon[Number(mapNum) as keyof typeof MapIcon].url;
     });
-    tierList.forEach((tier) => {
+    Object.keys(tierList).forEach((tier) => {
       const img = new Image();
-      img.src = TierIcon[Object.keys(tier)[0] as keyof typeof TierIcon].url;
+      img.src = TierIcon[tier as keyof typeof TierIcon].url;
     });
   }
 
@@ -55,24 +44,30 @@ const TierAndMapSelect = ({
     <div className="flex justify-between items-center">
       <div className="flex items-center">
         <select
-          className="mr-2 h-10 md:h-11  p-2 w-22 md:w-48 lg:w-40 text-xs md:text-sm lg:text-base border border-gray-200 rounded"
+          className="mr-2 h-10 md:h-11  p-2 w-22 md:w-48 lg:w-40 text-xs md:text-sm lg:text-base border form-select bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-gray-200 rounded"
           onChange={(e) => onChangeTier(e.target.value)}
         >
-          <option value={option.selectedTier}>티어 선택</option>
-          {tierList.map((tier, idx) => (
-            <option key={`tier_${idx}`} value={Object.keys(tier)}>
-              {Object.values(tier)}
-            </option>
-          ))}
+          <option value={option.selectedTier}>
+            {languageTranslations.tierListOptionName}
+          </option>
+          {Object.entries(tierList).map(([value, tier], idx) => {
+            return (
+              <option key={`tier_${idx}`} value={value}>
+                {tier}
+              </option>
+            );
+          })}
         </select>
         <select
-          className="p-2  h-10  md:h-11 w-32 lg:w-60 md:w-48 text-xs md:text-sm lg:text-base  border border-gray-200 rounded"
+          className="p-2  h-10  md:h-11 w-32 lg:w-60 md:w-48 text-xs md:text-sm lg:text-base  border form-select bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-gray-200 rounded"
           onChange={(e) => onChangeMap(Number(e.target.value))}
         >
-          <option value={option.selectedMap}>맵 선택</option>
-          {mapList.map((map, idx) => (
-            <option key={`map_${idx}`} value={Object.keys(map)}>
-              {Object.values(map)}
+          <option value={option.selectedMap}>
+            {languageTranslations.mapListOptionName}
+          </option>
+          {Object.entries(mapList).map(([value, map], idx) => (
+            <option key={`map_${idx}`} value={value}>
+              {map}
             </option>
           ))}
         </select>

@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import '../styles/globals.css';
 import Layout from '@/components/common/Layout';
 import Head from 'next/head';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -9,9 +10,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Special Legends</title>
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <LanguageProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </LanguageProvider>
     </>
   );
 }

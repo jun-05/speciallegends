@@ -9,7 +9,7 @@ interface CharacterListProps {
 
 const CharacterList = ({ sortedCharacters }: CharacterListProps) => {
   return (
-    <tbody className="bg-gray-200 w-full">
+    <tbody className=" w-full">
       {sortedCharacters.map((characterData, idx: number) => (
         <CharacterItem key={`charcter_${idx}`} characterData={characterData} />
       ))}
