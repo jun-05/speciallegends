@@ -30,10 +30,13 @@ const Header = ({ toggleDarkMode, darkMode }: HeaderProps) => {
     <header
       className={`flex h-12 md:h-16 justify-between items-center p-4 bg-blue-500  dark:bg-blue-800`}
     >
-      <h1
-        className={`text-white dark:text-gray-300 text-xl hover:cursor-pointer`}
-      >
-        <div>SL</div>
+      <h1 className={`ali text-white dark:text-black hover:cursor-pointer`}>
+        <div className="text-lg md:text-xl italic">
+          <span className="text-xl md:text-2xl">S</span>mash
+        </div>
+        <div className="text-lg md:text-xl italic pl-2 -mt-2">
+          <span className="text-xl md:text-2xl">L</span>egend
+        </div>
       </h1>
       <div className="flex  space-x-2 md:space-x-4">
         <div className="h-5 w-5 md:h-6 md:w-6" onClick={toggleDarkMode}>
