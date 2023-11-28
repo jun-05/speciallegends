@@ -32,10 +32,10 @@ const Header = ({ toggleDarkMode, darkMode }: HeaderProps) => {
     >
       <h1 className={`ali text-white dark:text-black hover:cursor-pointer`}>
         <div className="text-lg md:text-xl italic">
-          <span className="text-xl md:text-2xl">S</span>mash
+          <span className="text-xl md:text-2xl">S</span>pecial
         </div>
         <div className="text-lg md:text-xl italic pl-2 -mt-2">
-          <span className="text-xl md:text-2xl">L</span>egend
+          <span className="text-xl md:text-2xl">L</span>egends
         </div>
       </h1>
       <div className="flex  space-x-2 md:space-x-4">
