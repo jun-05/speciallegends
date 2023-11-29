@@ -4,7 +4,7 @@ import { charactersIcon } from '@/constants/images';
 import { useLanguageContext } from '@/context/LanguageContext';
 import { localeText } from '@/locales/localeText';
 import { characterResult } from '@/types/smasherDataTypes';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GrCaretDown, GrCaretUp } from 'react-icons/gr';
 import CharacterDetail from './CharacterDetail';
 
@@ -16,6 +16,10 @@ const CharacterItem = ({ characterData }: CharacterItemProps) => {
   const [language] = useLanguageContext();
   const languageTranslations = localeText[language as keyof typeof localeText];
   const [showDetails, setShowDetails] = useState(false);
+
+  useEffect(() => {
+    setShowDetails(false);
+  }, [characterData]);
 
   const onClickDetailButton = () => {
     setShowDetails(!showDetails);

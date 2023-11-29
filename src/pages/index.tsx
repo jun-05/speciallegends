@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { SmasherData } from '@/types/smasherDataTypes';
 import { getSortedCharacters } from '@/utils/sortedCharacters';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import TierAndMapSelect from '@/components/TierAndMapSelect';
 import TableOption from '@/components/TableOption';
@@ -20,8 +20,6 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
 
   const tierData = smasherData[option.selectedTier];
   const { characters, maps } = tierData;
-
-  console.log(smasherData);
 
   const dataInOption =
     option.selectedMap == 4000
