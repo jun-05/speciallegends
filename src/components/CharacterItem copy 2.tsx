@@ -4,9 +4,7 @@ import { charactersIcon } from '@/constants/images';
 import { useLanguageContext } from '@/context/LanguageContext';
 import { localeText } from '@/locales/localeText';
 import { characterResult } from '@/types/smasherDataTypes';
-import { useState } from 'react';
-import { GrCaretDown, GrCaretUp } from 'react-icons/gr';
-import CharacterDetail from './CharacterDetail';
+import { GrCaretDown } from 'react-icons/gr';
 
 interface CharacterItemProps {
   characterData: characterResult;
@@ -15,11 +13,6 @@ interface CharacterItemProps {
 const CharacterItem = ({ characterData }: CharacterItemProps) => {
   const [language] = useLanguageContext();
   const languageTranslations = localeText[language as keyof typeof localeText];
-  const [showDetails, setShowDetails] = useState(false);
-
-  const onClickDetailButton = () => {
-    setShowDetails(!showDetails);
-  };
 
   const name =
     languageTranslations.characterName[
@@ -33,15 +26,39 @@ const CharacterItem = ({ characterData }: CharacterItemProps) => {
   const characterIcon =
     charactersIcon[characterData.characterId as keyof typeof charactersIcon];
 
+  const talentData = [
+    {
+      name: '재능1',
+      image: '/assets/images/icon/abilityIcon/T_UI_JackO_Ability_02_Common.png',
+      rate: 20,
+    },
+    {
+      name: '재능2',
+      image: '/assets/images/icon/abilityIcon/T_UI_JackO_Ability_02_Common.png',
+      rate: 30,
+    },
+  ];
+
+  const enChantData = [
+    {
+      name: '재능1',
+      image:
+        '/assets/images/icon/enchantment/T_UI_Icon_Enchant_Attack_Symbol.png',
+      rate: 20,
+    },
+    {
+      name: '재능2',
+      image:
+        '/assets/images/icon/enchantment/T_UI_Icon_Enchant_Attack_Symbol.png',
+      rate: 30,
+    },
+  ];
+
   return (
     <>
-      <tr
-        className={`${
-          !showDetails ? 'bg-gray-200' : 'bg-gray-300'
-        }  hover:bg-gray-300 dark:hover:bg-gray-700 dark:text-white dark:bg-gray-800`}
-      >
+      <tr className="bg-gray-200  hover:bg-gray-300 dark:hover:bg-gray-700 dark:text-white dark:bg-gray-800">
         <th className="w-[5%] ">-</th>
-        <th className="flex w-full items-center text-left pl-2 md:pl-8 space-x-2 md:space-x-5">
+        <th className="flex w-full items-center text-left pl-1 md:pl-8 space-x-2 md:space-x-5">
           <span className="flex-shrink-0">
             <img
               src={characterIcon.url}
@@ -52,31 +69,24 @@ const CharacterItem = ({ characterData }: CharacterItemProps) => {
 
           <span className="flex-grow">{name}</span>
         </th>
+        <th className="w-[15%]">
+          <div className="w-full flex justify-center space-x-1 md:space-x-2 ">
+            <img
+              src={talentData[1].image}
+              className=" h-5 w-5  md:h-8 md:w-8"
+            />
+            <img src={talentData[1].image} className="h-5 w-5  md:h-8 md:w-8" />
+          </div>
+        </th>
+
         <th className="w-[20%] md:w-[15%] text-center ">
           {characterData.pickRate}%
         </th>
         <th className="w-[20%] md:w-[15%] text-center ">
           {characterData.winRate}%
         </th>
-        <th className="w-[10%] ">
-          <div className="flex items-center justify-center ">
-            {showDetails ? (
-              <GrCaretUp
-                className="h-4 w-4 md:h-5 md:w-5 hover:cursor-pointer"
-                onClick={onClickDetailButton}
-              />
-            ) : (
-              <GrCaretDown
-                className="h-4 w-4 md:h-5 md:w-5 hover:cursor-pointer"
-                onClick={onClickDetailButton}
-              />
-            )}
-          </div>
-        </th>
       </tr>
-
       {/**상세정보 컴포넌트 */}
-      {showDetails && <CharacterDetail />}
     </>
   );
 };

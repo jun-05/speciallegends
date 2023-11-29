@@ -18,8 +18,6 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
     order: 'desc', // 'asc' 또는 'desc'
   });
 
-  console.log(option);
-
   const tierData = smasherData[option.selectedTier];
   const { characters, maps } = tierData;
 

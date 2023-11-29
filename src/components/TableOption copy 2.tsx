@@ -19,9 +19,11 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
     <thead className="w-full  bg-gray-300 border-b-gray-300 dark:bg-gray-700 dark:border-gray-700">
       <tr className="text-gray-600 dark:text-gray-400">
         <th className="w-[5%]">#</th>
-        <th className="w-[40%] md:w-[50%] text-left pl-2 md:pl-8">
+        <th className="w-[40%] md:w-[50%] text-left pl-1 md:pl-8">
           {languageTranslations.firstTableOption}
         </th>
+        <th className="w-[15%]">재능</th>
+
         <th className="w-[20%] md:w-[15%] ">
           <div className="inline-flex items-center space-x-1 pl-2">
             <span> {languageTranslations.secondTableOption}</span>
@@ -37,6 +39,7 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
             </div>
           </div>
         </th>
+
         <th className="w-[20%] md:w-[15%]">
           <div className="inline-flex items-center space-x-1 pl-2 ">
             <span> {languageTranslations.thirdTableOption}</span>
@@ -50,11 +53,6 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
                 <MdOutlineKeyboardArrowUp size={20} />
               )}
             </div>
-          </div>
-        </th>
-        <th className="w-[10%] md:w-[10%] ">
-          <div className="flex items-center justify-center">
-            <FiInfo className="h-4 w-4 md:h-5 md:w-5" />
           </div>
         </th>
       </tr>
