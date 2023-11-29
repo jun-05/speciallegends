@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { MdLanguage } from 'react-icons/md';
 import { BsBrightnessHigh, BsMoonFill } from 'react-icons/bs';
 import { useLanguageContext } from '@/context/LanguageContext';
+import { SiSmashingmagazine } from 'react-icons/si';
 
 interface HeaderProps {
   toggleDarkMode: () => void;

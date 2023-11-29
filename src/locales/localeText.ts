@@ -1,8 +1,8 @@
 export const localeText = {
   ko: {
   firstTableOption: "캐릭터 이름",
-  secondTableOption : "승률",
-  thirdTableOption : "픽률",
+  secondTableOption : "픽률",
+  thirdTableOption : "승률",
     mapListOptionName : '맵 선택',
     mapList:   {
       4000: "전체",
@@ -22,6 +22,8 @@ export const localeText = {
        silver: '실버' ,
        bronze: '브론즈' ,
     },
+    firstInfoHeadName : '재능 선택률',
+    secondInfoHeadName : '각성 선택률',
     characterName : {
       101: '피터', 
       102: '신디', 
@@ -59,13 +61,13 @@ export const localeText = {
       135: '아오이', 
       136: '티문',
       137: '마리나', 
-      138: '마담 레터스', 
+      138: '레터스', 
     }
 },
 en: {
   firstTableOption: "Character Name",
-  secondTableOption : "Win Rate",
-  thirdTableOption : "Pick Rate",
+  secondTableOption : "Pick Rate",
+  thirdTableOption : "Win Rate",
 
     mapListOptionName : 'Select Map',
     mapList:   {
@@ -87,6 +89,8 @@ en: {
        silver: 'Silver' ,
        bronze: 'Bronze' ,
     },
+    firstInfoHeadName : 'Ability Selection Rate',
+    secondInfoHeadName : 'Enchantment Selection Rate',
     characterName : {
       101: 'Peter',
       102:  'Cindy',
@@ -124,7 +128,7 @@ en: {
       135:  'Aoi',
       136:  'Timun',
       137:  'Marina',
-      138:  'Madam Lettuce',
+      138:  'Lettuce',
     }
 }
 }

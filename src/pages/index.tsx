@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { SmasherData } from '@/types/smasherDataTypes';
 import { getSortedCharacters } from '@/utils/sortedCharacters';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import TierAndMapSelect from '@/components/TierAndMapSelect';
 import TableOption from '@/components/TableOption';
@@ -17,8 +17,6 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
     sortType: 'winRate', // 'winRate' 또는 'pickRate'
     order: 'desc', // 'asc' 또는 'desc'
   });
-
-  console.log(option);
 
   const tierData = smasherData[option.selectedTier];
   const { characters, maps } = tierData;
@@ -68,6 +66,7 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
           onChangeMap={onChangeMap}
         />
         {/**테이블 */}
+        {/**         <div>* 승률 및 픽률의 아래쪽 숫자는 티어 평균대비 값입니다.</div>*/}
         <div className="rounded-md overflow-hidden">
           <table className="w-full mt-4 rounded-md text-sm md:text-base text-gray-800 dark:text-white bg-white dark:bg-gray-800">
             {/**테이블 헤드 컴포넌트 */}

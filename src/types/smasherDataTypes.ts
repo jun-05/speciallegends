@@ -1,9 +1,29 @@
+interface enchantment {
+  enchantmentUseCount : number;
+  enchantmentUsageRate? : number
+}
+
+interface enchantments {
+  [enchantment:string] : enchantment;
+}
+
+interface ability {
+  abilityUseCount : number
+  abilityUsageRate? : number
+}
+
+interface abilities {
+  [abilityUseCount:string] : ability;
+}
+
 export interface characterResult {
   characterId?: number;
   gameCount: number;
   winCount: number;
   winRate?: number;
   pickRate?: number;
+  abilities:abilities;
+  enchantments:enchantments;
 }
 
 export interface Characters {

@@ -4,6 +4,7 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from 'react-icons/md';
+import { FiInfo } from 'react-icons/fi';
 
 interface TableOptionProps {
   sortOption: { sortType: string; order: string };
@@ -17,8 +18,8 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
   return (
     <thead className="w-full  bg-gray-300 border-b-gray-300 dark:bg-gray-700 dark:border-gray-700">
       <tr className="text-gray-600 dark:text-gray-400">
-        <th className="w-[10%]">#</th>
-        <th className="w-[50%] md:w-[60%] text-left pl-4 md:pl-8">
+        <th className="w-[5%]">#</th>
+        <th className="w-[40%] md:w-[50%] text-left pl-2 md:pl-8">
           {languageTranslations.firstTableOption}
         </th>
         <th className="w-[20%] md:w-[15%] ">
@@ -38,7 +39,8 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
         </th>
         <th className="w-[20%] md:w-[15%]">
           <div className="inline-flex items-center space-x-1 pl-2 ">
-            <span> {languageTranslations.thirdTableOption}</span>
+            <span> {languageTranslations.thirdTableOption} </span>
+
             <div
               onClick={() => onClickSort('winRate')}
               className="hover:cursor-pointer"
@@ -49,6 +51,11 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
                 <MdOutlineKeyboardArrowUp size={20} />
               )}
             </div>
+          </div>
+        </th>
+        <th className="w-[10%] md:w-[10%] ">
+          <div className="flex items-center justify-center">
+            <FiInfo className="h-4 w-4 md:h-5 md:w-5" />
           </div>
         </th>
       </tr>
