@@ -21,6 +21,8 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
   const tierData = smasherData[option.selectedTier];
   const { characters, maps } = tierData;
 
+  console.log(smasherData);
+
   const dataInOption =
     option.selectedMap == 4000
       ? characters
@@ -66,6 +68,7 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
           onChangeMap={onChangeMap}
         />
         {/**테이블 */}
+        {/**         <div>* 승률 및 픽률의 아래쪽 숫자는 티어 평균대비 값입니다.</div>*/}
         <div className="rounded-md overflow-hidden">
           <table className="w-full mt-4 rounded-md text-sm md:text-base text-gray-800 dark:text-white bg-white dark:bg-gray-800">
             {/**테이블 헤드 컴포넌트 */}

@@ -37,8 +37,10 @@ const CharacterItem = ({ characterData }: CharacterItemProps) => {
     <>
       <tr
         className={`${
-          !showDetails ? 'bg-gray-200' : 'bg-gray-300'
-        }  hover:bg-gray-300 dark:hover:bg-gray-700 dark:text-white dark:bg-gray-800`}
+          !showDetails
+            ? 'bg-gray-200 dark:bg-gray-800'
+            : 'bg-gray-300 dark:bg-gray-700'
+        }  hover:bg-gray-300 dark:hover:bg-gray-700 dark:text-white `}
       >
         <th className="w-[5%] ">-</th>
         <th className="flex w-full items-center text-left pl-2 md:pl-8 space-x-2 md:space-x-5">
@@ -57,6 +59,7 @@ const CharacterItem = ({ characterData }: CharacterItemProps) => {
         </th>
         <th className="w-[20%] md:w-[15%] text-center ">
           {characterData.winRate}%
+          {/**           <div className="text-[9px] md:text-[10px] ml-2 -mt-1">+3.5%</div> */}
         </th>
         <th className="w-[10%] ">
           <div className="flex items-center justify-center ">
@@ -76,7 +79,7 @@ const CharacterItem = ({ characterData }: CharacterItemProps) => {
       </tr>
 
       {/**상세정보 컴포넌트 */}
-      {showDetails && <CharacterDetail />}
+      {showDetails && <CharacterDetail characterData={characterData} />}
     </>
   );
 };

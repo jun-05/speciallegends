@@ -39,7 +39,8 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
         </th>
         <th className="w-[20%] md:w-[15%]">
           <div className="inline-flex items-center space-x-1 pl-2 ">
-            <span> {languageTranslations.thirdTableOption}</span>
+            <span> {languageTranslations.thirdTableOption} </span>
+
             <div
               onClick={() => onClickSort('winRate')}
               className="hover:cursor-pointer"
