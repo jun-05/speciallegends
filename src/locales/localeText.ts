@@ -1,5 +1,6 @@
 export const localeText = {
   ko: {
+    tableTitle : '스매셔 통계',
   firstTableOption: "캐릭터 이름",
   secondTableOption : "픽률",
   thirdTableOption : "승률",
@@ -67,6 +68,7 @@ explanationTextByMap:'※ 승률/픽률 하단값 : 전체 맵 대비',
     }
 },
 en: {
+  tableTitle : 'Smasher Stats',
   firstTableOption: "Character Name",
   secondTableOption : "Pick Rate",
   thirdTableOption : "Win Rate",

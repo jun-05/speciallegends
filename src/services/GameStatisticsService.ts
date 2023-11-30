@@ -1,10 +1,18 @@
-import { SmasherData } from '@/types/smasherDataTypes';
+import { SmasherData, SmasherDatas } from '@/types/smasherDataTypes';
 
 class GameStatisticsService {
   //각 티어를 분류로하는 맵에 따른 캐릭터 정보 / 티어에 따른 캐릭터 정보를 갖는 객체를 만듦
-  analyzeData(data: (string | number)[][]): SmasherData {
-    const results: SmasherData = {};
-  
+  analyzeData(data: (string | number)[][]): SmasherDatas {
+    const startDate = data[0][0].toString().slice(5);
+    const endDate = data[0][1].toString().slice(5);;
+
+
+    const smasherData: SmasherData = {};
+
+    const results = {
+      [startDate+"-"+endDate] : smasherData
+    }
+
     for (const row of data) {
       const tier = row[2].toString().replace(/\d/g, '');
       const mapNumber = row[3].toString();
@@ -14,59 +22,59 @@ class GameStatisticsService {
       const abilityNumbers = [row[5], row[6]];
       const enchantmentNumbers = [row[7], row[8]];
   
-      if (!results[tier]) {
-        results[tier] = {
+      if (!smasherData[tier]) {
+        smasherData[tier] = {
           maps: {},
           characters: {},
           totalGamesInTier: 0,
           totalGameWin: 0,
         };
       }
-      results[tier].totalGamesInTier += gameCount;
-      results[tier].totalGameWin += winCount;
+      smasherData[tier].totalGamesInTier += gameCount;
+      smasherData[tier].totalGameWin += winCount;
   
-      if (!results[tier].maps[mapNumber]) {
-        results[tier].maps[mapNumber] = { characters: {}, totalGamesInMap: 0 };
+      if (!smasherData[tier].maps[mapNumber]) {
+        smasherData[tier].maps[mapNumber] = { characters: {}, totalGamesInMap: 0 };
       }
 
-      results[tier].maps[mapNumber].totalGamesInMap += gameCount;
+      smasherData[tier].maps[mapNumber].totalGamesInMap += gameCount;
   
-      if (!results[tier].characters[charNumber]) {
-        results[tier].characters[charNumber] = {
+      if (!smasherData[tier].characters[charNumber]) {
+        smasherData[tier].characters[charNumber] = {
           gameCount: 0, winCount: 0, abilities: {}, enchantments: {} 
         };
       }
 
-      if (!results[tier].maps[mapNumber].characters[charNumber]) {
-        results[tier].maps[mapNumber].characters[charNumber] = {
+      if (!smasherData[tier].maps[mapNumber].characters[charNumber]) {
+        smasherData[tier].maps[mapNumber].characters[charNumber] = {
           gameCount: 0, winCount: 0, abilities: {}, enchantments: {} 
         };
       }
-      results[tier].maps[mapNumber].characters[charNumber].gameCount += gameCount;
-      results[tier].maps[mapNumber].characters[charNumber].winCount += winCount;
+      smasherData[tier].maps[mapNumber].characters[charNumber].gameCount += gameCount;
+      smasherData[tier].maps[mapNumber].characters[charNumber].winCount += winCount;
       
       for (const enchantmentNumber of enchantmentNumbers) {
-        if (!results[tier].characters[charNumber].enchantments![enchantmentNumber]) {
-          results[tier].characters[charNumber].enchantments![enchantmentNumber] = { enchantmentUseCount: 0 };
+        if (!smasherData[tier].characters[charNumber].enchantments![enchantmentNumber]) {
+          smasherData[tier].characters[charNumber].enchantments![enchantmentNumber] = { enchantmentUseCount: 0 };
         }
-        if (!results[tier].maps[mapNumber].characters[charNumber].enchantments![enchantmentNumber]) {
-          results[tier].maps[mapNumber].characters[charNumber].enchantments![enchantmentNumber] = { enchantmentUseCount: 0 };
+        if (!smasherData[tier].maps[mapNumber].characters[charNumber].enchantments![enchantmentNumber]) {
+          smasherData[tier].maps[mapNumber].characters[charNumber].enchantments![enchantmentNumber] = { enchantmentUseCount: 0 };
         }
-        results[tier].maps[mapNumber].characters[charNumber].enchantments![enchantmentNumber].enchantmentUseCount += gameCount;
-        results[tier].characters[charNumber].enchantments![enchantmentNumber].enchantmentUseCount += gameCount;
+        smasherData[tier].maps[mapNumber].characters[charNumber].enchantments![enchantmentNumber].enchantmentUseCount += gameCount;
+        smasherData[tier].characters[charNumber].enchantments![enchantmentNumber].enchantmentUseCount += gameCount;
       
         if(enchantmentNumbers[0] === 0 && enchantmentNumbers[1]===0) break;
       }
   
       for (const abilityNumber of abilityNumbers) {
-        if (!results[tier].characters[charNumber].abilities![abilityNumber]) {
-          results[tier].characters[charNumber].abilities![abilityNumber] = { abilityUseCount: 0 };
+        if (!smasherData[tier].characters[charNumber].abilities![abilityNumber]) {
+          smasherData[tier].characters[charNumber].abilities![abilityNumber] = { abilityUseCount: 0 };
         }
-        if (!results[tier].maps[mapNumber].characters[charNumber].abilities![abilityNumber]) {
-          results[tier].maps[mapNumber].characters[charNumber].abilities![abilityNumber] = { abilityUseCount: 0 };
+        if (!smasherData[tier].maps[mapNumber].characters[charNumber].abilities![abilityNumber]) {
+          smasherData[tier].maps[mapNumber].characters[charNumber].abilities![abilityNumber] = { abilityUseCount: 0 };
         }
-        results[tier].maps[mapNumber].characters[charNumber].abilities![abilityNumber].abilityUseCount += gameCount;
-        results[tier].characters[charNumber].abilities![abilityNumber].abilityUseCount += gameCount;
+        smasherData[tier].maps[mapNumber].characters[charNumber].abilities![abilityNumber].abilityUseCount += gameCount;
+        smasherData[tier].characters[charNumber].abilities![abilityNumber].abilityUseCount += gameCount;
 
         if(abilityNumbers[0] === 0 && abilityNumbers[1]===0) break;
       }
@@ -74,14 +82,15 @@ class GameStatisticsService {
   
 
       
-      results[tier].characters[charNumber].gameCount += gameCount;
-      results[tier].characters[charNumber].winCount += winCount;
+      smasherData[tier].characters[charNumber].gameCount += gameCount;
+      smasherData[tier].characters[charNumber].winCount += winCount;
     }
   
-    return results;
+    return results
   }
 
-  calculateRates(smasherData: SmasherData): void {
+  calculateRates(smasherDatas: SmasherDatas): void {
+    for(const smasherData of Object.values(smasherDatas)){
     for (const tier of Object.values(smasherData)) {
       for (const mapData of Object.values(tier.maps)) {
         for (const characterResult of Object.values(mapData.characters)) {
@@ -137,6 +146,6 @@ class GameStatisticsService {
   }
     }
   }
-}
+}}
 }
 module.exports = GameStatisticsService;

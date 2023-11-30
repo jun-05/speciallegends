@@ -48,3 +48,7 @@ export interface TierData {
 export interface SmasherData {
   [tier: string]: TierData;
 }
+
+export interface SmasherDatas {
+  [period:string]: SmasherData;
+}

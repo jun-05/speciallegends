@@ -1,11 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import { SmasherData } from '@/types/smasherDataTypes';
+import { SmasherDatas } from '@/types/smasherDataTypes';
 import { useState } from 'react';
 import TierAndMapSelect from '@/components/TierAndMapSelect';
 import TableOption from '@/components/TableOption';
 import CharacterList from '@/components/CharacterList';
+import TableTitle from '@/components/TableTitle';
+import { useLanguageContext } from '@/context/LanguageContext';
+import { localeText } from '@/locales/localeText';
 
-const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
+const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
   const [language] = useLanguageContext();
   const languageTranslations = localeText[language as keyof typeof localeText];
 
@@ -18,6 +21,9 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
     sortType: 'winRate', // 'winRate' 또는 'pickRate'
     order: 'desc', // 'asc' 또는 'desc'
   });
+
+  const period = Object.keys(smasherDatas)[0];
+  const smasherData = smasherDatas[period];
 
   const tierData = smasherData[option.selectedTier];
 
@@ -50,17 +56,18 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
   };
 
   return (
-    <div className="p-4 pt-8 md:pt-32 flex justify-center items-center text-gray-800 dark:text-white ">
-      <div className="w-[512px] md:w-[720px] lg:w-[1024px] ">
-        <div>dddddddddddd</div>
+    <div className="p-4 pt-8 md:pt-12 flex justify-center items-center text-gray-800 dark:text-white ">
+      <div className=" w-[512px] md:w-[720px] lg:w-[1024px] ">
+        {/** 타이틀 */}
+        <TableTitle period={period} />
         {/**옵션 */}
         <TierAndMapSelect
           option={option}
           onChangeTier={onChangeTier}
           onChangeMap={onChangeMap}
         />
-        {/**테이블 */}
 
+        {/** 테이블 설명 텍스트 */}
         <div className="rounded-md overflow-hidden">
           <div className="flex justify-end">
             {option.selectedMap !== 4000 ? (
@@ -73,7 +80,7 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
               </div>
             )}
           </div>
-
+          {/**테이블 */}
           <table className="w-full mt-4 rounded-md text-sm md:text-base text-gray-800 dark:text-white bg-white dark:bg-gray-800">
             {/**테이블 헤드 컴포넌트 */}
             <TableOption sortOption={sortOption} onClickSort={onClickSort} />
@@ -90,8 +97,7 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
   );
 };
 import fs from 'fs';
-import { useLanguageContext } from '@/context/LanguageContext';
-import { localeText } from '@/locales/localeText';
+
 export async function getStaticProps() {
   // const S3Service = require('/src/services/S3Service');
   const ExcelService = require('/src/services/ExcelService');
@@ -118,12 +124,12 @@ export async function getStaticProps() {
   //로컬 개발환경에서 사용하는 코드
   const data = excelService.readExcelFile(buffer);
 
-  const smasherData = gameStatisticsService.analyzeData(data);
-  gameStatisticsService.calculateRates(smasherData);
+  const smasherDatas = gameStatisticsService.analyzeData(data);
+  gameStatisticsService.calculateRates(smasherDatas);
 
   return {
     props: {
-      smasherData,
+      smasherDatas,
     },
   };
 }
