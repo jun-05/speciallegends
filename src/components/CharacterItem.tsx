@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-
+import { useEffect, useState } from 'react';
 import { charactersIcon } from '@/constants/images';
 import { useLanguageContext } from '@/context/LanguageContext';
 import { localeText } from '@/locales/localeText';
 import { characterResult } from '@/types/smasherDataTypes';
-import { useEffect, useState } from 'react';
-import { GrCaretDown, GrCaretUp } from 'react-icons/gr';
 import CharacterDetail from './CharacterDetail';
+
+import { GrCaretDown, GrCaretUp } from 'react-icons/gr';
 
 interface CharacterItemProps {
   characterData: characterResult;

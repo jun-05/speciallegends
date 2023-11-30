@@ -52,6 +52,7 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
   return (
     <div className="p-4 pt-8 md:pt-32 flex justify-center items-center text-gray-800 dark:text-white ">
       <div className="w-[512px] md:w-[720px] lg:w-[1024px] ">
+        <div>dddddddddddd</div>
         {/**옵션 */}
         <TierAndMapSelect
           option={option}

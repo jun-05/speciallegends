@@ -9,14 +9,14 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const [darkMode, setDarkMode] = useState<boolean>(() =>
     typeof window !== 'undefined'
-      ? localStorage.getItem('SL_darkMode') === 'true'
+      ? localStorage.getItem('SpecialLegends_darkMode') === 'true'
       : false
   );
 
   const toggleDarkMode = () => {
     const newMode = !darkMode;
     setDarkMode(newMode);
-    localStorage.setItem('SL_darkMode', newMode.toString());
+    localStorage.setItem('SpecialLegends_darkMode', newMode.toString());
   };
 
   return (

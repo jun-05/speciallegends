@@ -14,7 +14,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<string>('');
 
   useEffect(() => {
-    const storedLanguage = localStorage.getItem('SL_language');
+    const storedLanguage = localStorage.getItem('SpecialLegends_language');
     let defaultLanguage = 'en';
     if (storedLanguage) {
       setLanguage(storedLanguage);
@@ -28,7 +28,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('SL_language', language);
+    localStorage.setItem('SpecialLegends_language', language);
   }, [language]);
 
   if (!language) {
