@@ -24,6 +24,8 @@ export const localeText = {
     },
     firstInfoHeadName : '재능 선택률',
     secondInfoHeadName : '각성 선택률',
+    explanationText:'※ 승률/픽률 하단값 : 티어 평균값 대비',    
+explanationTextByMap:'※ 승률/픽률 하단값 : 전체 맵 대비',
     characterName : {
       101: '피터', 
       102: '신디', 
@@ -91,6 +93,8 @@ en: {
     },
     firstInfoHeadName : 'Ability Selection Rate',
     secondInfoHeadName : 'Enchantment Selection Rate',
+    explanationText:'※ Lower value of win rate/pick rate: Relative to the average tier value',    
+    explanationTextByMap:'※ Lower value of win rate/pick rate: Relative to the entire map',
     characterName : {
       101: 'Peter',
       102:  'Cindy',

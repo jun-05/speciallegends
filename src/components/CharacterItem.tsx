@@ -10,9 +10,19 @@ import CharacterDetail from './CharacterDetail';
 
 interface CharacterItemProps {
   characterData: characterResult;
+  tierAvgWinRate: number;
+  isAllDataInTier: boolean;
+  characterAvgWinRate: number;
+  characterAvgPickRate: number;
 }
 
-const CharacterItem = ({ characterData }: CharacterItemProps) => {
+const CharacterItem = ({
+  characterData,
+  tierAvgWinRate,
+  isAllDataInTier,
+  characterAvgWinRate,
+  characterAvgPickRate,
+}: CharacterItemProps) => {
   const [language] = useLanguageContext();
   const languageTranslations = localeText[language as keyof typeof localeText];
   const [showDetails, setShowDetails] = useState(false);
@@ -30,12 +40,18 @@ const CharacterItem = ({ characterData }: CharacterItemProps) => {
       characterData.characterId as keyof typeof characterData.characterId
     ];
 
-  if (!name) {
-    throw new Error(`Invalid character ID: ${characterData.characterId}`);
-  }
-
   const characterIcon =
     charactersIcon[characterData.characterId as keyof typeof charactersIcon];
+
+  const infoWinRateByisAllData = isAllDataInTier
+    ? (characterData.winRate! - tierAvgWinRate).toFixed(1)
+    : (characterData.winRate! - characterAvgWinRate).toFixed(1);
+
+  const tierAvgPickRate = Math.round((6 / 38) * 1000) / 10;
+
+  const infoPickRateByisAllData = isAllDataInTier
+    ? (characterData.pickRate! - tierAvgPickRate).toFixed(1)
+    : (characterData.pickRate! - characterAvgPickRate).toFixed(1);
 
   return (
     <>
@@ -60,10 +76,33 @@ const CharacterItem = ({ characterData }: CharacterItemProps) => {
         </th>
         <th className="w-[20%] md:w-[15%] text-center ">
           {characterData.pickRate}%
+          <div
+            className={`${
+              Number(infoPickRateByisAllData) > 0
+                ? 'text-red-600 dark:text-red-400'
+                : 'text-blue-600 dark:text-blue-400'
+            } text-[9px] md:text-[10px] ml-2 -mt-1`}
+          >
+            {Number(infoPickRateByisAllData) > 0
+              ? `+${infoPickRateByisAllData} `
+              : infoPickRateByisAllData}
+            %
+          </div>
         </th>
         <th className="w-[20%] md:w-[15%] text-center ">
           {characterData.winRate}%
-          {/**           <div className="text-[9px] md:text-[10px] ml-2 -mt-1">+3.5%</div> */}
+          <div
+            className={`${
+              Number(infoWinRateByisAllData) > 0
+                ? 'text-red-600 dark:text-red-400'
+                : 'text-blue-600 dark:text-blue-400'
+            } text-[9px] md:text-[10px] ml-2 -mt-1`}
+          >
+            {Number(infoWinRateByisAllData) > 0
+              ? `+${infoWinRateByisAllData}`
+              : infoWinRateByisAllData}
+            %
+          </div>
         </th>
         <th className="w-[10%] ">
           <div className="flex items-center justify-center ">

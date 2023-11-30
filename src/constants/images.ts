@@ -765,23 +765,23 @@ export const characterAbilityIcon =  {
   },
   "126": {
       "1": {
-          "url": "/assets/images/icon/abilityIcon/T_UI_YongYong_Ability_01_Common.png",
+          "url": "/assets/images/icon/abilityIcon/T_UI_YongYong_Ability_01_Common_v2.png",
           "name": "YongYong_1"
       },
       "2": {
-          "url": "/assets/images/icon/abilityIcon/T_UI_YongYong_Ability_02_Common.png",
+          "url": "/assets/images/icon/abilityIcon/T_UI_YongYong_Ability_02_Common_v2.png",
           "name": "YongYong_2"
       },
       "3": {
-          "url": "/assets/images/icon/abilityIcon/T_UI_YongYong_Ability_03_Common.png",
+          "url": "/assets/images/icon/abilityIcon/T_UI_YongYong_Ability_03_Common_v2.png",
           "name": "YongYong_3"
       },
       "4": {
-          "url": "/assets/images/icon/abilityIcon/T_UI_YongYong_Ability_04_Common.png",
+          "url": "/assets/images/icon/abilityIcon/T_UI_YongYong_Ability_04_Common_v2.png",
           "name": "YongYong_4"
       },
       "5": {
-          "url": "/assets/images/icon/abilityIcon/T_UI_YongYong_Ability_05_Rare.png",
+          "url": "/assets/images/icon/abilityIcon/T_UI_YongYong_Ability_05_Rare_v2.png",
           "name": "YongYong_5"
       }
   },

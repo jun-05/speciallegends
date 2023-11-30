@@ -71,7 +71,6 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
           <div className="flex overflow-hidden justify-start items-center">
             {sortedEnchantments.map(
               ([enchantmentId, { enchantmentUsageRate }], index) => {
-                console.log(enchantmentId);
                 return (
                   <div key={index} className=" text-center ml-3 first:ml-0">
                     <img

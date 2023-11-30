@@ -39,7 +39,7 @@ interface Maps {
   [mapNumber: string]: MapData;
 }
 
-interface TierData {
+export interface TierData {
   maps: Maps;
   characters: Characters;
   totalGamesInTier: number;

@@ -1,16 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import { SmasherData } from '@/types/smasherDataTypes';
-import { getSortedCharacters } from '@/utils/sortedCharacters';
-import { useEffect, useState } from 'react';
-
+import { useState } from 'react';
 import TierAndMapSelect from '@/components/TierAndMapSelect';
 import TableOption from '@/components/TableOption';
 import CharacterList from '@/components/CharacterList';
 
 const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
+  const [language] = useLanguageContext();
+  const languageTranslations = localeText[language as keyof typeof localeText];
+
   const [option, setOption] = useState({
     selectedTier: 'master',
-    selectedMap: 4000,
+    selectedMap: 4000, // 4000은 All값
   });
 
   const [sortOption, setSortOption] = useState({
@@ -19,14 +20,6 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
   });
 
   const tierData = smasherData[option.selectedTier];
-  const { characters, maps } = tierData;
-
-  const dataInOption =
-    option.selectedMap == 4000
-      ? characters
-      : maps[option.selectedMap].characters;
-
-  const sortedCharacters = getSortedCharacters(dataInOption, sortOption);
 
   const onChangeTier = (tier: string) => {
     setOption((prevOption) => ({
@@ -66,13 +59,29 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
           onChangeMap={onChangeMap}
         />
         {/**테이블 */}
-        {/**         <div>* 승률 및 픽률의 아래쪽 숫자는 티어 평균대비 값입니다.</div>*/}
+
         <div className="rounded-md overflow-hidden">
+          <div className="flex justify-end">
+            {option.selectedMap !== 4000 ? (
+              <div className="text-xs md:text-base mt-2">
+                {languageTranslations.explanationTextByMap}
+              </div>
+            ) : (
+              <div className="text-xs md:text-base mt-2">
+                {languageTranslations.explanationText}
+              </div>
+            )}
+          </div>
+
           <table className="w-full mt-4 rounded-md text-sm md:text-base text-gray-800 dark:text-white bg-white dark:bg-gray-800">
             {/**테이블 헤드 컴포넌트 */}
             <TableOption sortOption={sortOption} onClickSort={onClickSort} />
             {/**테이블 리스트 컴포넌트 */}
-            <CharacterList sortedCharacters={sortedCharacters} />
+            <CharacterList
+              tierData={tierData}
+              selectedMap={option.selectedMap}
+              sortOption={sortOption}
+            />
           </table>
         </div>
       </div>
@@ -80,6 +89,8 @@ const MyPage = ({ smasherData }: { smasherData: SmasherData }) => {
   );
 };
 import fs from 'fs';
+import { useLanguageContext } from '@/context/LanguageContext';
+import { localeText } from '@/locales/localeText';
 export async function getStaticProps() {
   // const S3Service = require('/src/services/S3Service');
   const ExcelService = require('/src/services/ExcelService');
