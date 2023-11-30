@@ -1,19 +1,19 @@
 interface enchantment {
-  enchantmentUseCount : number;
-  enchantmentUsageRate? : number
+  enchantmentUseCount: number;
+  enchantmentUsageRate?: number;
 }
 
 interface enchantments {
-  [enchantment:string] : enchantment;
+  [enchantment: string]: enchantment;
 }
 
 interface ability {
-  abilityUseCount : number
-  abilityUsageRate? : number
+  abilityUseCount: number;
+  abilityUsageRate?: number;
 }
 
 interface abilities {
-  [abilityUseCount:string] : ability;
+  [abilityUseCount: string]: ability;
 }
 
 export interface characterResult {
@@ -22,8 +22,8 @@ export interface characterResult {
   winCount: number;
   winRate?: number;
   pickRate?: number;
-  abilities:abilities;
-  enchantments:enchantments;
+  abilities: abilities;
+  enchantments: enchantments;
 }
 
 export interface Characters {
@@ -50,5 +50,5 @@ export interface SmasherData {
 }
 
 export interface SmasherDatas {
-  [period:string]: SmasherData;
+  [period: string]: SmasherData;
 }
