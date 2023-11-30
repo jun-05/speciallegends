@@ -9,7 +9,7 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"
+            src="https://www.googletagmanager.com/gtag/js?id=G-HH1NC5K603"
           />
           <script
             dangerouslySetInnerHTML={{
