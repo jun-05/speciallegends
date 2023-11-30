@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import React, { useState } from 'react';
 import Footer from './Footer';
 import Header from './Header';
@@ -24,6 +25,7 @@ const Layout = ({ children }: LayoutProps) => {
       <div className="min-w-full min-h-screen bg-gray-100 dark:bg-gray-800 ">
         <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
         <main>{children}</main>
+        <Analytics />
         <Footer />
       </div>
     </div>
