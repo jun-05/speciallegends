@@ -77,13 +77,13 @@ export const localeText = {
     mapList: {
       4000: 'All',
       4003: 'Abandoned Pirate Ship - Noon',
-      4005: 'Abandoned Pirate Ship - Proto',
-      4006: 'Abandoned Pirate Ship - Sunset',
-      4007: 'Abandoned Pirate Ship - Late Night',
+      4005: 'Abandoned Pirate Ship - Sunset',
+      4006: 'Abandoned Pirate Ship - Late Night',
+      4007: 'Abandoned Pirate Ship - Rain',
       4008: 'Unlicensed Space Dock - Stratosphere',
       4009: 'Unlicensed Zeppetta Factory - Sunset',
     },
-
+    
     tierListOptionName: 'Select Tier',
     tierList: {
       master: 'Master',
