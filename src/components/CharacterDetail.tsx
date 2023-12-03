@@ -33,8 +33,8 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
 
   return (
     <td colSpan={5} className="bg-gray-300 dark:bg-gray-700 dark:text-white">
-      <div className="flex flex-grow w-full justify-around space-x-10">
-        <div className="w-32 md:w-80 py-2 pl-2 md:pl-8 ml-[5%] overflow-hidden">
+      <div className="flex flex-grow w-full justify-around space-x-6 md:space-x-10">
+        <div className="w-[132px] md:w-80 py-2 pl-2 md:pl-8 ml-[5%] overflow-hidden">
           <h2 className="text-sm font-bold mb-2">
             {languageTranslations.firstInfoHeadName}
           </h2>
@@ -42,7 +42,7 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
             {sortedAbilities.map(
               ([abilityNum, { abilityUsageRate }], index) => {
                 return (
-                  <div key={index} className=" text-center ml-3 first:ml-0">
+                  <div key={index} className=" text-start ml-3 first:ml-0">
                     <img
                       src={
                         abilityIcons[
@@ -56,7 +56,9 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
                       }
                       className="h-6 w-6 md:h-10 md:w-10 "
                     />
-                    <span className="text-xs">{abilityUsageRate}%</span>
+                    <span className="text-xs inline-block w-8">
+                      {abilityUsageRate}%
+                    </span>
                   </div>
                 );
               }
