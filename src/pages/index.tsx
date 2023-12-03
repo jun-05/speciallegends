@@ -12,6 +12,7 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
   const [language] = useLanguageContext();
   const languageTranslations = localeText[language as keyof typeof localeText];
 
+  const [smasherDataIndex, setSmasherDataIndex] = useState(0);
   const [option, setOption] = useState({
     selectedTier: 'master',
     selectedMap: 4000, // 4000은 All값
@@ -22,10 +23,22 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
     order: 'desc', // 'asc' 또는 'desc'
   });
 
-  const smasherData = smasherDatas[0].data;
-  const period = smasherDatas[0].period;
+  const smasherData = smasherDatas[smasherDataIndex].data;
+  const period = smasherDatas[smasherDataIndex].period;
 
   const tierData = smasherData[option.selectedTier];
+
+  const onClickPrevIndex = () => {
+    if (smasherDataIndex < smasherDatas.length - 1) {
+      setSmasherDataIndex((prevIndex) => prevIndex + 1);
+    }
+  };
+
+  const onClickNextIndex = () => {
+    if (smasherDataIndex > 0) {
+      setSmasherDataIndex((prevIndex) => prevIndex - 1);
+    }
+  };
 
   const onChangeTier = (tier: string) => {
     setOption((prevOption) => ({
@@ -59,7 +72,11 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
     <div className="p-4 pt-8 md:pt-12 flex justify-center items-center text-gray-800 dark:text-white ">
       <div className=" w-[512px] md:w-[720px] lg:w-[1024px] ">
         {/** 타이틀 */}
-        <TableTitle period={period} />
+        <TableTitle
+          period={period}
+          onClickNextIndex={onClickNextIndex}
+          onClickPrevIndex={onClickPrevIndex}
+        />
         {/**옵션 */}
         <TierAndMapSelect
           option={option}
