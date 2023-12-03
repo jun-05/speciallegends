@@ -1,16 +1,18 @@
-import { SmasherData, SmasherDatas } from '@/types/smasherDataTypes';
+import { SmasherData, SmasherDataInPeriod } from '@/types/smasherDataTypes';
 
 class GameStatisticsService {
   //각 티어를 분류로하는 맵에 따른 캐릭터 정보 / 티어에 따른 캐릭터 정보를 갖는 객체를 만듦
-  analyzeData(data: (string | number)[][]): SmasherDatas {
-    const startDate = data[0][0].toString().slice(5);
-    const endDate = data[0][1].toString().slice(5);
+  analyzeData(data: (string | number) [][] ): SmasherDataInPeriod {
+    const startDate = data[0][0].toString().split('/');
+    const endDate = data[0][1].toString().split('/');
 
     const smasherData: SmasherData = {};
 
     const results = {
-      [startDate + '-' + endDate]: smasherData,
+      data :smasherData,
+      period : startDate[0]+'-'+startDate[1] + '-' + endDate[0]+'-'+endDate[1]
     };
+
 
     for (const row of data) {
       const tier = row[2].toString().replace(/\d/g, '');
@@ -125,8 +127,8 @@ class GameStatisticsService {
     return results;
   }
 
-  calculateRates(smasherDatas: SmasherDatas): void {
-    for (const smasherData of Object.values(smasherDatas)) {
+  calculateRates(smasherData: SmasherData): void {
+
       for (const tier of Object.values(smasherData)) {
         for (const mapData of Object.values(tier.maps)) {
           for (const characterResult of Object.values(mapData.characters)) {
@@ -197,7 +199,7 @@ class GameStatisticsService {
           }
         }
       }
-    }
+
   }
 }
 module.exports = GameStatisticsService;

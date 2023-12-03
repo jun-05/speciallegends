@@ -31,6 +31,8 @@ export const formatDateRange = (
     '12월',
   ];
 
+  console.log(dateRange)
+
   const dates = dateRange.split('-');
   const startMonth = parseInt(dates[0]) - 1;
   const startDay = dates[1];
