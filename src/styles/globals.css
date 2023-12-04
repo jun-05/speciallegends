@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgb(229 231 235) transparent transparent transparent;
+}
+
+.dark .tooltip::after {
+  border-color: rgb(75, 85, 99) transparent transparent transparent;
+}

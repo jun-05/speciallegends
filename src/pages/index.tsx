@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { SmasherDatas } from '@/types/smasherDataTypes';
+import { SmasherDataInPeriod } from '@/types/smasherDataTypes';
 import { useState } from 'react';
 import TierAndMapSelect from '@/components/TierAndMapSelect';
 import TableOption from '@/components/TableOption';
@@ -8,10 +8,11 @@ import TableTitle from '@/components/TableTitle';
 import { useLanguageContext } from '@/context/LanguageContext';
 import { localeText } from '@/locales/localeText';
 
-const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
+const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
   const [language] = useLanguageContext();
   const languageTranslations = localeText[language as keyof typeof localeText];
 
+  const [smasherDataIndex, setSmasherDataIndex] = useState(0);
   const [option, setOption] = useState({
     selectedTier: 'master',
     selectedMap: 4000, // 4000은 All값
@@ -22,10 +23,22 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
     order: 'desc', // 'asc' 또는 'desc'
   });
 
-  const period = Object.keys(smasherDatas)[0];
-  const smasherData = smasherDatas[period];
+  const smasherData = smasherDatas[smasherDataIndex].data;
+  const period = smasherDatas[smasherDataIndex].period;
 
   const tierData = smasherData[option.selectedTier];
+
+  const onClickPrevIndex = () => {
+    if (smasherDataIndex < smasherDatas.length - 1) {
+      setSmasherDataIndex((prevIndex) => prevIndex + 1);
+    }
+  };
+
+  const onClickNextIndex = () => {
+    if (smasherDataIndex > 0) {
+      setSmasherDataIndex((prevIndex) => prevIndex - 1);
+    }
+  };
 
   const onChangeTier = (tier: string) => {
     setOption((prevOption) => ({
@@ -59,7 +72,12 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
     <div className="p-4 pt-8 md:pt-12 flex justify-center items-center text-gray-800 dark:text-white ">
       <div className=" w-[512px] md:w-[720px] lg:w-[1024px] ">
         {/** 타이틀 */}
-        <TableTitle period={period} />
+        <TableTitle
+          period={period}
+          onClickNextIndex={onClickNextIndex}
+          onClickPrevIndex={onClickPrevIndex}
+          index={smasherDataIndex}
+        />
         {/**옵션 */}
         <TierAndMapSelect
           option={option}
@@ -68,7 +86,7 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
         />
 
         {/** 테이블 설명 텍스트 */}
-        <div className="rounded-md overflow-hidden">
+        <div className="rounded-md ">
           <div className="flex justify-end">
             {option.selectedMap !== 4000 ? (
               <div className="text-xs md:text-base mt-2">
@@ -81,7 +99,7 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
             )}
           </div>
           {/**테이블 */}
-          <table className="w-full mt-4 rounded-md text-sm md:text-base text-gray-800 dark:text-white bg-white dark:bg-gray-800">
+          <table className="w-full mt-4 rounded-md text-sm md:text-base text-gray-800 dark:text-white  ">
             {/**테이블 헤드 컴포넌트 */}
             <TableOption sortOption={sortOption} onClickSort={onClickSort} />
             {/**테이블 리스트 컴포넌트 */}
@@ -96,41 +114,57 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
     </div>
   );
 };
-import fs from 'fs';
 
 export async function getStaticProps() {
   const S3Service = require('/src/services/S3Service');
   const ExcelService = require('/src/services/ExcelService');
   const GameStatisticsService = require('/src/services/GameStatisticsService');
-
-  //로컬 개발환경에서 사용하는 코드
-  // const filePath = './public/slgg_sheet_2023_11121119.xlsx';
-  // const buffer = fs.readFileSync(filePath);
-
-  const params = {
-    Bucket: process.env.AWS_BUCKET!,
-    Key: process.env.AWS_FILE_KEY!,
-  };
+  const DateService = require('/src/services/DateService');
 
   const s3Service = new S3Service();
-
   const excelService = new ExcelService();
   const gameStatisticsService = new GameStatisticsService();
+  const dateService = new DateService();
 
-  const xlsxFile = await s3Service.getObject(params);
-  const fileBuffer = xlsxFile.Body;
-  const data = excelService.readExcelFile(fileBuffer);
+  const currentDate = new Date();
+  const smasherDatas = [];
 
-  //로컬 개발환경에서 사용하는 코드
-  // const data = excelService.readExcelFile(buffer);
+  // 3주전까지의 데이터를 저장 , 차후 4주
+  for (let i = 0; i < 3; i++) {
+    try {
+      const targetDate = new Date(
+        currentDate.getTime() - dateService.weeksToMs(i)
+      );
+      const period = dateService.getPeriod(targetDate);
 
-  const smasherDatas = gameStatisticsService.analyzeData(data);
-  gameStatisticsService.calculateRates(smasherDatas);
+      const params = {
+        Bucket: process.env.AWS_BUCKET!,
+        Key: `sl_${period.start}${period.end}.csv`,
+      };
+
+      const csvFile = await s3Service.getObject(params);
+
+      // 로컬 개발환경
+      // const filePath = `./public/sl_${period.start}${period.end}.csv`;
+      // const fileBuffer = fs.readFileSync(filePath);
+
+      const fileBuffer = csvFile.Body;
+      const data = excelService.readExcelFile(fileBuffer);
+
+      const weekSmasherData = gameStatisticsService.analyzeData(data);
+
+      gameStatisticsService.calculateRates(weekSmasherData.data);
+      smasherDatas.push(weekSmasherData);
+    } catch (error) {
+      console.error(`Error occurred in week ${i}:`, error);
+    }
+  }
 
   return {
     props: {
       smasherDatas,
     },
+    revalidate: 604800,
   };
 }
 

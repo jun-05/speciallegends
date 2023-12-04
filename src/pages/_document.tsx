@@ -7,19 +7,13 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="icon" href="/favicon.ico" />
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-HH1NC5K603"
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
           />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-HH1NC5K603');
-              `,
-            }}
+          <meta
+            name="description"
+            content="Special Legends provides the latest statistics and insights for Smash Legends. Discover the most effective strategies and improve your gameplay."
           />
         </Head>
         <body>
