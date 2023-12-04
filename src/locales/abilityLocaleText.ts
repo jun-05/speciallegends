@@ -1434,7 +1434,7 @@ export const abilityLocaleText = {
             },
             "5": {
                 "name": "Follow Me!",
-                "effect": "Decreases gauge charge required for Ultimate by 18%. When using Ultimate, charges forward and leaves behind a trail of wind for 3 s. Increases Movement Speed by 20%< for 3 s to teammates within the trail of wind."
+                "effect": "Decreases gauge charge required for Ultimate by 18%. When using Ultimate, charges forward and leaves behind a trail of wind for 3 s. Increases Movement Speed by 20% for 3 s to teammates within the trail of wind."
             }
         },
           '130': {
