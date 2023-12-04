@@ -4,6 +4,8 @@ import { useLanguageContext } from '@/context/LanguageContext';
 import { localeText } from '@/locales/localeText';
 import { characterResult } from '@/types/smasherDataTypes';
 import React from 'react';
+import { abilityLocaleText } from '@/locales/abilityLocaleText';
+import TableImgItem from './TableImgItem';
 
 interface CharacterDetailProps {
   characterData: characterResult;
@@ -31,67 +33,94 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
     characterAbilityIcon[characterId as keyof typeof characterAbilityIcon];
   const enchantmentIcons = EnchantmentIcon;
 
+  const abilityTranslation =
+    abilityLocaleText[language as keyof typeof abilityLocaleText]
+      .characterAbility;
+
+  const abilityInfo =
+    abilityTranslation[characterId as keyof typeof abilityTranslation];
+
+  const enchantMentInfo = languageTranslations.enchantMentInfo;
+
   return (
     <td colSpan={5} className="bg-gray-300 dark:bg-gray-700 dark:text-white">
-      <div className="flex flex-grow w-full justify-around space-x-6 md:space-x-10">
-        <div className="w-[132px] md:w-80 py-2 pl-2 md:pl-8 ml-[5%] overflow-hidden">
-          <h2 className="text-sm font-bold mb-2">
+      <div className="flex flex-grow w-full justify-center sm:justify-around md:space-x-6 space-x-8">
+        <div className="w-40 sm:w-60 md:w-80  py-2 pl-2 md:pl-6 ml-[5%] ">
+          <h2
+            className={`text-sm font-bold mb-2 sm:min-h-0 ${
+              language === 'en' && 'min-h-[40px]'
+            }`}
+          >
             {languageTranslations.firstInfoHeadName}
           </h2>
-          <div className="flex overflow-hidden justify-start items-center ">
+          <div className="flex flex-wrap justify-start items-center ">
             {sortedAbilities.map(
               ([abilityNum, { abilityUsageRate }], index) => {
                 return (
-                  <div key={index} className=" text-start ml-3 first:ml-0">
-                    <img
-                      src={
-                        abilityIcons[
-                          String(abilityNum) as keyof typeof abilityIcons
-                        ].url
-                      }
-                      alt={
-                        abilityIcons[
-                          String(abilityNum) as keyof typeof abilityIcons
-                        ].name
-                      }
-                      className="h-6 w-6 md:h-10 md:w-10 "
-                    />
-                    <span className="text-xs inline-block w-8">
-                      {abilityUsageRate}%
-                    </span>
-                  </div>
+                  <TableImgItem
+                    key={index}
+                    src={
+                      abilityIcons[
+                        String(abilityNum) as keyof typeof abilityIcons
+                      ].url
+                    }
+                    alt={
+                      abilityIcons[
+                        String(abilityNum) as keyof typeof abilityIcons
+                      ].name
+                    }
+                    UsageRate={abilityUsageRate}
+                    tooltipTitle={
+                      abilityInfo[
+                        String(abilityNum) as keyof typeof abilityInfo
+                      ].name
+                    }
+                    tooltipInfo={
+                      abilityInfo[
+                        String(abilityNum) as keyof typeof abilityInfo
+                      ].effect
+                    }
+                  />
                 );
               }
             )}
           </div>
         </div>
 
-        <div className="w-32 md:w-80 py-2">
+        <div className="w-40 sm:w-60 md:w-[340px] py-2">
           <h2 className="text-sm font-bold mb-2">
             {languageTranslations.secondInfoHeadName}
           </h2>
-          <div className="flex overflow-hidden justify-start items-center">
+          <div className="flex flex-wrap justify-start items-center">
             {sortedEnchantments.map(
               ([enchantmentId, { enchantmentUsageRate }], index) => {
                 return (
-                  <div key={index} className=" text-center ml-3 first:ml-0">
-                    <img
-                      src={
-                        enchantmentIcons[
-                          Number(enchantmentId) as keyof typeof enchantmentIcons
-                        ].url
-                      }
-                      alt={
-                        enchantmentIcons[
-                          Number(
-                            enchantmentId
-                          ) as unknown as keyof typeof enchantmentIcons
-                        ].name
-                      }
-                      className="h-6 w-6 md:h-10 md:w-10 "
-                    />
-                    <span className="text-xs">{enchantmentUsageRate}%</span>
-                  </div>
+                  <TableImgItem
+                    key={index}
+                    src={
+                      enchantmentIcons[
+                        Number(enchantmentId) as keyof typeof enchantmentIcons
+                      ].url
+                    }
+                    alt={
+                      enchantmentIcons[
+                        Number(
+                          enchantmentId
+                        ) as unknown as keyof typeof enchantmentIcons
+                      ].name
+                    }
+                    UsageRate={enchantmentUsageRate}
+                    tooltipTitle={
+                      enchantMentInfo[
+                        Number(enchantmentId!) as keyof typeof enchantMentInfo
+                      ].name
+                    }
+                    tooltipInfo={
+                      enchantMentInfo[
+                        Number(enchantmentId!) as keyof typeof enchantMentInfo
+                      ].effect
+                    }
+                  />
                 );
               }
             )}
