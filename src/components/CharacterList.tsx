@@ -25,7 +25,7 @@ const CharacterList = ({
   const sortedCharacters = getSortedCharacters(dataInOption, sortOption);
 
   return (
-    <tbody className=" w-full">
+    <tbody className=" w-full ">
       {sortedCharacters.map((characterData, idx: number) => (
         <CharacterItem
           key={`charcter_${idx}`}

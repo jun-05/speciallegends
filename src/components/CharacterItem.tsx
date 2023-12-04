@@ -62,7 +62,7 @@ const CharacterItem = ({
             : 'bg-gray-300 dark:bg-gray-700'
         }  hover:bg-gray-300 dark:hover:bg-gray-700 dark:text-white `}
       >
-        <th className="w-[5%] ">-</th>
+        <th className="w-[5%] "></th>
         <th className="flex w-full items-center text-left pl-2 md:pl-8 space-x-2 md:space-x-5">
           <span className="flex-shrink-0">
             <img

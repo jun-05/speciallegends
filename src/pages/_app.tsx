@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Special Legends</title>
+        <title>Special Legends: Smash Legends Statistics</title>
       </Head>
       <LanguageProvider>
         <Layout>
