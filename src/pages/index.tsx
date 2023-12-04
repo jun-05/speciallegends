@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { SmasherDatas } from '@/types/smasherDataTypes';
+import { SmasherDataInPeriod } from '@/types/smasherDataTypes';
 import { useState } from 'react';
 import TierAndMapSelect from '@/components/TierAndMapSelect';
 import TableOption from '@/components/TableOption';
@@ -8,7 +8,7 @@ import TableTitle from '@/components/TableTitle';
 import { useLanguageContext } from '@/context/LanguageContext';
 import { localeText } from '@/locales/localeText';
 
-const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
+const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
   const [language] = useLanguageContext();
   const languageTranslations = localeText[language as keyof typeof localeText];
 
@@ -76,6 +76,7 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
           period={period}
           onClickNextIndex={onClickNextIndex}
           onClickPrevIndex={onClickPrevIndex}
+          index={smasherDataIndex}
         />
         {/**옵션 */}
         <TierAndMapSelect
@@ -85,7 +86,7 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
         />
 
         {/** 테이블 설명 텍스트 */}
-        <div className="rounded-md overflow-hidden">
+        <div className="rounded-md ">
           <div className="flex justify-end">
             {option.selectedMap !== 4000 ? (
               <div className="text-xs md:text-base mt-2">
@@ -98,7 +99,7 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDatas }) => {
             )}
           </div>
           {/**테이블 */}
-          <table className="w-full mt-4 rounded-md text-sm md:text-base text-gray-800 dark:text-white bg-white dark:bg-gray-800">
+          <table className="w-full mt-4 rounded-md text-sm md:text-base text-gray-800 dark:text-white  ">
             {/**테이블 헤드 컴포넌트 */}
             <TableOption sortOption={sortOption} onClickSort={onClickSort} />
             {/**테이블 리스트 컴포넌트 */}

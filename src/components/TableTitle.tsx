@@ -9,17 +9,21 @@ import React from 'react';
 
 interface TableTitleProps {
   period: string;
+  index: number;
   onClickPrevIndex: () => void;
   onClickNextIndex: () => void;
 }
 
 const TableTitle = ({
   period,
+  index,
   onClickPrevIndex,
   onClickNextIndex,
 }: TableTitleProps) => {
   const [language] = useLanguageContext();
   const languageTranslations = localeText[language as keyof typeof localeText];
+
+  console.log(index);
 
   return (
     <div className="flex items-top justify-between  mb-8">
@@ -34,15 +38,23 @@ const TableTitle = ({
         </div>
         <div className="flex justify-between pt-1">
           <div>{/**월 - 주간 선택 컴포넌트  */}</div>
-          <div className="flex">
+          <div className="flex space-x-1">
             <div
-              className="text-xl md:text-2xl cursor-pointer "
+              className={`${
+                index <= 1
+                  ? 'bg-gray-200 dark:bg-gray-600 cursor-pointer'
+                  : 'bg-red-200 dark:bg-gray-400 cursor-not-allowed'
+              } flex items-center justify-center text-xl md:text-2xl cursor-pointer h-6 w-6 rounded-full text-gray-800 dark:text-white `}
               onClick={onClickPrevIndex}
             >
               <MdOutlineKeyboardArrowLeft />
             </div>
             <div
-              className="text-xl md:text-2xl cursor-pointer"
+              className={`${
+                index !== 0
+                  ? 'bg-gray-200 dark:bg-gray-600 cursor-pointer'
+                  : 'bg-red-200 dark:bg-gray-400 cursor-not-allowed'
+              } flex items-center justify-center text-xl md:text-2xl cursor-pointer h-6 w-6 rounded-full text-gray-800 dark:text-white `}
               onClick={onClickNextIndex}
             >
               <MdOutlineKeyboardArrowRight />

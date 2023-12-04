@@ -78,7 +78,7 @@ const TierAndMapSelect = ({
             <img
               src={selectedTierIcon.url}
               alt={selectedTierIcon.name}
-              className="rounded-md object-fill h-10 w-10 md:h-14 md:w-14"
+              className=" rounded-md object-fill h-10 w-10 md:h-14 md:w-14"
             />
             <img
               src={selectedMapIcon.url}
