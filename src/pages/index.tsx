@@ -164,6 +164,7 @@ export async function getStaticProps() {
     props: {
       smasherDatas,
     },
+    revalidate: 604800,
   };
 }
 
