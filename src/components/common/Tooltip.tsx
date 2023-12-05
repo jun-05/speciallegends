@@ -22,7 +22,7 @@ const Tooltip = ({ title, infoText, idx, position }: TooltipProps) => {
               : ' -translate-x-[80%] tooltip_right'
       }`}
     >
-      <h2 className="text-sm md:text-base font-bold pl-2 md:p-2 inline-block text-center  break-words">
+      <h2 className="text-sm md:text-base font-bold pl-2 md:p-2 inline-block break-words">
         {title}
       </h2>
       <p className="p-2 text-xs md:text-sm md:inline-block break-words ">
