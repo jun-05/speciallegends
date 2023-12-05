@@ -44,8 +44,8 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
 
   return (
     <td colSpan={5} className="bg-gray-300 dark:bg-gray-700 dark:text-white">
-      <div className="flex flex-grow w-full justify-center sm:justify-around md:space-x-6 space-x-8">
-        <div className="w-36 sm:w-60 md:w-80  py-2 pl-2 md:pl-6 ml-[5%] ">
+      <div className="flex flex-grow w-full justify-around md:space-x-6 space-x-8">
+        <div className="w-36 sm:w-60 md:w-80  py-2 ml-[10%] lg:ml-0">
           <h2 className="text-sm font-bold mb-2 sm:min-h-0">
             {languageTranslations.firstInfoHeadName}
           </h2>
