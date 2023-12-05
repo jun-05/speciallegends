@@ -61,9 +61,7 @@ const TableImgItem = ({
 
   return (
     <div
-      className={`${containerClassName} ${
-        idx === 5 ? 'md:ml-0' : 'md:ml-2'
-      } relative  text-center md:text-center p-1 first:ml-0`}
+      className={`${containerClassName} relative  text-start md:text-center p-1 md:ml-2 first:ml-0`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
@@ -78,9 +76,7 @@ const TableImgItem = ({
           onLoad={() => setIsLoaded(true)}
         />
       </div>
-      <span className="text-[10px] md:text-sm inline-block w-8">
-        {UsageRate}%
-      </span>
+      <span className="text-xs inline-block w-8">{UsageRate}%</span>
       {isHovered && (
         <Tooltip
           title={tooltipTitle}

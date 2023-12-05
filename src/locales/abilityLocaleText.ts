@@ -1018,7 +1018,7 @@ export const abilityLocaleText = {
         },
         '5': {
           name: 'Loud Roar',
-          effect: 'Increases Movement Speed While using ultimate, and decreases incoming damage and hit received cooldown by 1 sec.',
+          effect: 'Increases Movement Speed While using ultimate,',
         },
       },
       '104': {
