@@ -61,7 +61,9 @@ const TableImgItem = ({
 
   return (
     <div
-      className={`${containerClassName} relative  text-start md:text-center p-1 md:ml-2 first:ml-0`}
+      className={`${containerClassName} relative  text-start md:text-center p-1 ${
+        idx === 5 ? 'md:ml-0' : 'md:ml-2'
+      } first:ml-0`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
