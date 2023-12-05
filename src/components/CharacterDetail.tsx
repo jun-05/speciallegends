@@ -45,12 +45,8 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
   return (
     <td colSpan={5} className="bg-gray-300 dark:bg-gray-700 dark:text-white">
       <div className="flex flex-grow w-full justify-center sm:justify-around md:space-x-6 space-x-8">
-        <div className="w-40 sm:w-60 md:w-80  py-2 pl-2 md:pl-6 ml-[5%] ">
-          <h2
-            className={`text-sm font-bold mb-2 sm:min-h-0 ${
-              language === 'en' && 'min-h-[40px]'
-            }`}
-          >
+        <div className="w-36 sm:w-60 md:w-80  py-2 pl-2 md:pl-6 ml-[5%] ">
+          <h2 className="text-sm font-bold mb-2 sm:min-h-0">
             {languageTranslations.firstInfoHeadName}
           </h2>
           <div className="flex flex-wrap justify-start items-center ">
@@ -80,6 +76,8 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
                         String(abilityNum) as keyof typeof abilityInfo
                       ].effect
                     }
+                    idx={index}
+                    position="left"
                   />
                 );
               }
@@ -87,7 +85,7 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
           </div>
         </div>
 
-        <div className="w-36 sm:w-60 md:w-[340px] py-2">
+        <div className="w-36 sm:w-60 md:w-72 py-2">
           <h2 className="text-sm font-bold mb-2">
             {languageTranslations.secondInfoHeadName}
           </h2>
@@ -120,6 +118,8 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
                         Number(enchantmentId!) as keyof typeof enchantMentInfo
                       ].effect
                     }
+                    idx={index}
+                    position="right"
                   />
                 );
               }

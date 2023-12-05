@@ -13,6 +13,23 @@
   border-color: rgb(229 231 235) transparent transparent transparent;
 }
 
+
+
+@media (max-width: 640px) {
+  .tooltip_left::after {
+    left: 20%;
+  }
+  
+  .tooltip_right::after {
+    left: 80%;
+  }
+}
+    /* ipad 사용자용 툴팁 디자인 */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .tooltip_right_md_lg::after  {
+      left: 80%;
+  }
+}
 .dark .tooltip::after {
   border-color: rgb(75, 85, 99) transparent transparent transparent;
 }
