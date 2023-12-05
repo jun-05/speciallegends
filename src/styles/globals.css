@@ -26,10 +26,13 @@
 }
     /* ipad 사용자용 툴팁 디자인 */
 
-  .tooltip_right_md::after  {
+  .tooltip_right_sm::after  {
       left: 80%;
+  }
+  .tooltip_left_sm::after  {
+    left: 20%;
+  }
 
-}
 .dark .tooltip::after {
   border-color: rgb(75, 85, 99) transparent transparent transparent;
 }
