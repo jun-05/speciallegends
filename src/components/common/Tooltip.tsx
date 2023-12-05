@@ -18,7 +18,7 @@ const Tooltip = ({ title, infoText, idx, position }: TooltipProps) => {
           : (idx! + 1) % 3 === 1
             ? ' -translate-x-1/2'
             : (idx! + 1) % 5 === 0
-              ? ' md:-translate-x-[80%] tooltip_right_md_lg'
+              ? '-translate-x-[80%] md:-translate-x-[80%] tooltip_right_md'
               : ' -translate-x-[80%] tooltip_right'
       }`}
     >
