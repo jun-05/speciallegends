@@ -22,7 +22,11 @@ const CharacterList = ({
   const dataInOption =
     selectedMap == 4000 ? characters : maps[selectedMap].characters;
 
+  console.log(dataInOption);
+
   const sortedCharacters = getSortedCharacters(dataInOption, sortOption);
+
+  console.log(sortedCharacters);
 
   return (
     <tbody className=" w-full ">

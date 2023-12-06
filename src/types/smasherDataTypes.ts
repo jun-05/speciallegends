@@ -17,7 +17,7 @@ interface abilities {
 }
 
 export interface characterResult {
-  characterId?: number;
+  characterId?: number | string;
   gameCount: number;
   winCount: number;
   winRate?: number;

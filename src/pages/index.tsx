@@ -114,14 +114,15 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
     </div>
   );
 };
+import fs from 'fs';
 
 export async function getStaticProps() {
-  const S3Service = require('/src/services/S3Service');
+  //const S3Service = require('/src/services/S3Service');
   const ExcelService = require('/src/services/ExcelService');
   const GameStatisticsService = require('/src/services/GameStatisticsService');
   const DateService = require('/src/services/DateService');
 
-  const s3Service = new S3Service();
+  //const s3Service = new S3Service();
   const excelService = new ExcelService();
   const gameStatisticsService = new GameStatisticsService();
   const dateService = new DateService();
@@ -142,13 +143,13 @@ export async function getStaticProps() {
         Key: `sl_${period.start}${period.end}.csv`,
       };
 
-      const csvFile = await s3Service.getObject(params);
+      //    const csvFile = await s3Service.getObject(params);
 
       // 로컬 개발환경
-      // const filePath = `./public/sl_${period.start}${period.end}.csv`;
-      // const fileBuffer = fs.readFileSync(filePath);
+      const filePath = `./public/sl_${period.start}${period.end}.csv`;
+      const fileBuffer = fs.readFileSync(filePath);
 
-      const fileBuffer = csvFile.Body;
+      // const fileBuffer = csvFile.Body;
       const data = excelService.readExcelFile(fileBuffer);
 
       const weekSmasherData = gameStatisticsService.analyzeData(data);
