@@ -80,7 +80,9 @@ const CharacterItem = ({
             className={`${
               Number(infoPickRateByisAllData) > 0
                 ? 'text-red-600 dark:text-red-400'
-                : 'text-blue-600 dark:text-blue-400'
+                : Number(infoPickRateByisAllData) === 0
+                  ? ''
+                  : 'text-blue-600 dark:text-blue-400'
             } text-[9px] md:text-[10px] ml-2 -mt-1`}
           >
             {Number(infoPickRateByisAllData) > 0
@@ -95,7 +97,9 @@ const CharacterItem = ({
             className={`${
               Number(infoWinRateByisAllData) > 0
                 ? 'text-red-600 dark:text-red-400'
-                : 'text-blue-600 dark:text-blue-400'
+                : Number(infoWinRateByisAllData) === 0
+                  ? ''
+                  : 'text-blue-600 dark:text-blue-400'
             } text-[9px] md:text-[10px] ml-2 -mt-1`}
           >
             {Number(infoWinRateByisAllData) > 0
