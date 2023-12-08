@@ -131,7 +131,7 @@ export async function getStaticProps() {
   const smasherDatas = [];
 
   // 3주전까지의 데이터를 저장 , 차후 4주
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 4; i++) {
     try {
       const targetDate = new Date(
         currentDate.getTime() - dateService.weeksToMs(i)

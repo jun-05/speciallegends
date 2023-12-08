@@ -39,11 +39,12 @@ const TableTitle = ({
         <div className="flex justify-between pt-1">
           <div>{/**월 - 주간 선택 컴포넌트  */}</div>
           <div className="flex space-x-1">
+            {/** index 3은 4주전 데이터기간을 의미 */}
             <div
               className={`${
-                index <= 1
-                  ? 'bg-gray-200 dark:bg-gray-600 cursor-pointer'
-                  : 'bg-red-200 dark:bg-gray-400 cursor-not-allowed'
+                index !== 3
+                  ? 'bg-gray-200 dark:bg-gray-600 '
+                  : 'bg-red-200 dark:bg-gray-400 '
               } flex items-center justify-center text-xl md:text-2xl cursor-pointer h-6 w-6 rounded-full text-gray-800 dark:text-white `}
               onClick={onClickPrevIndex}
             >
@@ -52,8 +53,8 @@ const TableTitle = ({
             <div
               className={`${
                 index !== 0
-                  ? 'bg-gray-200 dark:bg-gray-600 cursor-pointer'
-                  : 'bg-red-200 dark:bg-gray-400 cursor-not-allowed'
+                  ? 'bg-gray-200 dark:bg-gray-600 '
+                  : 'bg-red-200 dark:bg-gray-400 '
               } flex items-center justify-center text-xl md:text-2xl cursor-pointer h-6 w-6 rounded-full text-gray-800 dark:text-white `}
               onClick={onClickNextIndex}
             >
