@@ -32,7 +32,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, [language]);
 
   if (!language) {
-    return null; // 언어 설정이 로드되지 않은 경우 렌더링하지 않습니다
+    return null;
   }
 
   return (

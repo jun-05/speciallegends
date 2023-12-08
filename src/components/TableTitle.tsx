@@ -23,8 +23,6 @@ const TableTitle = ({
   const [language] = useLanguageContext();
   const languageTranslations = localeText[language as keyof typeof localeText];
 
-  console.log(index);
-
   return (
     <div className="flex items-top justify-between  mb-8">
       <div className="text-3xl font-bold">

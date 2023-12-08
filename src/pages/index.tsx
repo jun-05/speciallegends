@@ -117,12 +117,12 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
 import fs from 'fs';
 
 export async function getStaticProps() {
-  //const S3Service = require('/src/services/S3Service');
+  const S3Service = require('/src/services/S3Service');
   const ExcelService = require('/src/services/ExcelService');
   const GameStatisticsService = require('/src/services/GameStatisticsService');
   const DateService = require('/src/services/DateService');
 
-  //const s3Service = new S3Service();
+  const s3Service = new S3Service();
   const excelService = new ExcelService();
   const gameStatisticsService = new GameStatisticsService();
   const dateService = new DateService();
@@ -130,7 +130,6 @@ export async function getStaticProps() {
   const currentDate = new Date();
   const smasherDatas = [];
 
-  // 3주전까지의 데이터를 저장 , 차후 4주
   for (let i = 0; i < 3; i++) {
     try {
       const targetDate = new Date(
@@ -143,13 +142,9 @@ export async function getStaticProps() {
         Key: `sl_${period.start}${period.end}.csv`,
       };
 
-      //    const csvFile = await s3Service.getObject(params);
+      const csvFile = await s3Service.getObject(params);
 
-      // 로컬 개발환경
-      const filePath = `./public/sl_${period.start}${period.end}.csv`;
-      const fileBuffer = fs.readFileSync(filePath);
-
-      // const fileBuffer = csvFile.Body;
+      const fileBuffer = csvFile.Body;
       const data = excelService.readExcelFile(fileBuffer);
 
       const weekSmasherData = gameStatisticsService.analyzeData(data);
