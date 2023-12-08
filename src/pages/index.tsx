@@ -87,19 +87,22 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
 
         {/** 테이블 설명 텍스트 */}
         <div className="rounded-md ">
-          <div className="flex justify-end">
+          <div className="flex flex-col items-end">
+            <div className="text-xs md:text-base mt-2">
+              {languageTranslations.updateTimeInfo}
+            </div>
             {option.selectedMap !== 4000 ? (
-              <div className="text-xs md:text-base mt-2">
+              <div className="text-xs md:text-base mt-1">
                 {languageTranslations.explanationTextByMap}
               </div>
             ) : (
-              <div className="text-xs md:text-base mt-2">
+              <div className="text-xs md:text-base mt-1">
                 {languageTranslations.explanationText}
               </div>
             )}
           </div>
           {/**테이블 */}
-          <table className="w-full mt-4 rounded-md text-sm md:text-base text-gray-800 dark:text-white  ">
+          <table className="w-full mt-2 rounded-md text-sm md:text-base text-gray-800 dark:text-white  ">
             {/**테이블 헤드 컴포넌트 */}
             <TableOption sortOption={sortOption} onClickSort={onClickSort} />
             {/**테이블 리스트 컴포넌트 */}
@@ -130,7 +133,8 @@ export async function getStaticProps() {
   const currentDate = new Date();
   const smasherDatas = [];
 
-  for (let i = 0; i < 3; i++) {
+  // 3주전까지의 데이터를 저장 , 차후 4주
+  for (let i = 0; i < 4; i++) {
     try {
       const targetDate = new Date(
         currentDate.getTime() - dateService.weeksToMs(i)

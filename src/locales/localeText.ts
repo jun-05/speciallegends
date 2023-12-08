@@ -27,6 +27,8 @@ export const localeText = {
     secondInfoHeadName: '각성 선택률',
     explanationText: '※ 승률/픽률 하단값 : 티어 평균값 대비',
     explanationTextByMap: '※ 승률/픽률 하단값 : 전체 맵 대비',
+    updateTimeInfo : 
+    '※ 화요일 02시 데이터 갱신',
     characterName: {
       101: '피터',
       102: '신디',
@@ -129,7 +131,9 @@ export const localeText = {
       '※ Lower value of win rate/pick rate: Relative to the average tier value',
     explanationTextByMap:
       '※ Lower value of win rate/pick rate: Relative to the entire map',
-    characterName: {
+    updateTimeInfo : 
+    '※ Data updated every Monday at 17:00 UTC',
+      characterName: {
       101: 'Peter',
       102: 'Cindy',
       103: 'Kaiser',
