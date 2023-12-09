@@ -27,7 +27,7 @@ const TableTitle = ({
 
   return (
     <div className="flex items-top justify-between  mb-8">
-      <div className="text-3xl font-bold">
+      <div className="text-2xl sm:text-3xl font-bold">
         {languageTranslations.tableTitle}
       </div>
       <div className="flex flex-col">

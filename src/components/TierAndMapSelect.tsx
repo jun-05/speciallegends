@@ -45,7 +45,7 @@ const TierAndMapSelect = ({
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <select
-            className="mr-2 h-10 md:h-11  p-2 w-22 md:w-48 lg:w-40 text-xs md:text-sm lg:text-base border form-select bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-gray-200 rounded"
+            className="mr-2 h-10 md:h-11  p-2 w-16 sm:w-22 md:w-48 lg:w-40 text-xs md:text-sm lg:text-base border form-select bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-gray-200 rounded"
             onChange={(e) => onChangeTier(e.target.value)}
           >
             <option value={option.selectedTier}>
@@ -60,7 +60,7 @@ const TierAndMapSelect = ({
             })}
           </select>
           <select
-            className="p-2  h-10  md:h-11 w-32 lg:w-60 md:w-48 text-xs md:text-sm lg:text-base  border form-select bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-gray-200 rounded"
+            className="p-2  h-10  md:h-11 w-28 sm:w-32 lg:w-60 md:w-48 text-xs md:text-sm lg:text-base  border form-select bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-gray-200 rounded"
             onChange={(e) => onChangeMap(Number(e.target.value))}
           >
             <option value={option.selectedMap}>
@@ -78,12 +78,12 @@ const TierAndMapSelect = ({
             <img
               src={selectedTierIcon.url}
               alt={selectedTierIcon.name}
-              className=" rounded-md object-fill h-10 w-10 md:h-14 md:w-14"
+              className=" rounded-md object-fill h-8 w-8 sm:h-10 sm:w-10 md:h-14 md:w-14"
             />
             <img
               src={selectedMapIcon.url}
               alt={selectedMapIcon.name}
-              className={`h-10 w-10 md:h-14 md:w-14
+              className={` h-8 w-8 sm:h-10 sm:w-10 md:h-14 md:w-14
           ${
             option.selectedMap !== 4000 && window.innerWidth > 768
               ? 'transition-all duration-500 ease-in-out transform group-hover:scale-x-[2] rounded-md object-fill'
