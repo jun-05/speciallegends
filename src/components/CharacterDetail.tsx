@@ -44,8 +44,8 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
 
   return (
     <td colSpan={5} className="bg-gray-300 dark:bg-gray-700 dark:text-white">
-      <div className="flex flex-grow w-full justify-around   space-x-0 sm:space-x-8 md:space-x-6  ">
-        <div className="w-1/2 sm:w-60 md:w-80  py-2 ml-[10%] lg:ml-0">
+      <div className="flex flex-grow w-full justify-around   space-x-2  sm:space-x-8 md:space-x-6  ">
+        <div className="w-1/2 xs:w-32 sm:w-60 md:w-80  py-2 ml-[5%] sm:ml-[10%]  lg:ml-0">
           <h2 className="text-sm font-bold mb-2 w-28 sm:w-full ">
             {languageTranslations.firstInfoHeadName}
           </h2>
@@ -85,7 +85,7 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
           </div>
         </div>
 
-        <div className="w-1/2 sm:w-60 md:w-72 py-2">
+        <div className="w-1/2 xs:w-32 sm:w-60 md:w-72 py-2">
           <h2 className="text-sm font-bold mb-2">
             {languageTranslations.secondInfoHeadName}
           </h2>

@@ -78,7 +78,7 @@ const TableImgItem = ({
           onLoad={() => setIsLoaded(true)}
         />
       </div>
-      <span className="text-[10px] md:text-xs inline-block w-8">
+      <span className="text-[10px] sm:text-xs inline-block w-8">
         {UsageRate}%
       </span>
       {isHovered && (
