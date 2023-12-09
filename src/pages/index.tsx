@@ -19,7 +19,7 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
   });
 
   const [sortOption, setSortOption] = useState({
-    sortType: 'winRate', // 'winRate' 또는 'pickRate'
+    sortType: 'pickRate', // 'winRate' 또는 'pickRate'
     order: 'desc', // 'asc' 또는 'desc'
   });
 
