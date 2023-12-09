@@ -88,9 +88,6 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
         {/** 테이블 설명 텍스트 */}
         <div className="rounded-md ">
           <div className="flex flex-col items-end">
-            <div className="text-xs md:text-base mt-2">
-              {languageTranslations.updateTimeInfo}
-            </div>
             {option.selectedMap !== 4000 ? (
               <div className="text-xs md:text-base mt-1">
                 {languageTranslations.explanationTextByMap}

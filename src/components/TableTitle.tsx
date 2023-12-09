@@ -27,8 +27,13 @@ const TableTitle = ({
 
   return (
     <div className="flex items-top justify-between  mb-8">
-      <div className="text-2xl sm:text-3xl font-bold">
-        {languageTranslations.tableTitle}
+      <div>
+        <div className="text-2xl sm:text-3xl font-bold">
+          {languageTranslations.tableTitle}
+        </div>
+        <div className="text-[9px]  md:text-xs mt-1 sm:mt-2">
+          {languageTranslations.updateTimeInfo}
+        </div>
       </div>
       <div className="flex flex-col">
         <div className="p-2 bg-gray-200 dark:bg-gray-600 rounded-lg ">
