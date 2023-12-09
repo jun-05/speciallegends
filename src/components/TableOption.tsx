@@ -19,8 +19,20 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
     <thead className="w-full  bg-gray-300 border-b-gray-300 dark:bg-gray-700 dark:border-gray-700">
       <tr className="text-gray-600 dark:text-gray-400">
         <th className="w-[5%]">#</th>
-        <th className="w-[40%] md:w-[50%] text-left pl-2 md:pl-8">
-          {languageTranslations.firstTableOption}
+        <th className="w-[35%] xs:w-[40%] md:w-[50%]">
+          <div className="flex justify-start items-center text-left space-x-1 pl-2 md:pl-8">
+            <span> {languageTranslations.firstTableOption}</span>
+            <div
+              onClick={() => onClickSort('name')}
+              className="hover:cursor-pointer"
+            >
+              {sortOption.order === 'desc' ? (
+                <MdOutlineKeyboardArrowDown size={20} />
+              ) : (
+                <MdOutlineKeyboardArrowUp size={20} />
+              )}
+            </div>
+          </div>
         </th>
         <th className="w-[20%] md:w-[15%] ">
           <div className="inline-flex items-center space-x-1 pl-2">
