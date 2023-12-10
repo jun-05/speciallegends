@@ -148,7 +148,6 @@ let cache: { smasherDatas: SmasherDataInPeriod[] } = {
   smasherDatas: [],
 };
 
-import fs from 'fs';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
