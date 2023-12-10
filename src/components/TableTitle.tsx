@@ -36,7 +36,7 @@ const TableTitle = ({
       <div className="flex flex-col">
         <div className="p-2 bg-gray-200 dark:bg-gray-600 rounded-lg ">
           <h2 className="flex flex-wrap w-18 md:w-full text-xs md:text-base font-semibold text-gray-800 dark:text-white">
-            {formatDateRange(period, language)}
+            {formatDateRange(period, language!)}
           </h2>
         </div>
         <div className="flex justify-between pt-1">
