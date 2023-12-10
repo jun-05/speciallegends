@@ -144,9 +144,8 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-let cache = {
-  smasherDatas: null,
-  lastUpdated: null,
+let cache: { smasherDatas: SmasherDataInPeriod[] } = {
+  smasherDatas: [],
 };
 
 import fs from 'fs';
@@ -154,53 +153,56 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 export async function getStaticProps() {
-  //const S3Service = require('/src/services/S3Service');
-  const ExcelService = require('/src/services/ExcelService');
-  const GameStatisticsService = require('/src/services/GameStatisticsService');
-  const DateService = require('/src/services/DateService');
+  if (!cache.smasherDatas.length) {
+    //const S3Service = require('/src/services/S3Service');
+    const ExcelService = require('/src/services/ExcelService');
+    const GameStatisticsService = require('/src/services/GameStatisticsService');
+    const DateService = require('/src/services/DateService');
 
-  //const s3Service = new S3Service();
-  const excelService = new ExcelService();
-  const gameStatisticsService = new GameStatisticsService();
-  const dateService = new DateService();
+    //const s3Service = new S3Service();
+    const excelService = new ExcelService();
+    const gameStatisticsService = new GameStatisticsService();
+    const dateService = new DateService();
 
-  const currentDate = new Date();
-  const smasherDatas = [];
+    const currentDate = new Date();
+    const smasherDatas = [];
 
-  // 3주전까지의 데이터를 저장 , 차후 4주
-  for (let i = 0; i < 4; i++) {
-    try {
-      const targetDate = new Date(
-        currentDate.getTime() - dateService.weeksToMs(i)
-      );
-      const period = dateService.getPeriod(targetDate);
+    // 3주전까지의 데이터를 저장 , 차후 4주
+    for (let i = 0; i < 4; i++) {
+      try {
+        const targetDate = new Date(
+          currentDate.getTime() - dateService.weeksToMs(i)
+        );
+        const period = dateService.getPeriod(targetDate);
 
-      const params = {
-        Bucket: process.env.AWS_BUCKET!,
-        Key: `sl_${period.start}${period.end}.csv`,
-      };
+        const params = {
+          Bucket: process.env.AWS_BUCKET!,
+          Key: `sl_${period.start}${period.end}.csv`,
+        };
 
-      //    const csvFile = await s3Service.getObject(params);
+        //    const csvFile = await s3Service.getObject(params);
 
-      // 로컬 개발환경
-      const filePath = `./public/sl_${period.start}${period.end}.csv`;
-      const fileBuffer = fs.readFileSync(filePath);
+        // 로컬 개발환경
+        const filePath = `./public/sl_${period.start}${period.end}.csv`;
+        const fileBuffer = fs.readFileSync(filePath);
 
-      // const fileBuffer = csvFile.Body;
-      const data = excelService.readExcelFile(fileBuffer);
+        // const fileBuffer = csvFile.Body;
+        const data = excelService.readExcelFile(fileBuffer);
 
-      const weekSmasherData = gameStatisticsService.analyzeData(data);
+        const weekSmasherData = gameStatisticsService.analyzeData(data);
 
-      gameStatisticsService.calculateRates(weekSmasherData.data);
-      smasherDatas.push(weekSmasherData);
-    } catch (error) {
-      console.error(`Error occurred in week ${i}:`, error);
+        gameStatisticsService.calculateRates(weekSmasherData.data);
+        smasherDatas.push(weekSmasherData);
+      } catch (error) {
+        console.error(`Error occurred in week ${i}:`, error);
+      }
     }
+    cache.smasherDatas = smasherDatas;
   }
 
   return {
     props: {
-      smasherDatas,
+      smasherDatas: cache.smasherDatas,
     },
     revalidate: 604800,
   };
