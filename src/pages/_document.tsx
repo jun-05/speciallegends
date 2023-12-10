@@ -33,7 +33,7 @@ class MyDocument extends Document {
           />
           <meta
             name="description"
-            content="Special Legends provides the latest statistics and insights for Smash Legends. Discover the most effective strategies and improve your gameplay."
+            content="Smash Legends statistics site : Special Legends "
           />
         </Head>
         <body>

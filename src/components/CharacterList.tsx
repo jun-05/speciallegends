@@ -2,7 +2,12 @@
 
 import { TierData } from '@/types/smasherDataTypes';
 import CharacterItem from './CharacterItem';
-import { getSortedCharacters } from '@/utils/sortedCharacters';
+import {
+  getSortedCharactersByRate,
+  getSortedCharactersByName,
+} from '@/utils/sortedCharacters';
+import { useLanguageContext } from '@/context/LanguageContext';
+import { localeText } from '@/locales/localeText';
 
 interface CharacterListProps {
   tierData: TierData;
@@ -15,13 +20,25 @@ const CharacterList = ({
   selectedMap,
   sortOption,
 }: CharacterListProps) => {
+  const [language] = useLanguageContext();
+  const languageTranslations = localeText[language as keyof typeof localeText];
   const { characters, maps, totalGameWin, totalGamesInTier } = tierData;
   const tierAvgWinRate =
     Math.round((totalGameWin / totalGamesInTier) * 1000) / 10;
   const isAllDataInTier = selectedMap === 4000;
   const dataInOption =
     selectedMap == 4000 ? characters : maps[selectedMap].characters;
-  const sortedCharacters = getSortedCharacters(dataInOption, sortOption);
+
+  let sortedCharacters = [];
+  if (sortOption.sortType === 'name') {
+    sortedCharacters = getSortedCharactersByName(
+      dataInOption,
+      sortOption,
+      languageTranslations.characterName
+    );
+  } else {
+    sortedCharacters = getSortedCharactersByRate(dataInOption, sortOption);
+  }
 
   return (
     <tbody className=" w-full ">

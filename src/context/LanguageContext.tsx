@@ -7,29 +7,15 @@ import React, {
 } from 'react';
 
 export const LanguageContext = createContext<
-  [string, React.Dispatch<React.SetStateAction<string>>] | undefined
+  | [
+      string | undefined,
+      React.Dispatch<React.SetStateAction<string | undefined>>,
+    ]
+  | undefined
 >(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<string>('');
-
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem('SpecialLegends_language');
-    let defaultLanguage = 'en';
-    if (storedLanguage) {
-      setLanguage(storedLanguage);
-    } else if (navigator) {
-      const browserLanguage = navigator.language.slice(0, 2);
-      if (browserLanguage === 'ko') {
-        defaultLanguage = 'ko';
-      }
-      setLanguage(defaultLanguage);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('SpecialLegends_language', language);
-  }, [language]);
+  const [language, setLanguage] = useState<string | undefined>('ko');
 
   if (!language) {
     return null;
