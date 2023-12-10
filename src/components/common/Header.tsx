@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLanguageContext } from '@/context/LanguageContext';
 import { MdLanguage } from 'react-icons/md';
 import { BsBrightnessHigh, BsMoonFill } from 'react-icons/bs';
+import Link from 'next/link';
 
 interface HeaderProps {
   toggleDarkMode: () => void;
@@ -10,12 +11,6 @@ interface HeaderProps {
 
 const Header = ({ toggleDarkMode, darkMode }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [_, setLanguage] = useLanguageContext();
-
-  const handleClick = (lang: string) => {
-    setLanguage(lang);
-    setIsOpen(false);
-  };
 
   useEffect(() => {
     const clickOutside = () => setIsOpen(false);
@@ -62,18 +57,18 @@ const Header = ({ toggleDarkMode, darkMode }: HeaderProps) => {
           {/** 드롭다운 */}
           {isOpen && (
             <div className="absolute right-0 top-7 w-16 text-center bg-white dark:bg-blue-700 rounded-md overflow-hidden z-50 hover:cursor-pointer">
-              <div
-                onClick={() => handleClick('ko')}
+              <Link
+                href="/ko"
                 className="flex items-center justify-center h-6 md:h-8 hover:bg-blue-500 hover:dark:bg-blue-600 text-black font-bold text-sm md:text-base dark:text-gray-200"
               >
                 KR
-              </div>
-              <div
-                onClick={() => handleClick('en')}
+              </Link>
+              <Link
+                href="/en"
                 className="flex items-center justify-center h-6 md:h-8 hover:bg-blue-500 hover:dark:bg-blue-600 text-black font-bold text-sm md:text-base dark:text-gray-200"
               >
                 EN
-              </div>
+              </Link>
             </div>
           )}
         </div>
