@@ -45,7 +45,7 @@ const TableTitle = ({
             {/** index 3은 4주전 데이터기간을 의미 */}
             <div
               className={`${
-                index !== 2
+                index !== 3
                   ? 'bg-gray-200 dark:bg-gray-600 '
                   : 'bg-red-200 dark:bg-gray-400 '
               } flex items-center justify-center text-xl md:text-2xl cursor-pointer h-6 w-6 rounded-full text-gray-800 dark:text-white `}
