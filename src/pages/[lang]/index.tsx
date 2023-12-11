@@ -7,6 +7,8 @@ import CharacterList from '@/components/CharacterList';
 import TableTitle from '@/components/TableTitle';
 import { useLanguageContext } from '@/context/LanguageContext';
 import { localeText } from '@/locales/localeText';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
   const router = useRouter();
@@ -140,16 +142,12 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
 
 export async function getStaticPaths() {
   const paths = ['ko', 'en'].map((lang) => ({ params: { lang } }));
-
   return { paths, fallback: false };
 }
 
 let cache: { smasherDatas: SmasherDataInPeriod[] } = {
   smasherDatas: [],
 };
-
-import { useRouter } from 'next/router';
-import Head from 'next/head';
 
 export async function getStaticProps() {
   if (!cache.smasherDatas.length) {
