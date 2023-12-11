@@ -8,10 +8,12 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const storedMode =
-      localStorage.getItem('SpecialLegends_darkMode') === 'true' ? true : false;
+      localStorage.getItem('SpecialLegends_darkMode') === 'true';
     setDarkMode(storedMode);
   }, []);
 
@@ -21,7 +23,7 @@ const Layout = ({ children }: LayoutProps) => {
     localStorage.setItem('SpecialLegends_darkMode', newMode.toString());
   };
 
-  return (
+  return isMounted ? (
     <div className={`${darkMode ? 'dark' : ''} `}>
       <div className="min-w-full min-h-screen bg-gray-100 dark:bg-gray-800 ">
         <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
@@ -29,7 +31,7 @@ const Layout = ({ children }: LayoutProps) => {
         <Footer />
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default Layout;
