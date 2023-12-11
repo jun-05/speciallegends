@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -7,11 +7,13 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const [darkMode, setDarkMode] = useState<boolean>(() =>
-    typeof window !== 'undefined'
-      ? localStorage.getItem('SpecialLegends_darkMode') === 'true'
-      : false
-  );
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  useEffect(() => {
+    const storedMode =
+      localStorage.getItem('SpecialLegends_darkMode') === 'true' ? true : false;
+    setDarkMode(storedMode);
+  }, []);
 
   const toggleDarkMode = () => {
     const newMode = !darkMode;
