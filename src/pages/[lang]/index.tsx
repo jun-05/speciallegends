@@ -77,7 +77,7 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
   };
   const title =
     langStr === 'ko'
-      ? '스매시 레전드 통계 사이트 : 스페셜 레전드 :'
+      ? '스매시 레전드 통계 사이트 : 스페셜 레전드 '
       : 'Smash Legends statistics site : Special Legends';
   const description =
     langStr === 'ko'
