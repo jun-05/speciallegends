@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useLanguageContext } from '@/context/LanguageContext';
+import React, { useEffect, useState } from 'react';
 import { MdLanguage } from 'react-icons/md';
 import { BsBrightnessHigh, BsMoonFill } from 'react-icons/bs';
 import Link from 'next/link';

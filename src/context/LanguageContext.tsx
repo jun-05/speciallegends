@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useState,
-  useEffect,
-  ReactNode,
-  useContext,
-} from 'react';
+import React, { createContext, useState, ReactNode, useContext } from 'react';
 
 export const LanguageContext = createContext<
   | [
