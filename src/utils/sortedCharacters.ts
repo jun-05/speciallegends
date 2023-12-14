@@ -9,7 +9,7 @@ export const getSortedCharactersByRate = (
   }
 ): characterResult[] => {
   return Object.entries(dataInOption)
-    .map(([characterId, data]) => ({ characterId , ...data }))
+    .map(([cID, data]) => ({ cID , ...data }))
     .sort((a, b) => {
       const keyA = Number(a[sortOption.sortType as keyof typeof a]);
       const keyB = Number(b[sortOption.sortType as keyof typeof b]);
@@ -24,15 +24,15 @@ export const getSortedCharactersByName = (
     order: string;
   },
   characteNameObj : {
-    [characterId: number] : string
+    [cID: number] : string
   },
 ): characterResult[] => {
 
   return Object.entries(dataInOption)
-    .map(([characterId, data]) => ({ characterId , ...data }))
+    .map(([cID, data]) => ({ cID , ...data }))
     .sort((a, b) => {
-      const nameA = characteNameObj[a.characterId as keyof typeof characteNameObj];
-      const nameB = characteNameObj[b.characterId as keyof typeof characteNameObj];
+      const nameA = characteNameObj[a.cID as keyof typeof characteNameObj];
+      const nameB = characteNameObj[b.cID as keyof typeof characteNameObj];
       return sortOption.order === 'asc' ?    nameB.localeCompare(nameA) : nameA.localeCompare(nameB);
     });
 };

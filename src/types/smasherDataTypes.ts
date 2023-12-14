@@ -1,6 +1,6 @@
 interface enchantment {
-  enchantmentUseCount?: number;
-  enchantmentUsageRate?: number;
+  eUC?: number; // enchantmentUseCount
+  eUR?: number; // enchantmentUsageRate
 }
 
 interface enchantments {
@@ -8,8 +8,8 @@ interface enchantments {
 }
 
 interface ability {
-  abilityUseCount?: number;
-  abilityUsageRate?: number;
+  aUC?: number; // abilityUseCount
+  aUR?: number; // abilityUsageRate
 }
 
 interface abilities {
@@ -17,13 +17,13 @@ interface abilities {
 }
 
 export interface characterResult {
-  characterId?: number | string;
-  gameCount?: number;
-  winCount?: number;
-  winRate?: number;
-  pickRate?: number;
-  abilities: abilities;
-  enchantments: enchantments;
+  cID?: number | string; // chracterID
+  gC?: number; // gameCount
+  wC?: number; // winCount
+  wR?: number; // winRate
+  pR?: number; // pickRate
+  abs: abilities; // abilities
+  echs: enchantments; // enchantments
 }
 
 export interface Characters {

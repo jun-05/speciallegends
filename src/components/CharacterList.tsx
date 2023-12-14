@@ -48,12 +48,8 @@ const CharacterList = ({
           characterData={characterData}
           tierAvgWinRate={tierAvgWinRate}
           isAllDataInTier={isAllDataInTier}
-          characterAvgWinRate={
-            tierData.characters[characterData.characterId!].winRate!
-          }
-          characterAvgPickRate={
-            tierData.characters[characterData.characterId!].pickRate!
-          }
+          characterAvgWinRate={tierData.characters[characterData.cID!].wR!}
+          characterAvgPickRate={tierData.characters[characterData.cID!].pR!}
         />
       ))}
     </tbody>

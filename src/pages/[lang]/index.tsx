@@ -16,8 +16,6 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
   const langStr = Array.isArray(lang) ? lang[0] : lang;
   const [language, setLanguage] = useLanguageContext();
 
-  console.log(smasherDatas);
-
   useEffect(() => {
     setLanguage(langStr);
   }, [langStr, setLanguage]);
@@ -31,7 +29,7 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
   });
 
   const [sortOption, setSortOption] = useState({
-    sortType: 'pickRate', // 'name', 'winRate', 'pickRate'
+    sortType: 'pR', // 'name', 'wR', 'pR'
     order: 'desc', // 'asc' 또는 'desc'
   });
 
@@ -167,7 +165,7 @@ export async function getStaticProps() {
     const smasherDatas = [];
 
     // 3주전까지의 데이터를 저장 , 차후 4주
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 4; i++) {
       try {
         const targetDate = new Date(
           currentDate.getTime() - dateService.weeksToMs(i)

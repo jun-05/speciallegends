@@ -38,7 +38,7 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
           <div className="inline-flex items-center space-x-1 pl-2">
             <span> {languageTranslations.secondTableOption}</span>
             <div
-              onClick={() => onClickSort('pickRate')}
+              onClick={() => onClickSort('pR')}
               className="hover:cursor-pointer"
             >
               {sortOption.order === 'desc' ? (
@@ -54,7 +54,7 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
             <span> {languageTranslations.thirdTableOption} </span>
 
             <div
-              onClick={() => onClickSort('winRate')}
+              onClick={() => onClickSort('wR')}
               className="hover:cursor-pointer"
             >
               {sortOption.order === 'desc' ? (

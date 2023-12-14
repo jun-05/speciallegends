@@ -15,19 +15,14 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
   const [language] = useLanguageContext();
   const languageTranslations = localeText[language as keyof typeof localeText];
 
-  const characterId = characterData.characterId?.toString();
-  const sortedAbilities = Object.entries(characterData.abilities)
+  const characterId = characterData.cID?.toString();
+  const sortedAbilities = Object.entries(characterData.abs)
     .filter(([abilityId]) => abilityId !== '0')
-    .sort(
-      (a, b) => Number(b[1].abilityUsageRate) - Number(a[1].abilityUsageRate)
-    );
+    .sort((a, b) => Number(b[1].aUR) - Number(a[1].aUR));
 
-  const sortedEnchantments = Object.entries(characterData.enchantments)
+  const sortedEnchantments = Object.entries(characterData.echs)
     .filter(([enchantmentId]) => enchantmentId !== '0')
-    .sort(
-      (a, b) =>
-        Number(b[1].enchantmentUsageRate) - Number(a[1].enchantmentUsageRate)
-    );
+    .sort((a, b) => Number(b[1].eUR) - Number(a[1].eUR));
 
   const abilityIcons =
     characterAbilityIcon[characterId as keyof typeof characterAbilityIcon];
@@ -50,38 +45,34 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
             {languageTranslations.firstInfoHeadName}
           </h2>
           <div className="flex flex-wrap justify-start items-center ">
-            {sortedAbilities.map(
-              ([abilityNum, { abilityUsageRate }], index) => {
-                return (
-                  <TableImgItem
-                    key={index}
-                    src={
-                      abilityIcons[
-                        String(abilityNum) as keyof typeof abilityIcons
-                      ].url
-                    }
-                    alt={
-                      abilityIcons[
-                        String(abilityNum) as keyof typeof abilityIcons
-                      ].name
-                    }
-                    UsageRate={abilityUsageRate}
-                    tooltipTitle={
-                      abilityInfo[
-                        String(abilityNum) as keyof typeof abilityInfo
-                      ].name
-                    }
-                    tooltipInfo={
-                      abilityInfo[
-                        String(abilityNum) as keyof typeof abilityInfo
-                      ].effect
-                    }
-                    idx={index}
-                    position="left"
-                  />
-                );
-              }
-            )}
+            {sortedAbilities.map(([abilityNum, { aUR }], index) => {
+              return (
+                <TableImgItem
+                  key={index}
+                  src={
+                    abilityIcons[
+                      String(abilityNum) as keyof typeof abilityIcons
+                    ].url
+                  }
+                  alt={
+                    abilityIcons[
+                      String(abilityNum) as keyof typeof abilityIcons
+                    ].name
+                  }
+                  UsageRate={aUR}
+                  tooltipTitle={
+                    abilityInfo[String(abilityNum) as keyof typeof abilityInfo]
+                      .name
+                  }
+                  tooltipInfo={
+                    abilityInfo[String(abilityNum) as keyof typeof abilityInfo]
+                      .effect
+                  }
+                  idx={index}
+                  position="left"
+                />
+              );
+            })}
           </div>
         </div>
 
@@ -90,40 +81,38 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
             {languageTranslations.secondInfoHeadName}
           </h2>
           <div className="flex flex-wrap justify-start items-center">
-            {sortedEnchantments.map(
-              ([enchantmentId, { enchantmentUsageRate }], index) => {
-                return (
-                  <TableImgItem
-                    key={index}
-                    src={
-                      enchantmentIcons[
-                        Number(enchantmentId) as keyof typeof enchantmentIcons
-                      ].url
-                    }
-                    alt={
-                      enchantmentIcons[
-                        Number(
-                          enchantmentId
-                        ) as unknown as keyof typeof enchantmentIcons
-                      ].name
-                    }
-                    UsageRate={enchantmentUsageRate}
-                    tooltipTitle={
-                      enchantMentInfo[
-                        Number(enchantmentId!) as keyof typeof enchantMentInfo
-                      ].name
-                    }
-                    tooltipInfo={
-                      enchantMentInfo[
-                        Number(enchantmentId!) as keyof typeof enchantMentInfo
-                      ].effect
-                    }
-                    idx={index}
-                    position="right"
-                  />
-                );
-              }
-            )}
+            {sortedEnchantments.map(([enchantmentNumber, { eUR }], index) => {
+              return (
+                <TableImgItem
+                  key={index}
+                  src={
+                    enchantmentIcons[
+                      Number(enchantmentNumber) as keyof typeof enchantmentIcons
+                    ].url
+                  }
+                  alt={
+                    enchantmentIcons[
+                      Number(
+                        enchantmentNumber
+                      ) as unknown as keyof typeof enchantmentIcons
+                    ].name
+                  }
+                  UsageRate={eUR}
+                  tooltipTitle={
+                    enchantMentInfo[
+                      Number(enchantmentNumber!) as keyof typeof enchantMentInfo
+                    ].name
+                  }
+                  tooltipInfo={
+                    enchantMentInfo[
+                      Number(enchantmentNumber!) as keyof typeof enchantMentInfo
+                    ].effect
+                  }
+                  idx={index}
+                  position="right"
+                />
+              );
+            })}
           </div>
         </div>
       </div>

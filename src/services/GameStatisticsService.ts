@@ -18,8 +18,8 @@ class GameStatisticsService {
       const tier = row[2].toString().replace(/\d/g, '');
       const mapNumber = row[3].toString();
       const charNumber = row[4].toString();
-      const gameCount = Number(row[9]);
-      const winCount = Number(row[10]);
+      const gC = Number(row[9]);
+      const wC = Number(row[10]);
       const abilityNumbers = [row[5], row[6]];
       const enchantmentNumbers = [row[7], row[8]];
 
@@ -31,8 +31,8 @@ class GameStatisticsService {
           totalGameWin: 0,
         };
       }
-      smasherData[tier].totalGamesInTier += gameCount;
-      smasherData[tier].totalGameWin += winCount;
+      smasherData[tier].totalGamesInTier += gC;
+      smasherData[tier].totalGameWin += wC;
 
       if (!smasherData[tier].maps[mapNumber]) {
         smasherData[tier].maps[mapNumber] = {
@@ -41,87 +41,87 @@ class GameStatisticsService {
         };
       }
 
-      smasherData[tier].maps[mapNumber].totalGamesInMap += gameCount;
+      smasherData[tier].maps[mapNumber].totalGamesInMap += gC;
 
       if (!smasherData[tier].characters[charNumber]) {
         smasherData[tier].characters[charNumber] = {
-          gameCount: 0,
-          winCount: 0,
-          abilities: {},
-          enchantments: {},
+          gC: 0,
+          wC: 0,
+          abs: {},
+          echs: {},
         };
       }
 
       if (!smasherData[tier].maps[mapNumber].characters[charNumber]) {
         smasherData[tier].maps[mapNumber].characters[charNumber] = {
-          gameCount: 0,
-          winCount: 0,
-          abilities: {},
-          enchantments: {},
+          gC: 0,
+          wC: 0,
+          abs: {},
+          echs: {},
         };
       }
-      smasherData[tier].maps[mapNumber].characters[charNumber].gameCount! +=
-        gameCount;
-      smasherData[tier].maps[mapNumber].characters[charNumber].winCount! +=
-        winCount;
+      smasherData[tier].maps[mapNumber].characters[charNumber].gC! +=
+        gC;
+      smasherData[tier].maps[mapNumber].characters[charNumber].wC! +=
+        wC;
 
       for (const enchantmentNumber of enchantmentNumbers) {
         if (
-          !smasherData[tier].characters[charNumber].enchantments![
+          !smasherData[tier].characters[charNumber].echs![
             enchantmentNumber
           ]
         ) {
-          smasherData[tier].characters[charNumber].enchantments![
+          smasherData[tier].characters[charNumber].echs![
             enchantmentNumber
-          ] = { enchantmentUseCount: 0 };
+          ] = { eUC: 0 };
         }
         if (
           !smasherData[tier].maps[mapNumber].characters[charNumber]
-            .enchantments![enchantmentNumber]
+            .echs![enchantmentNumber]
         ) {
           smasherData[tier].maps[mapNumber].characters[
             charNumber
-          ].enchantments![enchantmentNumber] = { enchantmentUseCount: 0 };
+          ].echs![enchantmentNumber] = { eUC: 0 };
         }
-        smasherData[tier].maps[mapNumber].characters[charNumber].enchantments![
+        smasherData[tier].maps[mapNumber].characters[charNumber].echs![
           enchantmentNumber
-        ].enchantmentUseCount! += gameCount;
-        smasherData[tier].characters[charNumber].enchantments![
+        ].eUC! += gC;
+        smasherData[tier].characters[charNumber].echs![
           enchantmentNumber
-        ].enchantmentUseCount! += gameCount;
+        ].eUC! += gC;
 
         if (enchantmentNumbers[0] === 0 && enchantmentNumbers[1] === 0) break;
       }
 
       for (const abilityNumber of abilityNumbers) {
         if (
-          !smasherData[tier].characters[charNumber].abilities![abilityNumber]
+          !smasherData[tier].characters[charNumber].abs![abilityNumber]
         ) {
-          smasherData[tier].characters[charNumber].abilities![abilityNumber] = {
-            abilityUseCount: 0,
+          smasherData[tier].characters[charNumber].abs![abilityNumber] = {
+            aUC: 0,
           };
         }
         if (
-          !smasherData[tier].maps[mapNumber].characters[charNumber].abilities![
+          !smasherData[tier].maps[mapNumber].characters[charNumber].abs![
             abilityNumber
           ]
         ) {
-          smasherData[tier].maps[mapNumber].characters[charNumber].abilities![
+          smasherData[tier].maps[mapNumber].characters[charNumber].abs![
             abilityNumber
-          ] = { abilityUseCount: 0 };
+          ] = { aUC: 0 };
         }
-        smasherData[tier].maps[mapNumber].characters[charNumber].abilities![
+        smasherData[tier].maps[mapNumber].characters[charNumber].abs![
           abilityNumber
-        ].abilityUseCount! += gameCount;
-        smasherData[tier].characters[charNumber].abilities![
+        ].aUC! += gC;
+        smasherData[tier].characters[charNumber].abs![
           abilityNumber
-        ].abilityUseCount! += gameCount;
+        ].aUC! += gC;
 
         if (abilityNumbers[0] === 0 && abilityNumbers[1] === 0) break;
       }
 
-      smasherData[tier].characters[charNumber].gameCount! += gameCount;
-      smasherData[tier].characters[charNumber].winCount! += winCount;
+      smasherData[tier].characters[charNumber].gC! += gC;
+      smasherData[tier].characters[charNumber].wC! += wC;
     }
 
     return results;
@@ -131,34 +131,34 @@ class GameStatisticsService {
     for (const tier of Object.values(smasherData)) {
       for (const mapData of Object.values(tier.maps)) {
         for (const characterResult of Object.values(mapData.characters)) {
-          characterResult.winRate =
+          characterResult.wR =
             Math.round(
-              (characterResult.winCount! / characterResult.gameCount!) * 1000
+              (characterResult.wC! / characterResult.gC!) * 1000
             ) / 10;
-          characterResult.pickRate =
+          characterResult.pR =
             Math.round(
-              (characterResult.gameCount! / (mapData.totalGamesInMap / 6)) * 1000
+              (characterResult.gC! / (mapData.totalGamesInMap / 6)) * 1000
             ) / 10;
 
 
           for (const enchantmentNumber of Object.values(
-            characterResult.enchantments
+            characterResult.echs
           )) {
-            enchantmentNumber.enchantmentUsageRate =
+            enchantmentNumber.eUR =
               Math.round(
-                (enchantmentNumber.enchantmentUseCount! /
-                  characterResult.gameCount!) *
+                (enchantmentNumber.eUC! /
+                  characterResult.gC!) *
                   1000
               ) / 10;
 
           }
 
           for (const abilityNumber of Object.values(
-            characterResult.abilities
+            characterResult.abs
           )) {
-            abilityNumber.abilityUsageRate =
+            abilityNumber.aUR =
               Math.round(
-                (abilityNumber.abilityUseCount! / characterResult.gameCount!) *
+                (abilityNumber.aUC! / characterResult.gC!) *
                   1000
               ) / 10;
 
@@ -166,13 +166,13 @@ class GameStatisticsService {
         }
 
         for (const characterResult of Object.values(tier.characters)) {
-          characterResult.winRate =
+          characterResult.wR =
             Math.round(
-              (characterResult.winCount! / characterResult.gameCount!) * 1000
+              (characterResult.wC! / characterResult.gC!) * 1000
             ) / 10;
-          characterResult.pickRate =
+          characterResult.pR =
             Math.round(
-              (characterResult.gameCount! / (tier.totalGamesInTier / 6)) * 1000
+              (characterResult.gC! / (tier.totalGamesInTier / 6)) * 1000
             ) / 10;
 
         }
@@ -180,23 +180,23 @@ class GameStatisticsService {
 
       for (const characterResult of Object.values(tier.characters)) {
         for (const enchantmentNumber of Object.values(
-          characterResult.enchantments
+          characterResult.echs
         )) {
-          enchantmentNumber.enchantmentUsageRate =
+          enchantmentNumber.eUR =
             Math.round(
-              (enchantmentNumber.enchantmentUseCount! /
-                characterResult.gameCount!) *
+              (enchantmentNumber.eUC! /
+                characterResult.gC!) *
                 1000
             ) / 10;
 
         }
 
-        for (const abilityNumber of Object.values(characterResult.abilities)) {
-          abilityNumber.abilityUsageRate =
+        for (const abilityNumber of Object.values(characterResult.abs)) {
+          abilityNumber.aUR =
             Math.round(
-              (abilityNumber.abilityUseCount! / characterResult.gameCount!) * 1000
+              (abilityNumber.aUC! / characterResult.gC!) * 1000
             ) / 10;
-            delete abilityNumber.abilityUseCount;
+            delete abilityNumber.aUC;
         }
       }
     }
@@ -205,37 +205,37 @@ class GameStatisticsService {
     for (const tier of Object.values(smasherData)) {
       for (const mapData of Object.values(tier.maps)) {
         for (const characterResult of Object.values(mapData.characters)) {
-          delete characterResult.winCount;
-          delete characterResult.gameCount;
+          delete characterResult.wC;
+          delete characterResult.gC;
           for (const enchantmentNumber of Object.values(
-            characterResult.enchantments
+            characterResult.echs
           )) {
-            delete enchantmentNumber.enchantmentUseCount;
+            delete enchantmentNumber.eUC;
           }
 
           for (const abilityNumber of Object.values(
-            characterResult.abilities
+            characterResult.abs
           )) {
-            delete abilityNumber.abilityUseCount;
+            delete abilityNumber.aUC;
           }
         }
 
         for (const characterResult of Object.values(tier.characters)) {
-          delete characterResult.winCount;
-          delete characterResult.gameCount;
+          delete characterResult.wC;
+          delete characterResult.gC;
         }
       }
 
       for (const characterResult of Object.values(tier.characters)) {
         for (const enchantmentNumber of Object.values(
-          characterResult.enchantments
+          characterResult.echs
         )) {
-          delete enchantmentNumber.enchantmentUseCount;
+          delete enchantmentNumber.eUC;
         }
 
-        for (const abilityNumber of Object.values(characterResult.abilities)) {
+        for (const abilityNumber of Object.values(characterResult.abs)) {
 
-            delete abilityNumber.abilityUseCount;
+            delete abilityNumber.aUC;
         }
       }
     }

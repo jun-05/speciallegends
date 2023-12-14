@@ -37,21 +37,21 @@ const CharacterItem = ({
 
   const name =
     languageTranslations.characterName[
-      characterData.characterId as keyof typeof characterData.characterId
+      characterData.cID as keyof typeof languageTranslations.characterName
     ];
 
   const characterIcon =
-    charactersIcon[characterData.characterId as keyof typeof charactersIcon];
+    charactersIcon[characterData.cID as keyof typeof charactersIcon];
 
   const infoWinRateByisAllData = isAllDataInTier
-    ? (characterData.winRate! - tierAvgWinRate).toFixed(1)
-    : (characterData.winRate! - characterAvgWinRate).toFixed(1);
+    ? (characterData.wR! - tierAvgWinRate).toFixed(1)
+    : (characterData.wR! - characterAvgWinRate).toFixed(1);
 
   const tierAvgPickRate = Math.round((6 / 38) * 1000) / 10;
 
   const infoPickRateByisAllData = isAllDataInTier
-    ? (characterData.pickRate! - tierAvgPickRate).toFixed(1)
-    : (characterData.pickRate! - characterAvgPickRate).toFixed(1);
+    ? (characterData.pR! - tierAvgPickRate).toFixed(1)
+    : (characterData.pR! - characterAvgPickRate).toFixed(1);
 
   return (
     <>
@@ -75,7 +75,7 @@ const CharacterItem = ({
           <span className="flex-grow">{name}</span>
         </th>
         <th className="w-[20%] md:w-[15%] text-center ">
-          {characterData.pickRate}%
+          {characterData.pR}%
           <div
             className={`${
               Number(infoPickRateByisAllData) > 0
@@ -92,7 +92,7 @@ const CharacterItem = ({
           </div>
         </th>
         <th className="w-[20%] md:w-[15%] text-center ">
-          {characterData.winRate}%
+          {characterData.wR}%
           <div
             className={`${
               Number(infoWinRateByisAllData) > 0
