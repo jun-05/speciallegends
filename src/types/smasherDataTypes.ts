@@ -1,5 +1,5 @@
 interface enchantment {
-  enchantmentUseCount: number;
+  enchantmentUseCount?: number;
   enchantmentUsageRate?: number;
 }
 
@@ -8,7 +8,7 @@ interface enchantments {
 }
 
 interface ability {
-  abilityUseCount: number;
+  abilityUseCount?: number;
   abilityUsageRate?: number;
 }
 
@@ -18,8 +18,8 @@ interface abilities {
 
 export interface characterResult {
   characterId?: number | string;
-  gameCount: number;
-  winCount: number;
+  gameCount?: number;
+  winCount?: number;
   winRate?: number;
   pickRate?: number;
   abilities: abilities;

@@ -60,9 +60,9 @@ class GameStatisticsService {
           enchantments: {},
         };
       }
-      smasherData[tier].maps[mapNumber].characters[charNumber].gameCount +=
+      smasherData[tier].maps[mapNumber].characters[charNumber].gameCount! +=
         gameCount;
-      smasherData[tier].maps[mapNumber].characters[charNumber].winCount +=
+      smasherData[tier].maps[mapNumber].characters[charNumber].winCount! +=
         winCount;
 
       for (const enchantmentNumber of enchantmentNumbers) {
@@ -85,10 +85,10 @@ class GameStatisticsService {
         }
         smasherData[tier].maps[mapNumber].characters[charNumber].enchantments![
           enchantmentNumber
-        ].enchantmentUseCount += gameCount;
+        ].enchantmentUseCount! += gameCount;
         smasherData[tier].characters[charNumber].enchantments![
           enchantmentNumber
-        ].enchantmentUseCount += gameCount;
+        ].enchantmentUseCount! += gameCount;
 
         if (enchantmentNumbers[0] === 0 && enchantmentNumbers[1] === 0) break;
       }
@@ -112,16 +112,16 @@ class GameStatisticsService {
         }
         smasherData[tier].maps[mapNumber].characters[charNumber].abilities![
           abilityNumber
-        ].abilityUseCount += gameCount;
+        ].abilityUseCount! += gameCount;
         smasherData[tier].characters[charNumber].abilities![
           abilityNumber
-        ].abilityUseCount += gameCount;
+        ].abilityUseCount! += gameCount;
 
         if (abilityNumbers[0] === 0 && abilityNumbers[1] === 0) break;
       }
 
-      smasherData[tier].characters[charNumber].gameCount += gameCount;
-      smasherData[tier].characters[charNumber].winCount += winCount;
+      smasherData[tier].characters[charNumber].gameCount! += gameCount;
+      smasherData[tier].characters[charNumber].winCount! += winCount;
     }
 
     return results;
@@ -133,22 +133,24 @@ class GameStatisticsService {
         for (const characterResult of Object.values(mapData.characters)) {
           characterResult.winRate =
             Math.round(
-              (characterResult.winCount / characterResult.gameCount) * 1000
+              (characterResult.winCount! / characterResult.gameCount!) * 1000
             ) / 10;
           characterResult.pickRate =
             Math.round(
-              (characterResult.gameCount / (mapData.totalGamesInMap / 6)) * 1000
+              (characterResult.gameCount! / (mapData.totalGamesInMap / 6)) * 1000
             ) / 10;
+
 
           for (const enchantmentNumber of Object.values(
             characterResult.enchantments
           )) {
             enchantmentNumber.enchantmentUsageRate =
               Math.round(
-                (enchantmentNumber.enchantmentUseCount /
-                  characterResult.gameCount) *
+                (enchantmentNumber.enchantmentUseCount! /
+                  characterResult.gameCount!) *
                   1000
               ) / 10;
+
           }
 
           for (const abilityNumber of Object.values(
@@ -156,21 +158,23 @@ class GameStatisticsService {
           )) {
             abilityNumber.abilityUsageRate =
               Math.round(
-                (abilityNumber.abilityUseCount / characterResult.gameCount) *
+                (abilityNumber.abilityUseCount! / characterResult.gameCount!) *
                   1000
               ) / 10;
+
           }
         }
 
         for (const characterResult of Object.values(tier.characters)) {
           characterResult.winRate =
             Math.round(
-              (characterResult.winCount / characterResult.gameCount) * 1000
+              (characterResult.winCount! / characterResult.gameCount!) * 1000
             ) / 10;
           characterResult.pickRate =
             Math.round(
-              (characterResult.gameCount / (tier.totalGamesInTier / 6)) * 1000
+              (characterResult.gameCount! / (tier.totalGamesInTier / 6)) * 1000
             ) / 10;
+
         }
       }
 
@@ -180,17 +184,58 @@ class GameStatisticsService {
         )) {
           enchantmentNumber.enchantmentUsageRate =
             Math.round(
-              (enchantmentNumber.enchantmentUseCount /
-                characterResult.gameCount) *
+              (enchantmentNumber.enchantmentUseCount! /
+                characterResult.gameCount!) *
                 1000
             ) / 10;
+
         }
 
         for (const abilityNumber of Object.values(characterResult.abilities)) {
           abilityNumber.abilityUsageRate =
             Math.round(
-              (abilityNumber.abilityUseCount / characterResult.gameCount) * 1000
+              (abilityNumber.abilityUseCount! / characterResult.gameCount!) * 1000
             ) / 10;
+            delete abilityNumber.abilityUseCount;
+        }
+      }
+    }
+  }
+  deleteCount(smasherData: SmasherData): void {
+    for (const tier of Object.values(smasherData)) {
+      for (const mapData of Object.values(tier.maps)) {
+        for (const characterResult of Object.values(mapData.characters)) {
+          delete characterResult.winCount;
+          delete characterResult.gameCount;
+          for (const enchantmentNumber of Object.values(
+            characterResult.enchantments
+          )) {
+            delete enchantmentNumber.enchantmentUseCount;
+          }
+
+          for (const abilityNumber of Object.values(
+            characterResult.abilities
+          )) {
+            delete abilityNumber.abilityUseCount;
+          }
+        }
+
+        for (const characterResult of Object.values(tier.characters)) {
+          delete characterResult.winCount;
+          delete characterResult.gameCount;
+        }
+      }
+
+      for (const characterResult of Object.values(tier.characters)) {
+        for (const enchantmentNumber of Object.values(
+          characterResult.enchantments
+        )) {
+          delete enchantmentNumber.enchantmentUseCount;
+        }
+
+        for (const abilityNumber of Object.values(characterResult.abilities)) {
+
+            delete abilityNumber.abilityUseCount;
         }
       }
     }

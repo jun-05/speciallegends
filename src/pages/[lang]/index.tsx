@@ -16,6 +16,8 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
   const langStr = Array.isArray(lang) ? lang[0] : lang;
   const [language, setLanguage] = useLanguageContext();
 
+  console.log(smasherDatas);
+
   useEffect(() => {
     setLanguage(langStr);
   }, [langStr, setLanguage]);
@@ -165,7 +167,7 @@ export async function getStaticProps() {
     const smasherDatas = [];
 
     // 3주전까지의 데이터를 저장 , 차후 4주
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 1; i++) {
       try {
         const targetDate = new Date(
           currentDate.getTime() - dateService.weeksToMs(i)
@@ -185,6 +187,7 @@ export async function getStaticProps() {
         const weekSmasherData = gameStatisticsService.analyzeData(data);
 
         gameStatisticsService.calculateRates(weekSmasherData.data);
+        gameStatisticsService.deleteCount(weekSmasherData.data);
         smasherDatas.push(weekSmasherData);
       } catch (error) {
         console.error(`Error occurred in week ${i}:`, error);
