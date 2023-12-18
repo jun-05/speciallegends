@@ -4,7 +4,7 @@ export const abilityLocaleText = {
       '101': {
         "1": {
             "name": "인내의 일격",
-            "effect": "2초 동안 공격하지 않으면, 다음 공격의 피해량이 증가합니다."
+            "effect": "공격하지 않으면, 다음 공격의 피해량이 증가합니다."
         },
         "2": {
             "name": "묵직한 검",
@@ -12,7 +12,7 @@ export const abilityLocaleText = {
         },
         "3": {
             "name": "신속한 이동",
-            "effect": "부활한 후, 4초 동안 이동속도가 증가합니다."
+            "effect": "부활한 후, 이동속도가 증가합니다."
         },
         "4": {
             "name": "휘는 칼날",
@@ -38,7 +38,7 @@ export const abilityLocaleText = {
         },
         "4": {
             "name": "굳건한 의지",
-            "effect": "스킬을 사용할 수 없는 상태일 때 이동속도가 5% 증가하며 기본 공격의 피해량이 증가합니다."
+            "effect": "스킬을 사용할 수 없는 상태일 때 이동속도가 증가하며 기본 공격의 피해량이 증가합니다."
         },
         "5": {
             "name": "강습",
@@ -60,7 +60,7 @@ export const abilityLocaleText = {
         },
         "4": {
             "name": "철단익강",
-            "effect": "10회 피격 시, 10초 동안 이동속도가 증가하며, 상대 레전드로부터 받는 피해가 감소합니다."
+            "effect": "피격 시, 이동속도가 증가하며, 상대 레전드로부터 받는 피해가 감소합니다."
         },
         "5": {
             "name": "우렁찬 함성",
@@ -130,7 +130,7 @@ export const abilityLocaleText = {
         },
         "5": {
             "name": "지뢰폭격",
-            "effect": "스킬을 공중에서 사용할 때 투척하는 지뢰의 수가 2개로 증가하지만 기존 지뢰보다 폭발 범위가 좁아집니다. 각 지뢰는 폭발하며 피해를 줍니다."
+            "effect": "스킬을 지상에서 사용할 때 투척하는 지뢰의 수가 2개로 증가하지만 기존 지뢰보다 폭발 범위가 좁아집니다. 각 지뢰는 폭발하며 피해를 줍니다."
         }
     },
       '108': {
@@ -144,11 +144,11 @@ export const abilityLocaleText = {
         },
         "3": {
             "name": "신속한 발걸음",
-            "effect": "궁극기 사용에 필요한 자원 유지시간이 3.5초 증가하며, \n궁극기 사용이 가능할 때 증가하는 이동속도가 추가로 상승합니다."
+            "effect": "궁극기 사용에 필요한 자원 유지시간이 증가하며, \n궁극기 사용이 가능할 때 증가하는 이동속도가 추가로 상승합니다."
         },
         "4": {
             "name": "견인불발",
-            "effect": "궁극기 사용 시, 3초 동안 받는 피해가 감소합니다."
+            "effect": "궁극기 사용 시, 피해가 감소합니다."
         },
         "5": {
             "name": "일순천격",
@@ -180,7 +180,7 @@ export const abilityLocaleText = {
       '110': {
         "1": {
             "name": "나 잡아봐라!",
-            "effect": "공중에서 스킬 사용 후 3초 동안 이동속도가 증가하고, \n공격에 적중당한 상대 레전드의 이동속도를 3초 동안 감소시킵니다."
+            "effect": "공중에서 스킬 사용 후 이동속도가 증가하고, \n공격에 적중당한 상대 레전드의 이동속도를 감소시킵니다."
         },
         "2": {
             "name": "열화의 불길",
@@ -202,11 +202,11 @@ export const abilityLocaleText = {
       '111': {
         "1": {
             "name": "깃털처럼",
-            "effect": "기본 공격의 피해량이 증가하며 점프력이 22% 증가합니다."
+            "effect": "기본 공격의 피해량이 증가하며 점프력이 증가합니다."
         },
         "2": {
             "name": "제약 해제",
-            "effect": "스킬 공격에 적중당한 상대 레전드의 점프력이 감소합니다."
+            "effect": "궁극기 사용에 필요한 게이지가 감소합니다."
         },
         "3": {
             "name": "악랄한 저주",
@@ -218,7 +218,7 @@ export const abilityLocaleText = {
         },
         "5": {
             "name": "거울아 거울아",
-            "effect":      '스킬을 사용할 때 발사하는 마법 구체의 수가 5개로 증가하지만 구체의 크기와 폭발 범위가 감소합니다. 각 마법 구체는 140의 피해를 줍니다. ',        
+            "effect": '스킬을 사용할 때 발사하는 마법 구체의 수가 5개로 증가하지만 구체의 크기와 폭발 범위가 감소합니다.',        
           }
     },
       '112': {
@@ -236,7 +236,7 @@ export const abilityLocaleText = {
         },
         "4": {
             "name": "추격자",
-            "effect": "3초 동안 피격 받지 않으면, 이동속도가 증가하며, 기본 공격의 피해량이 \n증가합니다."
+            "effect": "3초 동안 피격 받지 않으면, 이동속도가 증가하며, 기본 공격의 피해량이 증가합니다."
         },
         "5": {
             "name": "과도한 열정",
@@ -246,7 +246,7 @@ export const abilityLocaleText = {
       '113': {
         "1": {
             "name": "순간적인 각성",
-            "effect": "스킬 공격으로 상대 레전드를 적중시키면, 3초 동안 기본 공격의 피해량이 \n증가합니다."
+            "effect": "스킬 공격으로 상대 레전드를 적중시키면, 3초 동안 기본 공격의 피해량이 증가합니다."
         },
         "2": {
             "name": "명과 암",
@@ -268,7 +268,7 @@ export const abilityLocaleText = {
       '114': {
         "1": {
             "name": "강화된 방패",
-            "effect": "스킬 공격의 전진 속도가 12% 증가하고, 마지막 공격이 상대 레전드를 더 멀리 밀쳐냅니다."
+            "effect": "스킬 공격의 전진 속도가 증가하고, 마지막 공격이 상대 레전드를 더 멀리 밀쳐냅니다."
         },
         "2": {
             "name": "로시난테의 응원",
@@ -276,7 +276,7 @@ export const abilityLocaleText = {
         },
         "3": {
             "name": "기사의 용기",
-            "effect": "지상 첫 번째 공격의 전진 거리가 10% 증가하고, 기본 공격의 피해량이 증가합니다."
+            "effect": "지상 첫 번째 공격의 전진 거리가 증가하고, 기본 공격의 피해량이 증가합니다."
         },
         "4": {
             "name": "굳건한 기사의 의지",
@@ -290,7 +290,7 @@ export const abilityLocaleText = {
       '115': {
         "1": {
             "name": "놓치지 않아",
-            "effect": "지상에서 사용하는 스킬의 피해량이 증가하고, 기절 유지시간이 0.5초 증가합니다."
+            "effect": "지상에서 사용하는 스킬의 피해량이 증가하고, 기절 유지시간이 증가합니다."
         },
         "2": {
             "name": "끝없는 복수",
@@ -312,7 +312,7 @@ export const abilityLocaleText = {
       '116': {
         "1": {
             "name": "햇살이 내리리",
-            "effect": "공중 기본 공격에 적중당한 상대 레전드의 이동속도가 2초 동안 감소합니다."
+            "effect": "공중 기본 공격에 적중당한 상대 레전드의 이동속도가 감소합니다."
         },
         "2": {
             "name": "뜨겁게 타오르리",
@@ -320,7 +320,7 @@ export const abilityLocaleText = {
         },
         "3": {
             "name": "퍼지는 온기",
-            "effect": "스킬의 장판을 밟은 팀원과 자신의 이동속도가 3초 동안 일정량 증가합니다."
+            "effect": "스킬의 장판을 밟은 팀원과 자신의 이동속도가 4초 동안 일정량 증가합니다."
         },
         "4": {
             "name": "일출",
@@ -382,7 +382,7 @@ export const abilityLocaleText = {
         },
         "2": {
             "name": "알레그로",
-            "effect": "기본 이동속도가 6% 증가하며, 기본 공격으로 상대 레전드를 적중시킬 때마다 스킬의 재사용 대기시간이 감소합니다."
+            "effect": "기본 이동속도가 증가하며, 기본 공격으로 상대 레전드를 적중시킬 때마다 스킬의 재사용 대기시간이 감소합니다."
         },
         "3": {
             "name": "아다지오",
@@ -532,45 +532,45 @@ export const abilityLocaleText = {
       '126': {
         "1": {
             "name": "참 잘했어요!",
-            "effect": "궁극기 사용 시, 3초 동안 받는 피해가 50% 감소합니다."
+            "effect": "궁극기 사용 시, 3초 동안 받는 피해가 감소합니다."
         },
         "2": {
             "name": "혼자서도 잘 해요",
-            "effect": "공중에서 사용하는 스킬로 상대를 적중시키면, 스킬의 쿨다운이 24% 감소합니다."
+            "effect": "공중에서 사용하는 스킬로 상대를 적중시키면, 스킬의 쿨다운이 감소합니다."
         },
         "3": {
             "name": "까꿍!",
-            "effect": "궁극기의 마무리 공격 범위가 7% 증가합니다."
+            "effect": "궁극기의 마무리 공격 범위가 증가합니다."
         },
         "4": {
             "name": "뛰뛰빵빵",
-            "effect": "지상에서 사용하는 스킬의 피해량이12% 증가합니다. 추가로 구르는 동안, 진행 방향을10% 더 전환할 수 있습니다."
+            "effect": "지상에서 사용하는 스킬의 피해량이 증가합니다. 추가로 구르는 동안, 진행 방향을 더 전환할 수 있습니다."
         },
         "5": {
             "name": "재밌는건 한 번 더!",
-            "effect": "궁극기로 2명 이상의 상대 레전드를 적중시키면, 궁극기 쿨다운을15% 돌려 받습니다."
+            "effect": "궁극기로 2명 이상의 상대 레전드를 적중시키면, 궁극기 쿨다운을 돌려 받습니다."
         }
     },
       '127': {
         "1": {
             "name": "폼나는 영상",
-            "effect": "궁극기를 사용할 수 있을 때 모든 공격의 피해량이 12% 증가합니다."
+            "effect": "궁극기를 사용할 수 있을 때 모든 공격의 피해량이 증가합니다."
         },
         "2": {
             "name": "빈틈없는 오디오를 위해",
-            "effect": "3초 동안 피격받지 않으면, 이동속도가 12% 증가합니다."
+            "effect": "3초 동안 피격받지 않으면, 이동속도가 증가합니다."
         },
         "3": {
             "name": "스트리머 미션",
-            "effect": "스킬로 상대를 타격할 때마다 궁극기의 피해량이 12% 증가하며, 최대 40%까지 증가합니다."
+            "effect": "스킬로 상대를 타격할 때마다 궁극기의 피해량이 증가하며, 최대 60%까지 증가합니다."
         },
         "4": {
             "name": "극적인 역전 상황 연출",
-            "effect": "체력이 30% 이하일 때 피해량이 18% 증가하고, 상대를 스매시하면 체력이 8% 회복됩니다. 이 재능이 활성화되었을 때 상대를 스매시하면 효과가 스매시 당할 때까지 지속됩니다."
+            "effect": "체력이 50% 이하일 상대를 스매시하면 체력이 회복됩니다."
         },
         "5": {
             "name": "제천대성님의 활약을 보라고!",
-            "effect": "게임 시작 후 40초 동안 모든 피해량이 20%증가합니다. 효과가 활성화되어있을 때 상대를 스매시하면, 지속시간이 갱신됩니다."
+            "effect": "게임 시작 후 60초 동안 모든 피해량이 증가합니다. 효과가 활성화되어있을 때 상대를 스매시하면, 지속시간이 갱신됩니다."
         }
     },
       '128': {
@@ -1024,7 +1024,7 @@ export const abilityLocaleText = {
         },
         "2": {
             "name": "Constraints Unchained",
-            "effect": "Decreases Jump for opponents hit with Skill."
+            "effect": "Decreases gauge charge required for Ultimiate"
         },
         "3": {
             "name": "Wicked Curse",
@@ -1373,23 +1373,23 @@ export const abilityLocaleText = {
       '127': {
         "1": {
             "name": "Dope Clip",
-            "effect": "Increases damage of all attacks by 12% when Ultimate is available."
+            "effect": "Increases damage of all attacks when Ultimate is available."
         },
         "2": {
             "name": "For That Seamless Audio",
-            "effect": "Increases Movement Speed by 12% when not receiving damage for 3 s."
+            "effect": "Increases Movement Speed when not receiving damage for 3 s."
         },
         "3": {
             "name": "Streamer Mission",
-            "effect": "Increases Ultimate damage by 12% when hitting an opponent with Skill. This effect stacks up to 40%."
+            "effect": "Increases Ultimate damage when hitting an opponent with Skill. This effect stacks up to 60%."
         },
         "4": {
             "name": "A Miraculous Comeback",
-            "effect": "Increases damage by 18% when HP is below 30%, and restores 8% of HP when smashing an opponent. When Wukong smashes an opponent while Ability effect is active, the effect lasts until Wukong is smashed."
+            "effect": "when HP is below 30%, restores 8% of HP when smashing an opponent."
         },
         "5": {
             "name": "Behold! The Great Sage, Heaven’s Equal!",
-            "effect": "Increases damage of all attacks by 20% for 40 s when game starts. Smashing an opponent while effect is active will refresh the duration."
+            "effect": "Increases damage of all attacks by 40% for 40 s when game starts. Smashing an opponent while effect is active will refresh the duration."
         }
     },
       '128': {
