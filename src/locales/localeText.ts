@@ -97,6 +97,11 @@ export const localeText = {
         effect:
           '체력이 20% 이하로 내려갔을 때, 체력이 60%에 도달할 때까지 매 0.2초마다 체력의 2%를 회복합니다. (재사용 대기시간: 80초)',
       },
+      51:{
+        name: '슈퍼 점프',
+        effect:
+          '각성 전용 조작 버튼이 추가됩니다. 시전 시, 바라보고 있는 방향으로 힘차게 도약합니다.(재사용 대기시간 10초)',
+      }
     },
   },
   en: {
@@ -201,6 +206,11 @@ export const localeText = {
         effect:
           'When HP falls below 20%, restores 2% HP every 0.2s until HP reaches 60%. (Cooldown:80s)',
       },
+      51:{
+        name: 'Super Jump',
+        effect:
+          'A control specifically for Enchantments has been added. Will leap towards the direction you are facing when used.(Cooldown:10s)',
+      }
     },
   },
 };

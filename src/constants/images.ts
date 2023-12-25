@@ -81,6 +81,10 @@ export const EnchantmentIcon = {
     url: '/assets/images/icon/enchantment/T_UI_Icon_Enchant_Will.png',
     name: 'Unyielding',
   },
+  51:{
+    url:'/assets/images/icon/enchantment/T_UI_Icon_Enchant_SuperJump.png',
+    name:'Super Jump'
+  }
 };
 
 export const charactersIcon = {
