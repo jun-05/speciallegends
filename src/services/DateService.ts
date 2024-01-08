@@ -9,10 +9,14 @@ class DateService {
     thisSunday.setDate(thisSunday.getDate() - ((thisSunday.getDay() + 7) % 7));
 
     return {
-      start: `${prevSunday.getMonth() + 1}${
+      start: `${prevSunday.getMonth() + 1
+        < 10 ? '0' : ''
+      }${prevSunday.getMonth()+1}${
         prevSunday.getDate() < 10 ? '0' : ''
       }${prevSunday.getDate()}`,
-      end: `${thisSunday.getMonth() + 1}${
+      end: `${thisSunday.getMonth() + 1
+        < 10 ? '0' : ''
+      }${thisSunday.getMonth()+1}${
         thisSunday.getDate() < 10 ? '0' : ''
       }${thisSunday.getDate()}`,
     };

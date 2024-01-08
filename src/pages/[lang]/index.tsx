@@ -9,6 +9,7 @@ import { useLanguageContext } from '@/context/LanguageContext';
 import { localeText } from '@/locales/localeText';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { GetStaticPropsContext } from 'next';
 
 const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
   const router = useRouter();
@@ -149,7 +150,9 @@ let cache: { smasherDatas: SmasherDataInPeriod[] } = {
   smasherDatas: [],
 };
 
-export async function getStaticProps() {
+export async function getStaticProps(context: GetStaticPropsContext) {
+  const params = context.params;
+
   if (!cache.smasherDatas.length) {
     const S3Service = require('/src/services/S3Service');
     const ExcelService = require('/src/services/ExcelService');
@@ -164,7 +167,6 @@ export async function getStaticProps() {
     const currentDate = new Date();
     const smasherDatas = [];
 
-    // 3주전까지의 데이터를 저장 , 차후 4주
     for (let i = 0; i < 4; i++) {
       try {
         const targetDate = new Date(
@@ -194,12 +196,18 @@ export async function getStaticProps() {
     cache.smasherDatas = smasherDatas;
   }
 
-  return {
+  const result = {
     props: {
       smasherDatas: cache.smasherDatas,
     },
     revalidate: 604800,
   };
+
+  if (params!.lang === 'en') {
+    cache = { smasherDatas: [] };
+  }
+
+  return result;
 }
 
 export default MyPage;
