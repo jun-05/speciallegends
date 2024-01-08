@@ -1,5 +1,11 @@
 # Special Legends
 
+## v1.23 배포
+
+1. **ISR 기능 오류 수정**
+2. **dateService 기능 오류 수정**
+3. **robts.txt, sitemap.xml 추가**
+
 ## v1.22 배포
 
 1. **슈퍼점프 각성석 설명 및 이미지 추가**
