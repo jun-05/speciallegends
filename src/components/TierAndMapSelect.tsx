@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { MapIcon, TierIcon } from '@/constants/images';
-import { useLanguageContext } from '@/context/LanguageContext';
-import { localeText } from '@/locales/localeText';
 import React from 'react';
+import {
+  useImageTextContext,
+  useLocaleTextContext,
+} from '@/context/PageDataContext';
 
 interface TierAndMapSelectProps {
   option: {
@@ -18,27 +19,27 @@ const TierAndMapSelect = ({
   onChangeTier,
   onChangeMap,
 }: TierAndMapSelectProps) => {
-  const [language] = useLanguageContext();
-  const languageTranslations = localeText[language as keyof typeof localeText];
+  const localeTextJson = useLocaleTextContext();
+  const { mapIcon, tierIcon } = useImageTextContext();
 
-  const tierList = languageTranslations.tierList;
-  const mapList = languageTranslations.mapList;
+  const tierList = localeTextJson?.tierList;
+  const mapList = localeTextJson?.mapList;
 
   // 티어와 맵 이미지 선로딩
   if (typeof window !== 'undefined') {
     Object.keys(mapList).forEach((mapNum) => {
       const img = new Image();
-      img.src = MapIcon[Number(mapNum) as keyof typeof MapIcon].url;
+      img.src = mapIcon[mapNum].url;
     });
     Object.keys(tierList).forEach((tier) => {
       const img = new Image();
-      img.src = TierIcon[tier as keyof typeof TierIcon].url;
+      img.src = tierIcon[tier as keyof typeof tierIcon].url;
     });
   }
 
   const selectedTierIcon =
-    TierIcon[option.selectedTier as keyof typeof TierIcon];
-  const selectedMapIcon = MapIcon[option.selectedMap as keyof typeof MapIcon];
+    tierIcon[option.selectedTier as keyof typeof tierIcon];
+  const selectedMapIcon = mapIcon[option.selectedMap];
 
   return (
     <>
@@ -49,7 +50,7 @@ const TierAndMapSelect = ({
             onChange={(e) => onChangeTier(e.target.value)}
           >
             <option value={option.selectedTier}>
-              {languageTranslations.tierListOptionName}
+              {localeTextJson?.tierListOptionName}
             </option>
             {Object.entries(tierList).map(([value, tier], idx) => {
               return (
@@ -64,7 +65,7 @@ const TierAndMapSelect = ({
             onChange={(e) => onChangeMap(Number(e.target.value))}
           >
             <option value={option.selectedMap}>
-              {languageTranslations.mapListOptionName}
+              {localeTextJson?.mapListOptionName}
             </option>
             {Object.entries(mapList).map(([value, map], idx) => (
               <option key={`map_${idx}`} value={value}>

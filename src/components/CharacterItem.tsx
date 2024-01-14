@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
-import { charactersIcon } from '@/constants/images';
-import { useLanguageContext } from '@/context/LanguageContext';
-import { localeText } from '@/locales/localeText';
+
 import { characterResult } from '@/types/smasherDataTypes';
+import {
+  useImageTextContext,
+  useLocaleTextContext,
+} from '@/context/PageDataContext';
 import CharacterDetail from './CharacterDetail';
 
 import { GrCaretDown, GrCaretUp } from 'react-icons/gr';
@@ -23,8 +25,8 @@ const CharacterItem = ({
   characterAvgWinRate,
   characterAvgPickRate,
 }: CharacterItemProps) => {
-  const [language] = useLanguageContext();
-  const languageTranslations = localeText[language as keyof typeof localeText];
+  const localeTextJson = useLocaleTextContext();
+  const { charactersIcon } = useImageTextContext();
   const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
@@ -35,13 +37,9 @@ const CharacterItem = ({
     setShowDetails(!showDetails);
   };
 
-  const name =
-    languageTranslations.characterName[
-      characterData.cID as keyof typeof languageTranslations.characterName
-    ];
+  const name = localeTextJson?.characterName[characterData.cID!];
 
-  const characterIcon =
-    charactersIcon[characterData.cID as keyof typeof charactersIcon];
+  const characterIcon = charactersIcon?.[characterData.cID!];
 
   const infoWinRateByisAllData = isAllDataInTier
     ? (characterData.wR! - tierAvgWinRate).toFixed(1)

@@ -1,15 +1,15 @@
-import { useLanguageContext } from '@/context/LanguageContext';
-import { localeText } from '@/locales/localeText';
+import React from 'react';
 import { formatDateRange } from '@/utils/formatDateRange';
+import { useLocaleTextContext } from '@/context/PageDataContext';
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from 'react-icons/md';
-import React from 'react';
 
 interface TableTitleProps {
   period: string;
   index: number;
+  lang: string;
   onClickPrevIndex: () => void;
   onClickNextIndex: () => void;
 }
@@ -17,26 +17,26 @@ interface TableTitleProps {
 const TableTitle = ({
   period,
   index,
+  lang,
   onClickPrevIndex,
   onClickNextIndex,
 }: TableTitleProps) => {
-  const [language] = useLanguageContext();
-  const languageTranslations = localeText[language as keyof typeof localeText];
+  const localeTextJson = useLocaleTextContext();
 
   return (
     <div className="flex items-top justify-between  mb-8">
       <div>
         <div className="text-2xl sm:text-3xl font-bold">
-          {languageTranslations.tableTitle}
+          {localeTextJson?.tableTitle}
         </div>
         <div className="text-[9px]  md:text-xs mt-1 sm:mt-2">
-          {languageTranslations.updateTimeInfo}
+          {localeTextJson?.updateTimeInfo}
         </div>
       </div>
       <div className="flex flex-col">
         <div className="p-2 bg-gray-200 dark:bg-gray-600 rounded-lg ">
           <h2 className="flex flex-wrap w-18 md:w-full text-xs md:text-base font-semibold text-gray-800 dark:text-white">
-            {formatDateRange(period, language!)}
+            {formatDateRange(period, lang)}
           </h2>
         </div>
         <div className="flex justify-between pt-1">

@@ -2,7 +2,6 @@ import { AppProps } from 'next/app';
 import '../styles/globals.css';
 import Layout from '@/components/common/Layout';
 import Head from 'next/head';
-import { LanguageProvider } from '@/context/LanguageContext';
 
 /**
  * Icons used in this project are provided by react-icons library.
@@ -23,11 +22,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Special Legends: Smash Legends Statistics</title>
       </Head>
-      <LanguageProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </LanguageProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }

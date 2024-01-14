@@ -1,5 +1,4 @@
-import { useLanguageContext } from '@/context/LanguageContext';
-import { localeText } from '@/locales/localeText';
+import { useLocaleTextContext } from '@/context/PageDataContext';
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
@@ -12,8 +11,7 @@ interface TableOptionProps {
 }
 
 const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
-  const [language] = useLanguageContext();
-  const languageTranslations = localeText[language as keyof typeof localeText];
+  const localeTextJson = useLocaleTextContext();
 
   return (
     <thead className="w-full  bg-gray-300 border-b-gray-300 dark:bg-gray-700 dark:border-gray-700">
@@ -21,7 +19,7 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
         <th className="w-[5%]">#</th>
         <th className="w-[35%] xs:w-[40%] md:w-[50%]">
           <div className="flex justify-start items-center text-left space-x-1 pl-2 md:pl-8">
-            <span> {languageTranslations.firstTableOption}</span>
+            <span> {localeTextJson?.firstTableOption}</span>
             <div
               onClick={() => onClickSort('name')}
               className="hover:cursor-pointer"
@@ -36,7 +34,7 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
         </th>
         <th className="w-[20%] md:w-[15%] ">
           <div className="inline-flex items-center space-x-1 pl-2">
-            <span> {languageTranslations.secondTableOption}</span>
+            <span> {localeTextJson?.secondTableOption}</span>
             <div
               onClick={() => onClickSort('pR')}
               className="hover:cursor-pointer"
@@ -51,7 +49,7 @@ const TableOption = ({ sortOption, onClickSort }: TableOptionProps) => {
         </th>
         <th className="w-[20%] md:w-[15%]">
           <div className="inline-flex items-center space-x-1 pl-2 ">
-            <span> {languageTranslations.thirdTableOption} </span>
+            <span> {localeTextJson?.thirdTableOption} </span>
 
             <div
               onClick={() => onClickSort('wR')}
