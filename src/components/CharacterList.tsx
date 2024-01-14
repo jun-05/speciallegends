@@ -23,7 +23,7 @@ const CharacterList = ({
   const { characters, maps, totalGameWin, totalGamesInTier } = tierData;
   const tierAvgWinRate =
     Math.round((totalGameWin / totalGamesInTier) * 1000) / 10;
-  const isAllDataInTier = selectedMap === 4000;
+  const isTotalData = selectedMap === 4000;
   const dataInOption =
     selectedMap == 4000 ? characters : maps[selectedMap].characters;
 
@@ -45,7 +45,7 @@ const CharacterList = ({
           key={`charcter_${idx}`}
           characterData={characterData}
           tierAvgWinRate={tierAvgWinRate}
-          isAllDataInTier={isAllDataInTier}
+          isTotalData={isTotalData}
           characterAvgWinRate={tierData.characters[characterData.cID!].wR!}
           characterAvgPickRate={tierData.characters[characterData.cID!].pR!}
         />

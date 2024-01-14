@@ -13,7 +13,7 @@ import { GrCaretDown, GrCaretUp } from 'react-icons/gr';
 interface CharacterItemProps {
   characterData: characterResult;
   tierAvgWinRate: number;
-  isAllDataInTier: boolean;
+  isTotalData: boolean;
   characterAvgWinRate: number;
   characterAvgPickRate: number;
 }
@@ -21,7 +21,7 @@ interface CharacterItemProps {
 const CharacterItem = ({
   characterData,
   tierAvgWinRate,
-  isAllDataInTier,
+  isTotalData,
   characterAvgWinRate,
   characterAvgPickRate,
 }: CharacterItemProps) => {
@@ -41,13 +41,16 @@ const CharacterItem = ({
   const name = localeTextJson?.characterName[characterData.cID!];
   const characterIcon = charactersIcon?.[characterData.cID!];
 
-  const infoWinRateByisAllData = isAllDataInTier
+  const characterTotalCount = Number(
+    process.env.NEXT_PUBLIC_CHARACTER_TOTAL_COUNT
+  );
+  const tierAvgPickRate = Math.round((6 / characterTotalCount) * 1000) / 10;
+
+  const WinRateInOption = isTotalData
     ? (characterData.wR! - tierAvgWinRate).toFixed(1)
     : (characterData.wR! - characterAvgWinRate).toFixed(1);
 
-  const tierAvgPickRate = Math.round((6 / 38) * 1000) / 10;
-
-  const infoPickRateByisAllData = isAllDataInTier
+  const PickRateInOption = isTotalData
     ? (characterData.pR! - tierAvgPickRate).toFixed(1)
     : (characterData.pR! - characterAvgPickRate).toFixed(1);
 
@@ -76,16 +79,16 @@ const CharacterItem = ({
           {characterData.pR}%
           <div
             className={`${
-              Number(infoPickRateByisAllData) > 0
+              Number(PickRateInOption) > 0
                 ? 'text-red-600 dark:text-red-400'
-                : Number(infoPickRateByisAllData) === 0
+                : Number(PickRateInOption) === 0
                   ? ''
                   : 'text-blue-600 dark:text-blue-400'
             } text-[9px] md:text-[10px] ml-2 -mt-1`}
           >
-            {Number(infoPickRateByisAllData) > 0
-              ? `+${infoPickRateByisAllData} `
-              : infoPickRateByisAllData}
+            {Number(PickRateInOption) > 0
+              ? `+${PickRateInOption} `
+              : PickRateInOption}
             %
           </div>
         </th>
@@ -93,16 +96,16 @@ const CharacterItem = ({
           {characterData.wR}%
           <div
             className={`${
-              Number(infoWinRateByisAllData) > 0
+              Number(WinRateInOption) > 0
                 ? 'text-red-600 dark:text-red-400'
-                : Number(infoWinRateByisAllData) === 0
+                : Number(WinRateInOption) === 0
                   ? ''
                   : 'text-blue-600 dark:text-blue-400'
             } text-[9px] md:text-[10px] ml-2 -mt-1`}
           >
-            {Number(infoWinRateByisAllData) > 0
-              ? `+${infoWinRateByisAllData}`
-              : infoWinRateByisAllData}
+            {Number(WinRateInOption) > 0
+              ? `+${WinRateInOption}`
+              : WinRateInOption}
             %
           </div>
         </th>
