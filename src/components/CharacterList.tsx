@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-
 import { TierData } from '@/types/smasherDataTypes';
 import CharacterItem from './CharacterItem';
+import { useLocaleTextContext } from '@/context/PageDataContext';
+
 import {
   getSortedCharactersByRate,
   getSortedCharactersByName,
 } from '@/utils/sortedCharacters';
-import { useLanguageContext } from '@/context/LanguageContext';
-import { localeText } from '@/locales/localeText';
 
 interface CharacterListProps {
   tierData: TierData;
@@ -20,12 +19,11 @@ const CharacterList = ({
   selectedMap,
   sortOption,
 }: CharacterListProps) => {
-  const [language] = useLanguageContext();
-  const languageTranslations = localeText[language as keyof typeof localeText];
+  const localeTextJson = useLocaleTextContext();
   const { characters, maps, totalGameWin, totalGamesInTier } = tierData;
   const tierAvgWinRate =
     Math.round((totalGameWin / totalGamesInTier) * 1000) / 10;
-  const isAllDataInTier = selectedMap === 4000;
+  const isTotalData = selectedMap === 4000;
   const dataInOption =
     selectedMap == 4000 ? characters : maps[selectedMap].characters;
 
@@ -34,7 +32,7 @@ const CharacterList = ({
     sortedCharacters = getSortedCharactersByName(
       dataInOption,
       sortOption,
-      languageTranslations.characterName
+      localeTextJson?.characterName
     );
   } else {
     sortedCharacters = getSortedCharactersByRate(dataInOption, sortOption);
@@ -47,7 +45,7 @@ const CharacterList = ({
           key={`charcter_${idx}`}
           characterData={characterData}
           tierAvgWinRate={tierAvgWinRate}
-          isAllDataInTier={isAllDataInTier}
+          isTotalData={isTotalData}
           characterAvgWinRate={tierData.characters[characterData.cID!].wR!}
           characterAvgPickRate={tierData.characters[characterData.cID!].pR!}
         />

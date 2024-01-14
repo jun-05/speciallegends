@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
-import { charactersIcon } from '@/constants/images';
-import { useLanguageContext } from '@/context/LanguageContext';
-import { localeText } from '@/locales/localeText';
+
 import { characterResult } from '@/types/smasherDataTypes';
+import {
+  useImageTextContext,
+  useLocaleTextContext,
+} from '@/context/PageDataContext';
 import CharacterDetail from './CharacterDetail';
 
 import { GrCaretDown, GrCaretUp } from 'react-icons/gr';
@@ -11,7 +13,7 @@ import { GrCaretDown, GrCaretUp } from 'react-icons/gr';
 interface CharacterItemProps {
   characterData: characterResult;
   tierAvgWinRate: number;
-  isAllDataInTier: boolean;
+  isTotalData: boolean;
   characterAvgWinRate: number;
   characterAvgPickRate: number;
 }
@@ -19,12 +21,12 @@ interface CharacterItemProps {
 const CharacterItem = ({
   characterData,
   tierAvgWinRate,
-  isAllDataInTier,
+  isTotalData,
   characterAvgWinRate,
   characterAvgPickRate,
 }: CharacterItemProps) => {
-  const [language] = useLanguageContext();
-  const languageTranslations = localeText[language as keyof typeof localeText];
+  const localeTextJson = useLocaleTextContext();
+  const { charactersIcon } = useImageTextContext();
   const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
@@ -35,21 +37,20 @@ const CharacterItem = ({
     setShowDetails(!showDetails);
   };
 
-  const name =
-    languageTranslations.characterName[
-      characterData.cID as keyof typeof languageTranslations.characterName
-    ];
+  const cloundFrontUrl = process.env.NEXT_PUBLIC_CLOUDFRONT_URL;
+  const name = localeTextJson?.characterName[characterData.cID!];
+  const characterIcon = charactersIcon?.[characterData.cID!];
 
-  const characterIcon =
-    charactersIcon[characterData.cID as keyof typeof charactersIcon];
+  const characterTotalCount = Number(
+    process.env.NEXT_PUBLIC_CHARACTER_TOTAL_COUNT
+  );
+  const tierAvgPickRate = Math.round((6 / characterTotalCount) * 1000) / 10;
 
-  const infoWinRateByisAllData = isAllDataInTier
+  const WinRateInOption = isTotalData
     ? (characterData.wR! - tierAvgWinRate).toFixed(1)
     : (characterData.wR! - characterAvgWinRate).toFixed(1);
 
-  const tierAvgPickRate = Math.round((6 / 38) * 1000) / 10;
-
-  const infoPickRateByisAllData = isAllDataInTier
+  const PickRateInOption = isTotalData
     ? (characterData.pR! - tierAvgPickRate).toFixed(1)
     : (characterData.pR! - characterAvgPickRate).toFixed(1);
 
@@ -66,7 +67,7 @@ const CharacterItem = ({
         <th className="flex w-full items-center text-left pl-2 md:pl-8 space-x-2 md:space-x-5">
           <span className="flex-shrink-0">
             <img
-              src={characterIcon.url}
+              src={cloundFrontUrl + characterIcon.url}
               alt={characterIcon.name}
               className="rounded-md object-fill h-8 w-8 md:h-14 md:w-14"
             />
@@ -78,16 +79,16 @@ const CharacterItem = ({
           {characterData.pR}%
           <div
             className={`${
-              Number(infoPickRateByisAllData) > 0
+              Number(PickRateInOption) > 0
                 ? 'text-red-600 dark:text-red-400'
-                : Number(infoPickRateByisAllData) === 0
+                : Number(PickRateInOption) === 0
                   ? ''
                   : 'text-blue-600 dark:text-blue-400'
             } text-[9px] md:text-[10px] ml-2 -mt-1`}
           >
-            {Number(infoPickRateByisAllData) > 0
-              ? `+${infoPickRateByisAllData} `
-              : infoPickRateByisAllData}
+            {Number(PickRateInOption) > 0
+              ? `+${PickRateInOption} `
+              : PickRateInOption}
             %
           </div>
         </th>
@@ -95,16 +96,16 @@ const CharacterItem = ({
           {characterData.wR}%
           <div
             className={`${
-              Number(infoWinRateByisAllData) > 0
+              Number(WinRateInOption) > 0
                 ? 'text-red-600 dark:text-red-400'
-                : Number(infoWinRateByisAllData) === 0
+                : Number(WinRateInOption) === 0
                   ? ''
                   : 'text-blue-600 dark:text-blue-400'
             } text-[9px] md:text-[10px] ml-2 -mt-1`}
           >
-            {Number(infoWinRateByisAllData) > 0
-              ? `+${infoWinRateByisAllData}`
-              : infoWinRateByisAllData}
+            {Number(WinRateInOption) > 0
+              ? `+${WinRateInOption}`
+              : WinRateInOption}
             %
           </div>
         </th>

@@ -1,27 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
-import { SmasherDataInPeriod } from '@/types/smasherDataTypes';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import TierAndMapSelect from '@/components/TierAndMapSelect';
 import TableOption from '@/components/TableOption';
 import CharacterList from '@/components/CharacterList';
 import TableTitle from '@/components/TableTitle';
-import { useLanguageContext } from '@/context/LanguageContext';
-import { localeText } from '@/locales/localeText';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { GetStaticPropsContext } from 'next';
+import { pageData } from '@/types/pageDataType';
+import { PageDataContext } from './../../context/PageDataContext';
+import { SmasherDataInPeriod } from '@/types/smasherDataTypes';
+import { imagesTextJSON } from '@/types/imageJsonTypes';
 
-const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
+const MyPage = ({
+  smasherDatas,
+  pageData,
+}: {
+  smasherDatas: SmasherDataInPeriod[];
+  pageData: pageData;
+}) => {
+  const { localeTextJson } = pageData;
   const router = useRouter();
   const { lang } = router.query;
   const langStr = Array.isArray(lang) ? lang[0] : lang;
-  const [language, setLanguage] = useLanguageContext();
-
-  useEffect(() => {
-    setLanguage(langStr);
-  }, [langStr, setLanguage]);
-
-  const languageTranslations = localeText[language as keyof typeof localeText];
 
   const [smasherDataIndex, setSmasherDataIndex] = useState(0);
   const [option, setOption] = useState({
@@ -94,49 +95,55 @@ const MyPage = ({ smasherDatas }: { smasherDatas: SmasherDataInPeriod[] }) => {
         <meta name="description" content={description} />
         <meta http-equiv="content-language" content={langStr} />
       </Head>
-      <div className="p-4 pt-8 md:pt-12 flex justify-center items-center text-gray-800 dark:text-white ">
-        <div className=" w-[512px] md:w-[720px] lg:w-[1024px] ">
-          {/** 타이틀 */}
-          <TableTitle
-            period={period}
-            onClickNextIndex={onClickNextIndex}
-            onClickPrevIndex={onClickPrevIndex}
-            index={smasherDataIndex}
-          />
-          {/**옵션 */}
-          <TierAndMapSelect
-            option={option}
-            onChangeTier={onChangeTier}
-            onChangeMap={onChangeMap}
-          />
+      <PageDataContext.Provider value={pageData}>
+        <div className="p-4 pt-8 md:pt-12 flex justify-center items-center text-gray-800 dark:text-white ">
+          <div className=" w-[512px] md:w-[720px] lg:w-[1024px] ">
+            {/** 타이틀 */}
+            <TableTitle
+              period={period}
+              onClickNextIndex={onClickNextIndex}
+              onClickPrevIndex={onClickPrevIndex}
+              index={smasherDataIndex}
+              lang={langStr!}
+            />
+            {/**옵션 */}
+            <TierAndMapSelect
+              option={option}
+              onChangeTier={onChangeTier}
+              onChangeMap={onChangeMap}
+            />
 
-          {/** 테이블 설명 텍스트 */}
-          <div className="rounded-md ">
-            <div className="flex flex-col items-end">
-              {option.selectedMap !== 4000 ? (
-                <div className="text-xs md:text-base mt-1">
-                  {languageTranslations.explanationTextByMap}
-                </div>
-              ) : (
-                <div className="text-xs md:text-base mt-1">
-                  {languageTranslations.explanationText}
-                </div>
-              )}
+            {/** 테이블 설명 텍스트 */}
+            <div className="rounded-md ">
+              <div className="flex flex-col items-end">
+                {option.selectedMap !== 4000 ? (
+                  <div className="text-xs md:text-base mt-1">
+                    {localeTextJson?.explanationTextByMap}
+                  </div>
+                ) : (
+                  <div className="text-xs md:text-base mt-1">
+                    {localeTextJson?.explanationText}
+                  </div>
+                )}
+              </div>
+              {/**테이블 */}
+              <table className="w-full mt-2 rounded-md text-sm md:text-base text-gray-800 dark:text-white  ">
+                {/**테이블 헤드 컴포넌트 */}
+                <TableOption
+                  sortOption={sortOption}
+                  onClickSort={onClickSort}
+                />
+                {/**테이블 리스트 컴포넌트 */}
+                <CharacterList
+                  tierData={tierData}
+                  selectedMap={option.selectedMap}
+                  sortOption={sortOption}
+                />
+              </table>
             </div>
-            {/**테이블 */}
-            <table className="w-full mt-2 rounded-md text-sm md:text-base text-gray-800 dark:text-white  ">
-              {/**테이블 헤드 컴포넌트 */}
-              <TableOption sortOption={sortOption} onClickSort={onClickSort} />
-              {/**테이블 리스트 컴포넌트 */}
-              <CharacterList
-                tierData={tierData}
-                selectedMap={option.selectedMap}
-                sortOption={sortOption}
-              />
-            </table>
           </div>
         </div>
-      </div>
+      </PageDataContext.Provider>
     </>
   );
 };
@@ -146,20 +153,31 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-let cache: { smasherDatas: SmasherDataInPeriod[] } = {
+let cache: {
+  smasherDatas: SmasherDataInPeriod[];
+  imageTextJson: imagesTextJSON | null;
+} = {
   smasherDatas: [],
+  imageTextJson: null,
 };
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const params = context.params;
+  const S3Service = require('/src/services/S3Service');
+  const s3Service = new S3Service();
 
+  const abilityTextJson = JSON.parse(
+    await s3Service.getAbilityTextFile(params?.lang)
+  );
+  const localeTextJson = JSON.parse(
+    await s3Service.getLocaleTextFile(params?.lang)
+  );
+
+  /**중복으로 사용되는 값들은 한번만 사용하고 캐시에 저장하여 사용 */
   if (!cache.smasherDatas.length) {
-    const S3Service = require('/src/services/S3Service');
     const ExcelService = require('/src/services/ExcelService');
     const GameStatisticsService = require('/src/services/GameStatisticsService');
     const DateService = require('/src/services/DateService');
-
-    const s3Service = new S3Service();
     const excelService = new ExcelService();
     const gameStatisticsService = new GameStatisticsService();
     const dateService = new DateService();
@@ -167,19 +185,21 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     const currentDate = new Date();
     const smasherDatas = [];
 
-    for (let i = 0; i < 4; i++) {
+    cache.imageTextJson = JSON.parse(await s3Service.getImagesTextFile());
+
+    for (let i = 0; i < 2; i++) {
       try {
         const targetDate = new Date(
           currentDate.getTime() - dateService.weeksToMs(i)
         );
         const period = dateService.getPeriod(targetDate);
 
-        const params = {
+        const aws_params = {
           Bucket: process.env.AWS_BUCKET!,
           Key: `sl_${period.start}${period.end}.csv`,
         };
 
-        const csvFile = await s3Service.getObject(params);
+        const csvFile = await s3Service.getStatDataFile(aws_params);
 
         const fileBuffer = csvFile.Body;
         const data = excelService.readExcelFile(fileBuffer);
@@ -199,12 +219,20 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   const result = {
     props: {
       smasherDatas: cache.smasherDatas,
+      pageData: {
+        abilityTextJson: abilityTextJson,
+        localeTextJson: localeTextJson,
+        imageTextJson: cache.imageTextJson,
+      },
     },
     revalidate: 604800,
   };
 
   if (params!.lang === 'en') {
-    cache = { smasherDatas: [] };
+    cache = {
+      smasherDatas: [],
+      imageTextJson: null,
+    };
   }
 
   return result;
