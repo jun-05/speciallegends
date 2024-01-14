@@ -14,6 +14,7 @@ interface CharacterItemProps {
   characterData: characterResult;
   tierAvgWinRate: number;
   isTotalData: boolean;
+  totalCharacters: number;
   characterAvgWinRate: number;
   characterAvgPickRate: number;
 }
@@ -22,6 +23,7 @@ const CharacterItem = ({
   characterData,
   tierAvgWinRate,
   isTotalData,
+  totalCharacters,
   characterAvgWinRate,
   characterAvgPickRate,
 }: CharacterItemProps) => {
@@ -39,12 +41,9 @@ const CharacterItem = ({
 
   const cloundFrontUrl = process.env.NEXT_PUBLIC_CLOUDFRONT_URL;
   const name = localeTextJson?.characterName[characterData.cID!];
-  const characterIcon = charactersIcon?.[characterData.cID!];
+  const characterIconInfo = charactersIcon?.[characterData.cID!];
 
-  const characterTotalCount = Number(
-    process.env.NEXT_PUBLIC_CHARACTER_TOTAL_COUNT
-  );
-  const tierAvgPickRate = Math.round((6 / characterTotalCount) * 1000) / 10;
+  const tierAvgPickRate = Math.round((6 / totalCharacters) * 1000) / 10;
 
   const WinRateInOption = isTotalData
     ? (characterData.wR! - tierAvgWinRate).toFixed(1)
@@ -67,8 +66,8 @@ const CharacterItem = ({
         <th className="flex w-full items-center text-left pl-2 md:pl-8 space-x-2 md:space-x-5">
           <span className="flex-shrink-0">
             <img
-              src={cloundFrontUrl + characterIcon.url}
-              alt={characterIcon.name}
+              src={cloundFrontUrl + characterIconInfo.url}
+              alt={characterIconInfo.name}
               className="rounded-md object-fill h-8 w-8 md:h-14 md:w-14"
             />
           </span>

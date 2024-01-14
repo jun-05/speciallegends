@@ -187,7 +187,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
     cache.imageTextJson = JSON.parse(await s3Service.getImagesTextFile());
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 4; i++) {
       try {
         const targetDate = new Date(
           currentDate.getTime() - dateService.weeksToMs(i)
