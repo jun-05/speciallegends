@@ -46,6 +46,7 @@ const CharacterList = ({
           characterData={characterData}
           tierAvgWinRate={tierAvgWinRate}
           isTotalData={isTotalData}
+          totalCharacters={Object.keys(characters).length}
           characterAvgWinRate={tierData.characters[characterData.cID!].wR!}
           characterAvgPickRate={tierData.characters[characterData.cID!].pR!}
         />
