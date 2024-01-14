@@ -21,6 +21,7 @@ const TierAndMapSelect = ({
 }: TierAndMapSelectProps) => {
   const localeTextJson = useLocaleTextContext();
   const { mapIcon, tierIcon } = useImageTextContext();
+  const cloundFrontUrl = process.env.NEXT_PUBLIC_CLOUDFRONT_URL || '';
 
   const tierList = localeTextJson?.tierList;
   const mapList = localeTextJson?.mapList;
@@ -77,12 +78,12 @@ const TierAndMapSelect = ({
         <div className="flex flex-col items-end">
           <div className="group flex space-x-2 md:space-x-8 md:mr-7">
             <img
-              src={selectedTierIcon.url}
+              src={cloundFrontUrl + selectedTierIcon.url}
               alt={selectedTierIcon.name}
               className=" rounded-md object-fill h-8 w-8 sm:h-10 sm:w-10 md:h-14 md:w-14"
             />
             <img
-              src={selectedMapIcon.url}
+              src={cloundFrontUrl + selectedMapIcon.url}
               alt={selectedMapIcon.name}
               className={` h-8 w-8 sm:h-10 sm:w-10 md:h-14 md:w-14
           ${

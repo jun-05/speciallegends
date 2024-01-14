@@ -3,6 +3,7 @@ export interface imagesTextJSON {
     tierIcon:        TierIcon;
     enchantmentIcon: { [key: string]: ImgInfo };
     charactersIcon:  { [key: string]: ImgInfo };
+    characterAbilityIcon: { [key: string]: { [key: string]: ImgInfo}}
 }
 
 export interface ImgInfo {

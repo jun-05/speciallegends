@@ -37,8 +37,8 @@ const CharacterItem = ({
     setShowDetails(!showDetails);
   };
 
+  const cloundFrontUrl = process.env.NEXT_PUBLIC_CLOUDFRONT_URL;
   const name = localeTextJson?.characterName[characterData.cID!];
-
   const characterIcon = charactersIcon?.[characterData.cID!];
 
   const infoWinRateByisAllData = isAllDataInTier
@@ -64,7 +64,7 @@ const CharacterItem = ({
         <th className="flex w-full items-center text-left pl-2 md:pl-8 space-x-2 md:space-x-5">
           <span className="flex-shrink-0">
             <img
-              src={characterIcon.url}
+              src={cloundFrontUrl + characterIcon.url}
               alt={characterIcon.name}
               className="rounded-md object-fill h-8 w-8 md:h-14 md:w-14"
             />

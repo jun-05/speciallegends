@@ -15,7 +15,8 @@ interface CharacterDetailProps {
 const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
   const localeTextJson = useLocaleTextContext();
   const abilityTextJson = useAbilityTextContext();
-  const { enchantmentIcon, charactersIcon } = useImageTextContext();
+  const { enchantmentIcon, characterAbilityIcon } = useImageTextContext();
+  const cloundFrontUrl = process.env.NEXT_PUBLIC_CLOUDFRONT_URL || '';
 
   const characterId = characterData.cID?.toString();
   const sortedAbilities = Object.entries(characterData.abs)
@@ -26,7 +27,7 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
     .filter(([enchantmentId]) => enchantmentId !== '0')
     .sort((a, b) => Number(b[1].eUR) - Number(a[1].eUR));
 
-  const abilityIcons = charactersIcon?.characterId;
+  const abilityIcons = characterAbilityIcon?.[characterId!];
   const enchantMentInfo = localeTextJson?.enchantMentInfo;
 
   return (
@@ -41,8 +42,8 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
               return (
                 <TableImgItem
                   key={index}
-                  src={abilityIcons.url}
-                  alt={abilityIcons.name}
+                  src={cloundFrontUrl + abilityIcons[abilityNum].url}
+                  alt={abilityIcons[abilityNum].name}
                   UsageRate={aUR}
                   tooltipTitle={
                     abilityTextJson?.characterAbility?.[characterId!][
@@ -71,7 +72,7 @@ const CharacterDetail = ({ characterData }: CharacterDetailProps) => {
               return (
                 <TableImgItem
                   key={index}
-                  src={enchantmentIcon[enchantmentNumber].url}
+                  src={cloundFrontUrl + enchantmentIcon[enchantmentNumber].url}
                   alt={enchantmentIcon[enchantmentNumber].name}
                   UsageRate={eUR}
                   tooltipTitle={enchantMentInfo[enchantmentNumber].name}
