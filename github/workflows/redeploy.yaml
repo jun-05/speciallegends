@@ -1,0 +1,19 @@
+name: Deploy to Vercel
+
+on:
+  schedule:
+    - cron: '58 5 * * 1' # 매주 월요일 5시 58분 UTC (한국시간으로 매주 월요일 오후 2시 58분)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Vercel CLI
+        run: npm i -g vercel
+
+      - name: Deploy to Vercel
+        run: vercel --token ${{ secrets.VERCEL_TOKEN }} --prod
