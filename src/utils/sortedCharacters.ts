@@ -23,16 +23,17 @@ export const getSortedCharactersByName = (
     sortType: string;
     order: string;
   },
-  characteNameObj : {
+  characterNameObj : {
     [cID: number] : string
   },
 ): characterResult[] => {
 
   return Object.entries(dataInOption)
     .map(([cID, data]) => ({ cID , ...data }))
+    .filter(character => characterNameObj.hasOwnProperty(character.cID))
     .sort((a, b) => {
-      const nameA = characteNameObj[a.cID as keyof typeof characteNameObj];
-      const nameB = characteNameObj[b.cID as keyof typeof characteNameObj];
+      const nameA = characterNameObj[a.cID as keyof typeof characterNameObj];
+      const nameB = characterNameObj[b.cID as keyof typeof characterNameObj];
       return sortOption.order === 'asc' ?    nameB.localeCompare(nameA) : nameA.localeCompare(nameB);
     });
 };

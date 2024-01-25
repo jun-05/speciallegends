@@ -40,17 +40,22 @@ const CharacterList = ({
 
   return (
     <tbody className=" w-full ">
-      {sortedCharacters.map((characterData, idx: number) => (
-        <CharacterItem
-          key={`charcter_${idx}`}
-          characterData={characterData}
-          tierAvgWinRate={tierAvgWinRate}
-          isTotalData={isTotalData}
-          totalCharacters={Object.keys(characters).length}
-          characterAvgWinRate={tierData.characters[characterData.cID!].wR!}
-          characterAvgPickRate={tierData.characters[characterData.cID!].pR!}
-        />
-      ))}
+      {sortedCharacters.map((characterData, idx: number) =>
+        //json 파일에 해당 캐릭터의 이름이 있을때만 item 렌더링
+        localeTextJson.characterName[characterData.cID!] ? (
+          <CharacterItem
+            key={`charcter_${idx}`}
+            characterData={characterData}
+            tierAvgWinRate={tierAvgWinRate}
+            isTotalData={isTotalData}
+            totalCharacters={Object.keys(characters).length}
+            characterAvgWinRate={tierData.characters[characterData.cID!].wR!}
+            characterAvgPickRate={tierData.characters[characterData.cID!].pR!}
+          />
+        ) : (
+          ''
+        )
+      )}
     </tbody>
   );
 };
