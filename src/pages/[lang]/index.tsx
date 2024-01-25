@@ -175,10 +175,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
   /**중복으로 사용되는 값들은 한번만 사용하고 캐시에 저장하여 사용 */
   if (!cache.smasherDatas.length) {
-    const ExcelService = require('/src/services/ExcelService');
     const GameStatisticsService = require('/src/services/GameStatisticsService');
     const DateService = require('/src/services/DateService');
-    const excelService = new ExcelService();
     const gameStatisticsService = new GameStatisticsService();
     const dateService = new DateService();
 
@@ -196,15 +194,16 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
         const aws_params = {
           Bucket: process.env.AWS_BUCKET!,
-          Key: `sl_${period.start}${period.end}.csv`,
+          Key: `sl_${period.start}${period.end}.json`,
         };
 
-        const csvFile = await s3Service.getStatDataFile(aws_params);
+        const statsData = await s3Service.getStatDataFile(aws_params);
 
-        const fileBuffer = csvFile.Body;
-        const data = excelService.readExcelFile(fileBuffer);
-
-        const weekSmasherData = gameStatisticsService.analyzeData(data);
+        const jsonData = JSON.parse(statsData.Body.toString('utf-8'));
+        const weekSmasherData = gameStatisticsService.analyzeData(
+          jsonData,
+          period
+        );
 
         gameStatisticsService.calculateRates(weekSmasherData.data);
         gameStatisticsService.deleteCount(weekSmasherData.data);

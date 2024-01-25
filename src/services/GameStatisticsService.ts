@@ -2,26 +2,26 @@ import { SmasherData, SmasherDataInPeriod } from '@/types/smasherDataTypes';
 
 class GameStatisticsService {
   //각 티어를 분류로하는 맵에 따른 캐릭터 정보 / 티어에 따른 캐릭터 정보를 갖는 객체를 만듦
-  analyzeData(data: (string | number)[][]): SmasherDataInPeriod {
-    const startDate = data[0][0].toString().split('/');
-    const endDate = data[0][1].toString().split('/');
+  analyzeData(data: (string | number)[][] , period : {start:string,end:string}): SmasherDataInPeriod {
+    const startDate = period.start;
+    const endDate = period.end;
 
     const smasherData: SmasherData = {};
 
     const results = {
       data: smasherData,
       period:
-        startDate[0] + '-' + startDate[1] + '-' + endDate[0] + '-' + endDate[1],
+        startDate.slice(0,2) + '-' + startDate.slice(-2) + '-' + endDate.slice(0,2) + '-' + endDate.slice(-2),
     };
 
     for (const row of data) {
-      const tier = row[2].toString().replace(/\d/g, '');
-      const mapNumber = row[3].toString();
-      const charNumber = row[4].toString();
-      const gC = Number(row[9]);
-      const wC = Number(row[10]);
-      const abilityNumbers = [row[5], row[6]];
-      const enchantmentNumbers = [row[7], row[8]];
+      const tier = row[0].toString().replace(/\d/g, '');
+      const mapNumber = row[1].toString();
+      const charNumber = row[2].toString();
+      const gC = Number(row[7]);
+      const wC = Number(row[8]);
+      const abilityNumbers = [row[3], row[4]];
+      const enchantmentNumbers = [row[5], row[6]];
 
       if (!smasherData[tier]) {
         smasherData[tier] = {
@@ -196,7 +196,6 @@ class GameStatisticsService {
             Math.round(
               (abilityNumber.aUC! / characterResult.gC!) * 1000
             ) / 10;
-            delete abilityNumber.aUC;
         }
       }
     }
