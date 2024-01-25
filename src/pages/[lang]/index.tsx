@@ -224,7 +224,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         imageTextJson: cache.imageTextJson,
       },
     },
-    revalidate: 604800,
   };
 
   if (params!.lang === 'en') {
