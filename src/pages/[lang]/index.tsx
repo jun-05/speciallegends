@@ -15,18 +15,14 @@ import { imagesTextJSON } from '@/types/imageJsonTypes';
 const MyPage = ({
   smasherDatas,
   pageData,
-  generatedAt,
 }: {
   smasherDatas: SmasherDataInPeriod[];
   pageData: pageData;
-  generatedAt: string;
 }) => {
   const { localeTextJson } = pageData;
   const router = useRouter();
   const { lang } = router.query;
   const langStr = Array.isArray(lang) ? lang[0] : lang;
-
-  console.log(generatedAt);
 
   const [smasherDataIndex, setSmasherDataIndex] = useState(0);
   const [option, setOption] = useState({
@@ -176,7 +172,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   const localeTextJson = JSON.parse(
     await s3Service.getLocaleTextFile(params?.lang)
   );
-  const startDate = new Date();
+
   /**중복으로 사용되는 값들은 한번만 사용하고 캐시에 저장하여 사용 */
   if (!cache.smasherDatas.length) {
     const GameStatisticsService = require('/src/services/GameStatisticsService');
@@ -227,7 +223,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         localeTextJson: localeTextJson,
         imageTextJson: cache.imageTextJson,
       },
-      generatedAt: startDate.toISOString(),
     },
     revalidate: 604800,
   };

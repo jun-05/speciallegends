@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import '../styles/globals.css';
 import Layout from '@/components/common/Layout';
 import Head from 'next/head';
+import { Analytics } from '@vercel/analytics/react';
 
 /**
  * Icons used in this project are provided by react-icons library.
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Special Legends: Smash Legends Statistics</title>
       </Head>
+      <Analytics />
       <Layout>
         <Component {...pageProps} />
       </Layout>

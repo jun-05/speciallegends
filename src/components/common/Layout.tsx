@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Footer from './Footer';
 import Header from './Header';
-import { Analytics } from '@vercel/analytics/react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -28,7 +27,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className={`${darkMode ? 'dark' : ''} `}>
       <div className="min-w-full min-h-screen bg-gray-100 dark:bg-gray-800 ">
         <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
-        <Analytics />
+
         <main>{children}</main>
         <Footer />
       </div>
