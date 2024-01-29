@@ -192,6 +192,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         );
         const period = dateService.getPeriod(targetDate);
 
+        //이후 날자 기준 변경될시 if로 처리할것
         const aws_params = {
           Bucket: process.env.AWS_BUCKET!,
           Key: `sl_${period.start}${period.end}.json`,
