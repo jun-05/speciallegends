@@ -3,7 +3,7 @@ name: Deploy to Vercel
 on:
   workflow_dispatch:
   schedule:
-    - cron: '58 5 * * 1' # 매주 월요일 5시 58분 UTC (한국시간으로 매주 월요일 오후 2시 58분)
+    - cron: '49 5 * * 1'
 
 jobs:
   build:
