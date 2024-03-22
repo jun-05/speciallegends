@@ -1,5 +1,10 @@
 # Special Legends
 
+## v1.32 배포
+
+1. ## robots.txt 파일 일부수정
+2. ## meta description 텍스트 일부 수정
+
 ## v1.31 배포
 
 1. **locale.json 파일등에 캐릭터 설정이 없으면 해당 캐릭터 아이템은 렌더링 하지 않도록 수정**
