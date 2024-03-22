@@ -26,18 +26,6 @@ const TierAndMapSelect = ({
   const tierList = localeTextJson?.tierList;
   const mapList = localeTextJson?.mapList;
 
-  // 티어와 맵 이미지 선로딩
-  if (typeof window !== 'undefined') {
-    Object.keys(mapList).forEach((mapNum) => {
-      const img = new Image();
-      img.src = mapIcon[mapNum].url;
-    });
-    Object.keys(tierList).forEach((tier) => {
-      const img = new Image();
-      img.src = tierIcon[tier as keyof typeof tierIcon].url;
-    });
-  }
-
   const selectedTierIcon =
     tierIcon[option.selectedTier as keyof typeof tierIcon];
   const selectedMapIcon = mapIcon[option.selectedMap];
