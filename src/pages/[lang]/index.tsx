@@ -82,11 +82,11 @@ const MyPage = ({
   const title =
     langStr === 'ko'
       ? '스매시 레전드 통계 사이트 : 스페셜 레전드 '
-      : 'Smash Legends statistics site : Special Legends';
+      : 'Smash Legends stats site : Special Legends';
   const description =
     langStr === 'ko'
-      ? '스매시 레전드 통계 사이트, 4주간의 캐릭터 통계 결과를 제공합니다.'
-      : 'Smash Legends statistics site, providing character statistics results for 4 weeks';
+      ? '스매시 레전드 통계 사이트, 4주간의 캐릭터 통계값을 제공합니다.'
+      : 'Smash Legends stats site, providing character stats results for 4 weeks';
 
   return (
     <>

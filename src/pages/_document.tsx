@@ -13,7 +13,7 @@ class MyDocument extends Document {
           />
           <meta
             name="description"
-            content="Smash Legends statistics site : Special Legends "
+            content="Smash Legends stats site : Special Legends "
           />
         </Head>
         <body>
