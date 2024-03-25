@@ -1,9 +1,13 @@
 # Special Legends
 
+## v1.33 배포
+
+1. **픽률 계산 방법 수정**
+
 ## v1.32 배포
 
-1. ## robots.txt 파일 일부수정
-2. ## meta description 텍스트 일부 수정
+1. **robots.txt 파일 일부수정 (기본경로 "/" 도 접근가능하도록 수정)**
+2. **meta description 텍스트 일부 수정**
 
 ## v1.31 배포
 
