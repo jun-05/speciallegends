@@ -40,6 +40,8 @@ const MyPage = ({
 
   const tierData = smasherData[option.selectedTier];
 
+  console.log(smasherDatas);
+
   const onClickPrevIndex = () => {
     if (smasherDataIndex < smasherDatas.length - 1) {
       setSmasherDataIndex((prevIndex) => prevIndex + 1);

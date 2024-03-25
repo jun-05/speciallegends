@@ -43,7 +43,10 @@ const CharacterItem = ({
   const name = localeTextJson?.characterName[characterData.cID!];
   const characterIconInfo = charactersIcon?.[characterData.cID!];
 
-  const tierAvgPickRate = Math.round((6 / totalCharacters) * 1000) / 10;
+  // 게임에서의 선택률
+  //  const tierAvgPickRate = Math.round((6 / totalCharacters) * 1000) / 10;
+  // 개인의 픽률
+  const tierAvgPickRate = Math.round((100 / totalCharacters) * 1000) / 1000;
 
   const WinRateInOption = isTotalData
     ? (characterData.wR! - tierAvgWinRate).toFixed(1)

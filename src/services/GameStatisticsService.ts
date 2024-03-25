@@ -137,7 +137,10 @@ class GameStatisticsService {
             ) / 10;
           characterResult.pR =
             Math.round(
-              (characterResult.gC! / (mapData.totalGamesInMap / 6)) * 1000
+              // 게임에서의 선택률
+//            (characterResult.gC! / (tier.totalGamesInTier / 6)) * 1000
+// 개인의 픽률
+              (characterResult.gC! / (tier.totalGamesInTier )) * 1000
             ) / 10;
 
 
@@ -172,7 +175,10 @@ class GameStatisticsService {
             ) / 10;
           characterResult.pR =
             Math.round(
-              (characterResult.gC! / (tier.totalGamesInTier / 6)) * 1000
+              // 게임에서의 선택률
+//            (characterResult.gC! / (tier.totalGamesInTier / 6)) * 1000
+// 개인의 픽률
+              (characterResult.gC! / (tier.totalGamesInTier )) * 1000
             ) / 10;
 
         }
@@ -204,24 +210,24 @@ class GameStatisticsService {
     for (const tier of Object.values(smasherData)) {
       for (const mapData of Object.values(tier.maps)) {
         for (const characterResult of Object.values(mapData.characters)) {
-          delete characterResult.wC;
-          delete characterResult.gC;
+          // delete characterResult.wC;
+          // delete characterResult.gC;
           for (const enchantmentNumber of Object.values(
             characterResult.echs
           )) {
-            delete enchantmentNumber.eUC;
+            // delete enchantmentNumber.eUC;
           }
 
           for (const abilityNumber of Object.values(
             characterResult.abs
           )) {
-            delete abilityNumber.aUC;
+          //  delete abilityNumber.aUC;
           }
         }
 
         for (const characterResult of Object.values(tier.characters)) {
-          delete characterResult.wC;
-          delete characterResult.gC;
+          // delete characterResult.wC;
+          // delete characterResult.gC;
         }
       }
 
@@ -229,12 +235,12 @@ class GameStatisticsService {
         for (const enchantmentNumber of Object.values(
           characterResult.echs
         )) {
-          delete enchantmentNumber.eUC;
+          // delete enchantmentNumber.eUC;
         }
 
         for (const abilityNumber of Object.values(characterResult.abs)) {
 
-            delete abilityNumber.aUC;
+          //  delete abilityNumber.aUC;
         }
       }
     }
